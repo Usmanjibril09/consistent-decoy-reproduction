@@ -22,6 +22,7 @@ dir = "HAI/hai-23.05"
 fs_hz = 1
 prefix = "P1_"
 commands = ["P1_PCV01D", "P1_FCV03D", "P1_LCV01D", "P1_FCV01D", "P1_PP04"]
+exclude_tags = ["P1_PP04D"]  # D25: absent from all HAI 22.04 files; one shared tag set
 train = ["hai-train1", "hai-train2", "hai-train3"]
 val = ["hai-train4"]
 test = ["hai-test1", "hai-test2"]

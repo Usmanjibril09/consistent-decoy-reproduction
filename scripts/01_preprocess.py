@@ -174,6 +174,13 @@ def hai(cfg, log):
     if miss: stop(f"HAI: command tags missing {miss}")
     exo = [c for c in p1 if c not in cmd and (c.endswith("D") or "SP" in c)]
     resp = [c for c in p1 if c not in cmd and c not in exo]
+    drop = list(h.get("exclude_tags", []))
+    if set(drop) & set(cmd): stop(f"HAI: excluded tags include command tags {sorted(set(drop) & set(cmd))}")
+    unknown = [x for x in drop if x not in p1]
+    if unknown: stop(f"HAI: excluded tags not in data {unknown}")
+    exo = [x for x in exo if x not in drop]; resp = [x for x in resp if x not in drop]
+    log["hai_excluded_tags"] = drop
+    if drop: say(f"HAI excluded tags (D25): {drop}")
     order = cmd + exo + resp
     X = {n: finite(df[order], f"HAI {n}") for n, (_, df) in data.items()}
     st = stats(np.vstack([X[n] for n, s in files.items() if s == "train"]), order)
