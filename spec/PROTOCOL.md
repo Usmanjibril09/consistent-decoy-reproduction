@@ -72,5 +72,5 @@ O1 CLOSED (D19): Russo et al. (ITASEC 2026) has no process-dynamics model; write
 O2 Confirm P1 tag names match in HAI 22.04.
 O4 Confirm Qin et al. CGAN generates process values; if not, replace B5.
 O5 Read NeuPot full text (IEEE Xplore 10032823): does its model take attacker commands as input? Defines novelty boundary.
-O6 Read LLMPot (Vasilatos et al., arXiv 2405.05999): does it model process response to written commands? Possible baseline.
+O6 CLOSED (D20): LLMPot fine-tunes an LLM on request/response packets collected by probing a live PLC; byte-level, own metrics (BCA, RVA), no fingerprinting classifiers. Not applicable to recorded datasets -> Related Work, not a baseline.
 O3 Confirm C2 relations per loop from the HAI technical PDF and the Quanser Aero 2 manual.

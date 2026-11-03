@@ -36,3 +36,4 @@ D18 2026-11-03 D17 committed before PROTOCOL patch applied (anchor mismatch); pa
 D19 2026-11-03 O1 closed. Russo, Marasco, Colajanni (ITASEC 2026, CEUR Vol-4198 paper23): LLM values + 4 rule checks, no physical process model;
                own limitation: "actuator-sensor feedback loops ... multi-minute transients are not explicitly captured"; future work = process dynamics.
                Supports our gap. Threat-model citation: Vetterl & Clayton, WOOT 2018 (actuator/sensor inconsistency fingerprinting). New item O6: LLMPot.
+D20 2026-11-03 O6 closed: LLMPot (Vasilatos et al., arXiv 2405.05999v3) requires live-PLC probing; related work only, not a baseline.
