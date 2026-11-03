@@ -36,3 +36,45 @@ files = ["train1", "train2", "train3", "train4", "train5", "train6"]
 pre_window_s = 600
 threshold_frac = 0.05
 range_pct = [1, 99]
+
+# ---- Phase 2 training (D28) ----
+[train]
+seed_select = 0
+seeds_final = [1, 2, 3, 4]
+grid_size = 12
+batch = 256
+max_epochs = 200
+patience = 10
+
+[train.hai]
+files_train = ["hai-train1", "hai-train2", "hai-train3"]
+files_val = ["hai-train4"]
+edge_files = ["hai-train4"]
+edge_rows = 600
+warm = 60
+horizon = 300
+stride = 180
+
+[train.qappd]
+files_train = ["train_1", "train_2", "train_3", "train_4", "train_5", "train_6"]
+files_val = ["train_7", "train_8"]
+edge_files = []
+edge_rows = 0
+warm = 100
+horizon = 500
+stride = 300
+
+[train.grid.C1]
+hidden = [32, 64, 128]
+layers = [1, 2]
+lr = [0.001, 0.003]
+
+[train.grid.B2]
+na = [1, 2, 3, 5]
+nb = [1, 5, 10]
+
+[train.smoke]
+max_windows = 64
+max_epochs = 2
+grid = 2
+seeds = 2

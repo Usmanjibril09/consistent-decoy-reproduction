@@ -1,4 +1,4 @@
-# PROTOCOL v1.1 (frozen before any training; amends v1.0 per D27, no model trained yet)
+# PROTOCOL v1.2 (frozen before any training; amends v1.1 per D28, no model trained yet)
 
 ## 1 Question
 Can a lightweight learned industrial decoy remain behaviourally consistent when an attacker actively changes its commands
@@ -27,13 +27,15 @@ motor voltages), observes responses. Goal: decide real vs decoy. Tools: (a) pass
 ## 4 Method (components; each removed in an ablation)
 C1 Command-conditioned response model: GRU predicting response tags from command, exogenous and response history
    and state (not unconditioned trajectory generation). Width/depth chosen within the 12-configuration budget.
-C2 Consistency layer: structure from hardware physics, parameters fitted on training data: actuator limits and rate limits,
-   demand->position tracking with p99.9 rate limit and training range (HAI; first-order lag rejected, D22), voltage->current->speed chain (QAPPD), sign of steady-state gain.
-C3 Coverage-aware fallback: when a command lies outside training coverage, blend toward an identified grey-box loop model instead of
-   extrapolating the network.
+C2 Consistency layer: structure from hardware physics, parameters fitted on training data: physical actuator range where known
+   (valve opening 0-100 %), training range only for tags without a physical limit; p99.9 rate limits; demand->position tracking
+   (HAI; first-order lag rejected, D22); voltage->current->speed chain (QAPPD); sign of steady-state gain.
+C3 Coverage-aware fallback: a command is out of coverage when outside its training min-max (D27). Blend weight
+   w = min(1, excess / (5% of training range)); output = (1-w)*C1 + w*B3 (identified grey-box loop model).
 Runtime budget: per-step inference below the sampling period (10 ms QAPPD, 1 s HAI) on the gateway-class CPU.
+Training specification: D28 (spec/decisions.md); free-run evaluation, windows, selection rules, checkpoints.
 
-## 5 Baselines (same splits, same tuning budget: 12 configurations x 5 seeds per learned method)
+## 5 Baselines (same splits; same budget per learned method, D28: 12 configurations with seed 0 for selection, best configuration retrained with seeds 1-4; results over seeds 0-4)
 B1 Record-and-replay (low-interaction honeypot practice)    B2 Linear ARX / state-space identification
 B3 First-order-plus-dead-time grey-box per loop (physics only)
 B4 Unconditioned LSTM generator (Sassnick et al., EUROCAST 2024)    B5 Recurrent conditional GAN, RCGAN (Esteban, Hyland, Ratsch 2017)
