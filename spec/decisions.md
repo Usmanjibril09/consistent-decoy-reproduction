@@ -37,3 +37,4 @@ D19 2026-11-03 O1 closed. Russo, Marasco, Colajanni (ITASEC 2026, CEUR Vol-4198 
                own limitation: "actuator-sensor feedback loops ... multi-minute transients are not explicitly captured"; future work = process dynamics.
                Supports our gap. Threat-model citation: Vetterl & Clayton, WOOT 2018 (actuator/sensor inconsistency fingerprinting). New item O6: LLMPot.
 D20 2026-11-03 O6 closed: LLMPot (Vasilatos et al., arXiv 2405.05999v3) requires live-PLC probing; related work only, not a baseline.
+D21 2026-11-03 O2 closed (HAI 22.04 tag names match). O3: C2 relation forms from hardware type (DC motor V~I,w; first-order lags; rate/range limits), parameters fitted on training split only; forms checked on train_1 / hai-train1.

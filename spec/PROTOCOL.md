@@ -69,7 +69,7 @@ Shared code: src/decoy/{data,models,baselines,constraints,attacker,metrics}.py. 
 
 ## 12 Open items before freezing
 O1 CLOSED (D19): Russo et al. (ITASEC 2026) has no process-dynamics model; writes only update replayed state; evaluated by rule coherence and latency, no fingerprinting classifiers or active probes. Cited as gap source.
-O2 Confirm P1 tag names match in HAI 22.04.
+O2 CLOSED (D21): all 16 P1 tags present with identical names in HAI 22.04 test1/test2.
 O4 Confirm Qin et al. CGAN generates process values; if not, replace B5.
 O5 Read NeuPot full text (IEEE Xplore 10032823): does its model take attacker commands as input? Defines novelty boundary.
 O6 CLOSED (D20): LLMPot fine-tunes an LLM on request/response packets collected by probing a live PLC; byte-level, own metrics (BCA, RVA), no fingerprinting classifiers. Not applicable to recorded datasets -> Related Work, not a baseline.
