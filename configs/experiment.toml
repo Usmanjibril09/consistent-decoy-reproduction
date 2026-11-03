@@ -1,0 +1,37 @@
+# Experiment configuration. Every value is referenced by PROTOCOL v1 or spec/decisions.md.
+
+[paths]
+raw = "data/raw"
+processed = "data/processed"
+results = "results/phase1"
+
+[qappd]                       # PROTOCOL 3.2; D2, D6, D12
+dir = "EUROCAST"
+fs_hz = 100
+flag = "Enable"
+commands = ["Voltage0", "Voltage1"]
+derived = ["FilteredPitch", "FilteredYaw", "CalcPitch"]
+period_channel = "Pitch"
+train = [1, 2, 3, 4, 5, 6]
+val = [7, 8]
+heldout_normal = [9, 10]
+test = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+[hai]                         # PROTOCOL 3.1; D1, D11, D14, D22
+dir = "HAI/hai-23.05"
+fs_hz = 1
+prefix = "P1_"
+commands = ["P1_PCV01D", "P1_FCV03D", "P1_LCV01D", "P1_FCV01D", "P1_PP04"]
+train = ["hai-train1", "hai-train2", "hai-train3"]
+val = ["hai-train4"]
+test = ["hai-test1", "hai-test2"]
+post_attack_margin_s = 600
+
+[hai_crosstime]               # PROTOCOL 3.1 cross-time; D21
+dir = "HAI/hai-22.04"
+files = ["train1", "train2", "train3", "train4", "train5", "train6"]
+
+[inclusion]                   # PROTOCOL 3.3
+pre_window_s = 600
+threshold_frac = 0.05
+range_pct = [1, 99]

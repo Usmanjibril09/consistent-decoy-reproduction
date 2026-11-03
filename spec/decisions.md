@@ -42,3 +42,10 @@ D22 2026-11-03 O3/O4/O5 closed. QAPPD: V = R*I + k*w holds (R2 0.972/0.983); spe
                HAI: first-order lag rejected (R2 0.005-0.41); position tracks demand (corr 0.976-0.999) with rate limit p99.9
                (FCV01 2.96, FCV03 1.08, PCV01 1.15, LCV01 1.15 per s); PCV02 near-static, excluded. FCV03 training range 49.0-66.9 (coverage gap).
                Qin et al. = topology-image CGAN -> related work; B5 = RCGAN. NeuPot B10 from published description.
+D23 2026-11-03 Phase 1 rules fixed before running 01_preprocess.py. Processed data kept in raw physical units; normalisation stats from training
+               split only, applied from Phase 2. QAPPD: trim leading/trailing Enable=0 rows, stop if Enable=0 inside a run; test normal mask =
+               label 0 and not within one cycle after an anomaly (cycle from training Pitch autocorrelation). HAI: scope = all P1_ tags; roles by rule:
+               command = 5 attacked CVs; exogenous = other P1 tags ending in D or containing SP; response = remaining P1 tags; constant-in-training
+               tags marked constant. HAI test normal mask excludes attacks + 600 s after each. Non-finite values stop the run (no imputation).
+               Correction: earlier "QAPPD voltage anomaly outside +-18 V in test_7" is not supported (test_7 |V| <= 15.9; test_3 reaches 18.66).
+               P-anom definition to be fixed from qappd_anomaly_segments.csv (command channels only) before Phase 2.
