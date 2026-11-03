@@ -4,3 +4,7 @@ D2 2026-11-03  QAPPD (folder data/raw/EUROCAST, Quanser Aero 2) = second plant f
 D3 2026-11-03  DeceptIIoT excluded (network flows only, no process values).
 D4 2026-11-03  SWaT/EPIC not needed; QAPPD fills the second-plant role.
 D5 2026-11-03  Structure approved: one script per phase (00 protocol ... 07 manuscript).
+D6 2026-11-03  QAPPD facts (Zenodo 10.5281/zenodo.20287835, v1.0, CC BY-SA 4.0): 100 Hz; 10 runs x ~182,001 samples (~30 min);
+               train_* = normal only; test_* = normal + anomalies; test_label_* = point-wise labels. Enable=1 in 99.9% of samples.
+D7 2026-11-03  Known limitation: QAPPD voltages come from the rig's own feedback controller (no reference trajectory recorded),
+               so training data shows closed-loop behaviour only. Protocol must measure how well training data covers probe inputs.
