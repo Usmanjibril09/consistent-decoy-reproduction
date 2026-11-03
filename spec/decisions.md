@@ -38,3 +38,7 @@ D19 2026-11-03 O1 closed. Russo, Marasco, Colajanni (ITASEC 2026, CEUR Vol-4198 
                Supports our gap. Threat-model citation: Vetterl & Clayton, WOOT 2018 (actuator/sensor inconsistency fingerprinting). New item O6: LLMPot.
 D20 2026-11-03 O6 closed: LLMPot (Vasilatos et al., arXiv 2405.05999v3) requires live-PLC probing; related work only, not a baseline.
 D21 2026-11-03 O2 closed (HAI 22.04 tag names match). O3: C2 relation forms from hardware type (DC motor V~I,w; first-order lags; rate/range limits), parameters fitted on training split only; forms checked on train_1 / hai-train1.
+D22 2026-11-03 O3/O4/O5 closed. QAPPD: V = R*I + k*w holds (R2 0.972/0.983); speed tau ~240 ms both motors (1-step R2=1.0 uninformative at 100 Hz).
+               HAI: first-order lag rejected (R2 0.005-0.41); position tracks demand (corr 0.976-0.999) with rate limit p99.9
+               (FCV01 2.96, FCV03 1.08, PCV01 1.15, LCV01 1.15 per s); PCV02 near-static, excluded. FCV03 training range 49.0-66.9 (coverage gap).
+               Qin et al. = topology-image CGAN -> related work; B5 = RCGAN. NeuPot B10 from published description.

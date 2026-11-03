@@ -1,4 +1,4 @@
-# PROTOCOL v0.3 (DRAFT - not frozen until approved and tagged protocol-v1)
+# PROTOCOL v1.0 (FINAL DRAFT - not frozen until approved and tagged protocol-v1)
 
 ## 1 Question
 Can a lightweight learned industrial decoy remain behaviourally consistent when an attacker actively changes its commands
@@ -23,7 +23,7 @@ motor voltages), observes responses. Goal: decide real vs decoy. Tools: (a) pass
 C1 Command-conditioned response model: lightweight recurrent/temporal-convolutional network predicting responses from command
    history and state (not unconditioned trajectory generation).
 C2 Consistency layer: structure from hardware physics, parameters fitted on training data: actuator limits and rate limits,
-   demand->position lag (HAI), voltage->current->speed chain (QAPPD), sign of steady-state gain.
+   demand->position tracking with p99.9 rate limit and training range (HAI; first-order lag rejected, D22), voltage->current->speed chain (QAPPD), sign of steady-state gain.
 C3 Coverage-aware fallback: when a command lies outside training coverage, blend toward an identified grey-box loop model instead of
    extrapolating the network.
 Runtime budget: per-step inference below the sampling period (10 ms QAPPD, 1 s HAI) on the gateway-class CPU.
@@ -31,9 +31,9 @@ Runtime budget: per-step inference below the sampling period (10 ms QAPPD, 1 s H
 ## 5 Baselines (same splits, same tuning budget: 12 configurations x 5 seeds per learned method)
 B1 Record-and-replay (low-interaction honeypot practice)    B2 Linear ARX / state-space identification
 B3 First-order-plus-dead-time grey-box per loop (physics only)
-B4 Unconditioned LSTM generator (Sassnick et al., EUROCAST 2024)    B5 Conditional GAN (Qin et al., Computer Networks 2024)
+B4 Unconditioned LSTM generator (Sassnick et al., EUROCAST 2024)    B5 Recurrent conditional GAN, RCGAN (Esteban, Hyland, Ratsch 2017)
 B6 GAN + autoencoder (NeuralPot, ISCC 2020)    B7 TimeGAN    B8 Command-conditioned Transformer    B9 Command-conditioned GRU, no C2/C3
-B10 Seq2seq forecaster with Huber loss (NeuPot, IEEE TII 2023)
+B10 Seq2seq forecaster with Huber loss (NeuPot, IEEE TII 2023; re-implemented from published description, full text unavailable)
 
 ## 6 Ablations
 A1 without C2   A2 without C3   A3 without command conditioning   A4 C2 with limits only (no dynamic relations)
@@ -70,7 +70,7 @@ Shared code: src/decoy/{data,models,baselines,constraints,attacker,metrics}.py. 
 ## 12 Open items before freezing
 O1 CLOSED (D19): Russo et al. (ITASEC 2026) has no process-dynamics model; writes only update replayed state; evaluated by rule coherence and latency, no fingerprinting classifiers or active probes. Cited as gap source.
 O2 CLOSED (D21): all 16 P1 tags present with identical names in HAI 22.04 test1/test2.
-O4 Confirm Qin et al. CGAN generates process values; if not, replace B5.
-O5 Read NeuPot full text (IEEE Xplore 10032823): does its model take attacker commands as input? Defines novelty boundary.
+O4 CLOSED (D22): Qin et al. CGAN generates network-topology images (condition = compromised-node count); related work; B5 -> RCGAN.
+O5 CLOSED (D22): no access; B10 built from published description and stated as such in the paper.
 O6 CLOSED (D20): LLMPot fine-tunes an LLM on request/response packets collected by probing a live PLC; byte-level, own metrics (BCA, RVA), no fingerprinting classifiers. Not applicable to recorded datasets -> Related Work, not a baseline.
-O3 Confirm C2 relations per loop from the HAI technical PDF and the Quanser Aero 2 manual.
+O3 CLOSED (D22): QAPPD V~I,w (R2 0.97/0.98), speed lag tau~240 ms (judge multi-step, not 1-step R2); HAI tracking + rate limit; PCV02 excluded.
