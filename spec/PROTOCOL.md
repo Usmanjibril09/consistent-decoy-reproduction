@@ -68,8 +68,9 @@ Units: attack (HAI), run x window (QAPPD); 5 training seeds per learned method. 
 Shared code: src/decoy/{data,models,baselines,constraints,attacker,metrics}.py. Every run logs git commit and config hash.
 
 ## 12 Open items before freezing
-O1 Novelty boundary vs Russo, Marasco and Colajanni (ITASEC 2026, LLM honeypot with physical-constraint validation): read full paper.
+O1 CLOSED (D19): Russo et al. (ITASEC 2026) has no process-dynamics model; writes only update replayed state; evaluated by rule coherence and latency, no fingerprinting classifiers or active probes. Cited as gap source.
 O2 Confirm P1 tag names match in HAI 22.04.
 O4 Confirm Qin et al. CGAN generates process values; if not, replace B5.
 O5 Read NeuPot full text (IEEE Xplore 10032823): does its model take attacker commands as input? Defines novelty boundary.
+O6 Read LLMPot (Vasilatos et al., arXiv 2405.05999): does it model process response to written commands? Possible baseline.
 O3 Confirm C2 relations per loop from the HAI technical PDF and the Quanser Aero 2 manual.

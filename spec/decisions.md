@@ -33,3 +33,6 @@ D17 2026-11-03 Aligned with TimeGAN (discriminative score uses its post-hoc RNN 
                fidelity score M2b; models noise only and filters out windows with process changes = our gap), NeuPot (IEEE TII 2023, seq2seq+Huber
                Modbus honeypot = closest method competitor, baseline B10, full text needed: O5).
 D18 2026-11-03 D17 committed before PROTOCOL patch applied (anchor mismatch); patch applied in this commit. Borrowed papers supply the evaluation attacker and baselines only; the decoy method is our own.
+D19 2026-11-03 O1 closed. Russo, Marasco, Colajanni (ITASEC 2026, CEUR Vol-4198 paper23): LLM values + 4 rule checks, no physical process model;
+               own limitation: "actuator-sensor feedback loops ... multi-minute transients are not explicitly captured"; future work = process dynamics.
+               Supports our gap. Threat-model citation: Vetterl & Clayton, WOOT 2018 (actuator/sensor inconsistency fingerprinting). New item O6: LLMPot.
