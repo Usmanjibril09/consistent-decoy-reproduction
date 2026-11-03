@@ -21,3 +21,5 @@ D12 2026-11-03 QAPPD sampling rate = 100 Hz, measured from data (yaw 99.5-102.1 
 D13 2026-11-03 HAI 23.05: 52 attacks (14 + 38). summary_label2 header says 40 but lists 38; we use 38 (matches labels and README).
                Licence stated as CC BY-SA 4.0 (README) and CC BY 4.0 (metadata); follow BY-SA for any derived release.
                Attack targets must come from hai_dataset_technical_details.pdf before HAI attacks are used as probe tests.
+D14 2026-11-03 HAI 23.05 attacks classified from technical PDF pp.31-32: 14 command-only (probe ground truth, spec/hai2305_command_attacks.csv),
+               8 setpoint-only, 12 with sensor masking (excluded), 8 internal-logic (later), 10 combined (excluded). Decoy scope: P1 loops PC, FC, LC, TC, CC.
