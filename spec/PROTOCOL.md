@@ -1,4 +1,4 @@
-# PROTOCOL v0.1 (DRAFT - not frozen until approved and tagged protocol-v1)
+# PROTOCOL v0.2 (DRAFT - not frozen until approved and tagged protocol-v1)
 
 ## 1 Question
 Can a lightweight learned industrial decoy remain behaviourally consistent when an attacker actively changes its commands
@@ -37,23 +37,25 @@ B6 GAN + autoencoder (NeuralPot, ISCC 2020)    B7 TimeGAN    B8 Command-conditio
 ## 6 Ablations
 A1 without C2   A2 without C3   A3 without command conditioning   A4 C2 with limits only (no dynamic relations)
 
-## 7 Evaluation suite
-Probe sets: P-real (HAI command attacks, scored against recorded plant response); P-anom (QAPPD test_7 voltage anomaly);
-P-syn (generated steps/pulses/ramps/out-of-range, both plants; no ground truth, scored only by classifiers and independent checks).
-Classifiers: K-dev (allowed during development) and K-test (never used before Phase 3): MiniRocket, feature-based random forest,
-1D-CNN, physics-rule detector.
-Independent checks (not enforced by C2, avoids circularity): QAPPD PitchDot vs 100*dPitch; pitch-yaw coupling;
-HAI valve opening vs measured flow; pump command vs TIT03 direction.
+## 7 Fingerprinting attacks (evaluation attacker; the decoy is the target, not the detector)
+Probe sets: P-real (HAI command attacks, real plant response recorded); P-anom (QAPPD test_7 voltage anomaly);
+P-syn (generated steps/pulses/ramps/out-of-range commands, both plants; no real response exists).
+Fingerprinting classifiers trained to separate real from decoy windows: K-dev (usable during development) and K-test
+(never used before Phase 3): MiniRocket, feature-based random forest, 1D-CNN.
+Physics-rule detector (attacker-side, fixed before training, not enforced by C2): QAPPD PitchDot vs 100*dPitch, pitch-yaw coupling;
+HAI valve opening vs measured flow, pump command vs TIT03 direction. Only detector applicable to P-syn.
 
-## 8 Metrics
-Primary: (M1) probe-response NRMSE on P-real; (M2) K-test attacker AUC on probe windows (0.5 = indistinguishable);
-(M3) independent-check violation rate on P-syn.
-Secondary: held-out normal NRMSE, lag/gain error, DTW, per-step latency, model size.
+## 8 Metrics (established only)
+Primary:
+M1 FIT% = 100(1 - ||y - y_hat|| / ||y - mean(y)||) on response tags (system identification; Ljung). P-real, P-anom.
+M2 Discriminative score = |accuracy - 0.5| of each K-test classifier, real vs decoy windows (Yoon et al., NeurIPS 2019). 0 = indistinguishable.
+Secondary: physics-rule detector detection rate on P-syn; predictive score TSTR (Yoon et al. 2019); Context-FID (Jeha et al., ICLR 2022);
+DTW; held-out normal FIT%; per-step latency; model size.
 
 ## 9 Hypotheses (each tested and reported separately; no combined pass condition)
-H1 Full method has lower M1 than every baseline on P-real.
+H1 Full method has higher M1 than every baseline on P-real.
 H2 Full method has lower M2 than the best baseline, on each plant.
-H3 Removing C3 increases M1/M3 on out-of-coverage probes (A2 vs full).
+H3 Removing C3 lowers M1 and raises M2 on out-of-coverage probes (A2 vs full).
 
 ## 10 Statistics
 Units: attack (HAI), run x window (QAPPD); 5 training seeds per learned method. Paired differences, cluster bootstrap by attack/run,
@@ -66,4 +68,5 @@ Shared code: src/decoy/{data,models,baselines,constraints,attacker,metrics}.py. 
 ## 12 Open items before freezing
 O1 Novelty boundary vs Russo, Marasco and Colajanni (ITASEC 2026, LLM honeypot with physical-constraint validation): read full paper.
 O2 Confirm P1 tag names match in HAI 22.04.
+O4 Confirm Qin et al. CGAN generates process values; if not, replace B5.
 O3 Confirm C2 relations per loop from the HAI technical PDF and the Quanser Aero 2 manual.

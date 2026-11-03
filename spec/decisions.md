@@ -26,3 +26,6 @@ D14 2026-11-03 HAI 23.05 attacks classified from technical PDF pp.31-32: 14 comm
 D15 2026-11-03 All 14 command-attack onsets match PDF start times. Pre-window z-score invalid when tag constant (PP04); use training-range
                normalisation. Short-term attacks show valve position lagging demand (A105 8.2 vs 2.6, A218 5.8 vs 1.2 sd): real dynamics a decoy must
                reproduce. haiend PP04-SP-OUT available -> A213, A234 secondary setpoint probes. Inclusion rule fixed in PROTOCOL 3.3 before training.
+D16 2026-11-03 Metrics restricted to established ones: FIT% (Ljung), discriminative score |acc-0.5| (Yoon et al. 2019), TSTR, Context-FID, DTW.
+               Invented "violation rate" removed; physics checks are an attacker-side detector (detection rate). Section 7 renamed fingerprinting attacks.
+               Chapter metrics may differ across thesis chapters; link is narrative (Ch2 skepticism consequence, Ch3 cause).
