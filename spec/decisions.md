@@ -32,3 +32,4 @@ D16 2026-11-03 Metrics restricted to established ones: FIT% (Ljung), discriminat
 D17 2026-11-03 Aligned with TimeGAN (discriminative score uses its post-hoc RNN classifier; TSTR), SimProcess (CPSS 2025: tsfresh+RF attacker,
                fidelity score M2b; models noise only and filters out windows with process changes = our gap), NeuPot (IEEE TII 2023, seq2seq+Huber
                Modbus honeypot = closest method competitor, baseline B10, full text needed: O5).
+D18 2026-11-03 D17 committed before PROTOCOL patch applied (anchor mismatch); patch applied in this commit. Borrowed papers supply the evaluation attacker and baselines only; the decoy method is our own.

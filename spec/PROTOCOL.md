@@ -1,4 +1,4 @@
-# PROTOCOL v0.2 (DRAFT - not frozen until approved and tagged protocol-v1)
+# PROTOCOL v0.3 (DRAFT - not frozen until approved and tagged protocol-v1)
 
 ## 1 Question
 Can a lightweight learned industrial decoy remain behaviourally consistent when an attacker actively changes its commands
@@ -33,6 +33,7 @@ B1 Record-and-replay (low-interaction honeypot practice)    B2 Linear ARX / stat
 B3 First-order-plus-dead-time grey-box per loop (physics only)
 B4 Unconditioned LSTM generator (Sassnick et al., EUROCAST 2024)    B5 Conditional GAN (Qin et al., Computer Networks 2024)
 B6 GAN + autoencoder (NeuralPot, ISCC 2020)    B7 TimeGAN    B8 Command-conditioned Transformer    B9 Command-conditioned GRU, no C2/C3
+B10 Seq2seq forecaster with Huber loss (NeuPot, IEEE TII 2023)
 
 ## 6 Ablations
 A1 without C2   A2 without C3   A3 without command conditioning   A4 C2 with limits only (no dynamic relations)
@@ -41,7 +42,7 @@ A1 without C2   A2 without C3   A3 without command conditioning   A4 C2 with lim
 Probe sets: P-real (HAI command attacks, real plant response recorded); P-anom (QAPPD test_7 voltage anomaly);
 P-syn (generated steps/pulses/ramps/out-of-range commands, both plants; no real response exists).
 Fingerprinting classifiers trained to separate real from decoy windows: K-dev (usable during development) and K-test
-(never used before Phase 3): MiniRocket, feature-based random forest, 1D-CNN.
+(never used before Phase 3): TimeGAN post-hoc 2-layer RNN classifier (Yoon et al. 2019); SimProcess pipeline, tsfresh features + random forest (Donadel et al., CPSS 2025); MiniRocket. K-dev: 1D-CNN.
 Physics-rule detector (attacker-side, fixed before training, not enforced by C2): QAPPD PitchDot vs 100*dPitch, pitch-yaw coupling;
 HAI valve opening vs measured flow, pump command vs TIT03 direction. Only detector applicable to P-syn.
 
@@ -49,6 +50,7 @@ HAI valve opening vs measured flow, pump command vs TIT03 direction. Only detect
 Primary:
 M1 FIT% = 100(1 - ||y - y_hat|| / ||y - mean(y)||) on response tags (system identification; Ljung). P-real, P-anom.
 M2 Discriminative score = |accuracy - 0.5| of each K-test classifier, real vs decoy windows (Yoon et al., NeurIPS 2019). 0 = indistinguishable.
+M2b SimProcess fidelity score = mean P(real) over decoy windows from the SimProcess classifier (Donadel et al. 2025). Higher = better.
 Secondary: physics-rule detector detection rate on P-syn; predictive score TSTR (Yoon et al. 2019); Context-FID (Jeha et al., ICLR 2022);
 DTW; held-out normal FIT%; per-step latency; model size.
 
@@ -69,4 +71,5 @@ Shared code: src/decoy/{data,models,baselines,constraints,attacker,metrics}.py. 
 O1 Novelty boundary vs Russo, Marasco and Colajanni (ITASEC 2026, LLM honeypot with physical-constraint validation): read full paper.
 O2 Confirm P1 tag names match in HAI 22.04.
 O4 Confirm Qin et al. CGAN generates process values; if not, replace B5.
+O5 Read NeuPot full text (IEEE Xplore 10032823): does its model take attacker commands as input? Defines novelty boundary.
 O3 Confirm C2 relations per loop from the HAI technical PDF and the Quanser Aero 2 manual.
