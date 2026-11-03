@@ -13,3 +13,6 @@ D8 2026-11-03  QAPPD anomalies are designed process faults (arXiv 2605.27486): p
 D9 2026-11-03  QAPPD trajectories were generated with the tool from Sassnick et al. (EUROCAST 2024 generative OPC UA honeypot), which
                left interaction as future work. That gap is the one this work addresses.
 D10 2026-11-03 Sampling rate conflict: Zenodo says 100 Hz, paper says 50 Hz. Resolved from data (PitchDot vs dPitch). See next entry.
+D11 2026-11-03 HAI 23.05 confirmed: 1 Hz, no gaps; train 4 files = 896,400 s (~10.4 days) normal; test 2 files = 284,400 s;
+               52 attack segments (14 + 38), 56-2052 s each. 6 clean command/response pairs: P1_{FCV01,FCV02,FCV03,LCV01,PCV01,PCV02} D->Z,
+               plus 7 controller setpoint outputs (x1001_05 ... x1003_24).
