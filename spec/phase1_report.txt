@@ -1,0 +1,102 @@
+Phase 1 preprocessing | commit 811b1c8bcd25 (protocol-v1-5-g811b1c8) | config de83b21d2d20
+=== QAPPD ===
+channels: 13 (2 command, 11 response); derived (kept as response): ['FilteredPitch', 'FilteredYaw', 'CalcPitch']
+train_1   train    rows  181901  trimmed head 100 tail 0  anomalous 0.0000
+train_2   train    rows  181901  trimmed head 100 tail 0  anomalous 0.0000
+train_3   train    rows  181901  trimmed head 100 tail 0  anomalous 0.0000
+train_4   train    rows  181901  trimmed head 100 tail 0  anomalous 0.0000
+train_5   train    rows  181901  trimmed head 100 tail 0  anomalous 0.0000
+train_6   train    rows  181901  trimmed head 100 tail 0  anomalous 0.0000
+train_7   val      rows  181901  trimmed head 100 tail 0  anomalous 0.0000
+train_8   val      rows  181901  trimmed head 100 tail 0  anomalous 0.0000
+train_9   heldout  rows  181901  trimmed head 100 tail 0  anomalous 0.0000
+train_10  heldout  rows  181901  trimmed head 100 tail 0  anomalous 0.0000
+test_1    test     rows  181901  trimmed head 100 tail 0  anomalous 0.0230
+test_2    test     rows  181901  trimmed head 100 tail 0  anomalous 0.0132
+test_3    test     rows  181901  trimmed head 100 tail 0  anomalous 0.0212
+test_4    test     rows  181901  trimmed head 100 tail 0  anomalous 0.0265
+test_5    test     rows  181901  trimmed head 100 tail 0  anomalous 0.0110
+test_6    test     rows  181901  trimmed head 100 tail 0  anomalous 0.0100
+test_7    test     rows  181901  trimmed head 100 tail 0  anomalous 0.1068
+test_8    test     rows  181901  trimmed head 100 tail 0  anomalous 0.0109
+test_9    test     rows  181901  trimmed head 100 tail 0  anomalous 0.0206
+test_10   test     rows  181891  trimmed head 100 tail 0  anomalous 0.0232
+cycle period (training Pitch autocorrelation, per run [49.0, 42.5, 37.7, 48.8, 40.5, 40.6]) median 41.5 s -> margin 4155 samples
+training range Voltage0: -14.835 .. 15.779
+training range Voltage1: -16.386 .. 17.367
+    run  segment  start_s  length_s  Voltage0_maxabs  Voltage0_share_outside_train_minmax  Voltage1_maxabs  Voltage1_share_outside_train_minmax
+ test_1        1  1031.36     10.22            1.755                                  0.0            6.606                                  0.0
+ test_1        2  1190.14      7.72            5.616                                  0.0            8.342                                  0.0
+ test_1        3  1438.68     11.98            8.624                                  0.0           10.787                                  0.0
+ test_1        4  1610.94     11.90           10.971                                  0.0           12.105                                  0.0
+ test_2        1   701.06     10.70            7.652                                  0.0            9.868                                  0.0
+ test_2        2  1580.40      6.70            3.742                                  0.0            8.017                                  0.0
+ test_2        3  1628.94      6.70            1.931                                  0.0            6.347                                  0.0
+ test_3        1   230.62      9.46           14.841                                  0.0           15.296                                  0.0
+ test_3        2   270.22      9.06           14.906                                  0.0           15.506                                  0.0
+ test_3        3   588.36     11.62            7.317                                  0.0           10.254                                  0.0
+ test_3        4  1746.34      8.44           11.597                                  0.0           12.530                                  0.0
+ test_4        1   417.46      9.86           10.533                                  0.0           11.902                                  0.0
+ test_4        2   464.46      9.42           10.009                                  0.0           10.895                                  0.0
+ test_4        3   511.60     10.24           11.979                                  0.0           14.053                                  0.0
+ test_4        4  1241.66     10.12            6.978                                  0.0            8.643                                  0.0
+ test_4        5  1443.50      8.58            8.937                                  0.0           10.522                                  0.0
+ test_5        1   373.50      7.70            4.276                                  0.0            8.560                                  0.0
+ test_5        2   419.42      7.70            4.676                                  0.0            8.364                                  0.0
+ test_5        3  1022.88      4.52            4.970                                  0.0            8.594                                  0.0
+ test_6        1   425.44      8.60            7.854                                  0.0            9.678                                  0.0
+ test_6        2  1119.28      9.66           10.470                                  0.0           12.991                                  0.0
+ test_7        1  1073.18    194.32           15.318                                  0.0           15.906                                  0.0
+ test_8        1   699.30     10.28            4.152                                  0.0            9.249                                  0.0
+ test_8        2   755.28      2.68            4.554                                  0.0            8.149                                  0.0
+ test_8        3   803.34      6.88            3.650                                  0.0            9.901                                  0.0
+ test_9        1   301.96     12.12           14.763                                  0.0           15.640                                  0.0
+ test_9        2   603.26     12.54           13.571                                  0.0           15.322                                  0.0
+ test_9        3  1121.42      2.12            5.944                                  0.0           10.476                                  0.0
+ test_9        4  1161.96     10.62            5.927                                  0.0           10.459                                  0.0
+test_10        1   754.36      7.90           11.178                                  0.0           11.990                                  0.0
+test_10        2   808.30      9.62           13.770                                  0.0           14.593                                  0.0
+test_10        3  1347.10     17.22            3.456                                  0.0            8.888                                  0.0
+test_10        4  1600.28      7.42            7.472                                  0.0            9.862                                  0.0
+HAI excluded tags (D25): ['P1_PP04D']
+
+=== HAI 23.05 ===
+command   ( 5): ['P1_PCV01D', 'P1_FCV03D', 'P1_LCV01D', 'P1_FCV01D', 'P1_PP04']
+exogenous ( 3): ['P1_FCV02D', 'P1_PCV02D', 'P1_PP04SP']
+response  (18): ['P1_FCV01Z', 'P1_FCV02Z', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01Z', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT02', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03']
+constant  (10): ['P1_PP01AD', 'P1_PP01BD', 'P1_PP02D', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_PIT01_HH', 'P1_PP01AR', 'P1_PP01BR', 'P1_PP02R']
+hai-train1  train rows  280800  2022-08-04 18:00:01 -> 2022-08-08 00:00:00  attack 0.0000  normal-mask 1.0000
+hai-train2  train rows  291600  2022-08-13 07:00:01 -> 2022-08-16 16:00:00  attack 0.0000  normal-mask 1.0000
+hai-train3  train rows  126000  2022-08-19 16:00:01 -> 2022-08-21 03:00:00  attack 0.0000  normal-mask 1.0000
+hai-train4  val   rows  198000  2022-08-22 17:00:01 -> 2022-08-25 00:00:00  attack 0.0000  normal-mask 1.0000
+hai-test1   test  rows   54000  2022-08-12 16:00:01 -> 2022-08-13 07:00:00  attack 0.0552  normal-mask 0.7892
+hai-test2   test  rows  230400  2022-08-17 00:00:01 -> 2022-08-19 16:00:00  attack 0.0365  normal-mask 0.8646
+post-attack margin 600 s
+
+protocol 3.3 inclusion rule (pre-window 600 s, threshold 5% of training p1-p99 range):
+attack  file               onset  duration_s   command  exceed  train_range_p1_p99  exceed_frac  included
+  A103 test1 2022-08-12 18:32:17         157 P1_PCV01D 25.8672             11.7799       2.1959      True
+  A105 test1 2022-08-12 20:43:01         162 P1_PCV01D 14.1466             11.7799       1.2009      True
+  A110 test1 2022-08-13 01:34:09          56 P1_FCV03D  5.4255             14.5394       0.3732      True
+  A112 test1 2022-08-13 03:26:03          79 P1_FCV03D  0.4547             14.5394       0.0313     False
+  A203 test2 2022-08-17 04:21:03          69 P1_LCV01D  2.9923             13.1326       0.2278      True
+  A205 test2 2022-08-17 06:21:05          86 P1_LCV01D 24.8389             13.1326       1.8914      True
+  A207 test2 2022-08-17 09:42:04         615 P1_LCV01D  2.2072             13.1326       0.1681      True
+  A209 test2 2022-08-17 11:35:05          86   P1_PP04  5.9070             40.0000       0.1477      True
+  A210 test2 2022-08-17 12:25:05          89   P1_PP04  0.0000             40.0000       0.0000     False
+  A212 test2 2022-08-17 14:25:04         128   P1_PP04  5.0000             40.0000       0.1250      True
+  A214 test2 2022-08-17 17:34:04          62 P1_FCV01D  0.0000             78.6637       0.0000     False
+  A216 test2 2022-08-17 19:40:03          96 P1_FCV01D 11.0620             78.6637       0.1406      True
+  A218 test2 2022-08-17 22:41:01         215 P1_PCV01D 10.7804             11.7799       0.9152      True
+  A219 test2 2022-08-17 23:38:04         132 P1_FCV03D  0.2078             14.5394       0.0143     False
+included 10 of 14
+
+=== HAI 22.04 cross-time ===
+train1: rows 93601  2021-07-11 10:00:00 -> 2021-07-12 12:00:00  label columns ['Attack']
+train2: rows 201600  2021-07-17 00:00:01 -> 2021-07-19 08:00:00  label columns ['Attack']
+train3: rows 126000  2021-07-23 18:00:01 -> 2021-07-25 05:00:00  label columns ['Attack']
+train4: rows 86401  2021-07-26 12:00:00 -> 2021-07-27 12:00:00  label columns ['Attack']
+train5: rows 237600  2021-08-02 15:00:01 -> 2021-08-05 09:00:00  label columns ['Attack']
+train6: rows 259200  2021-08-06 09:00:01 -> 2021-08-09 09:00:00  label columns ['Attack']
+
+outputs: 32 npz files; raw files hashed: 44
