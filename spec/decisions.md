@@ -8,3 +8,8 @@ D6 2026-11-03  QAPPD facts (Zenodo 10.5281/zenodo.20287835, v1.0, CC BY-SA 4.0):
                train_* = normal only; test_* = normal + anomalies; test_label_* = point-wise labels. Enable=1 in 99.9% of samples.
 D7 2026-11-03  Known limitation: QAPPD voltages come from the rig's own feedback controller (no reference trajectory recorded),
                so training data shows closed-loop behaviour only. Protocol must measure how well training data covers probe inputs.
+D8 2026-11-03  QAPPD anomalies are designed process faults (arXiv 2605.27486): pick-up position outside 3-5 deg, pause outside 0.3-0.7 s,
+               motor voltage outside +-18 V (long segment, one file). Only the voltage type resembles a command probe.
+D9 2026-11-03  QAPPD trajectories were generated with the tool from Sassnick et al. (EUROCAST 2024 generative OPC UA honeypot), which
+               left interaction as future work. That gap is the one this work addresses.
+D10 2026-11-03 Sampling rate conflict: Zenodo says 100 Hz, paper says 50 Hz. Resolved from data (PitchDot vs dPitch). See next entry.
