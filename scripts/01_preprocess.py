@@ -191,8 +191,17 @@ def hai(cfg, log):
             Y[n] = np.zeros(len(t), np.int8); continue
         fl = raw / h["dir"] / f"label-{n.split('-', 1)[1]}.csv"
         lab = pd.read_csv(fl); log["raw_sha256"][str(fl.relative_to(ROOT))] = sha256(fl)
-        if len(lab) != len(t) or not np.array_equal(pd.to_datetime(lab["timestamp"]).to_numpy(), t.to_numpy()):
+        lt = pd.DatetimeIndex(pd.to_datetime(lab["timestamp"])); dt = pd.DatetimeIndex(t)
+        if len(lab) != len(t):
+            stop(f"HAI {n}: label rows {len(lab)} != data rows {len(t)}")
+        if np.array_equal(lt.to_numpy(), dt.to_numpy()):
+            mode = "exact"
+        elif (lt.second == 0).all() and np.array_equal(lt.to_numpy(), dt.floor("min").to_numpy()):
+            mode = "minute (D24: label timestamps truncated to minutes; rows matched by position)"
+        else:
             stop(f"HAI {n}: label timestamps do not match data timestamps")
+        log.setdefault("label_alignment", {})[n] = mode
+        print(f"HAI {n}: label alignment {mode.split()[0]}")
         Y[n] = lab["label"].to_numpy().astype(np.int8)
     for n, s in files.items():
         save(out / "hai" / f"{n}.npz", log, X=X[n].astype(np.float32), columns=np.array(order), roles=roles,
