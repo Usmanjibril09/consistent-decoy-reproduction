@@ -29,3 +29,6 @@ D15 2026-11-03 All 14 command-attack onsets match PDF start times. Pre-window z-
 D16 2026-11-03 Metrics restricted to established ones: FIT% (Ljung), discriminative score |acc-0.5| (Yoon et al. 2019), TSTR, Context-FID, DTW.
                Invented "violation rate" removed; physics checks are an attacker-side detector (detection rate). Section 7 renamed fingerprinting attacks.
                Chapter metrics may differ across thesis chapters; link is narrative (Ch2 skepticism consequence, Ch3 cause).
+D17 2026-11-03 Aligned with TimeGAN (discriminative score uses its post-hoc RNN classifier; TSTR), SimProcess (CPSS 2025: tsfresh+RF attacker,
+               fidelity score M2b; models noise only and filters out windows with process changes = our gap), NeuPot (IEEE TII 2023, seq2seq+Huber
+               Modbus honeypot = closest method competitor, baseline B10, full text needed: O5).
