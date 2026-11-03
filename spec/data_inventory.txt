@@ -1,0 +1,958 @@
+dataset root: /Users/ujw/Desktop/Dataset
+
+== Dell HoneyPot/DeceptIIoT Dataset/DeceptIIoT_dataset.csv.gz  (181.61 MB)
+    sha256: 47f08c6b96e1edecb0d824a0952c159affeff86188c36abee3ec48f4f68e4926
+    columns (44): ['timestamp', 'src_ip', 'src_port', 'dest_ip', 'dest_port', 'protocol', 'app_proto', 'source_tool', 'event_type', 'event_detail', 'attack_label', 'attack_sub_type', 'honeypot_interaction', 'iiot_device_involved', 'session_id', 'phase', 'flow_duration', 'bytes_toserver', 'bytes_toclient', 'pkts_toserver', 'pkts_toclient', 'total_bytes', 'total_packets', 'packet_rate', 'byte_rate', 'src_pkts_ratio', 'dest_pkts_ratio', 'src_bytes_ratio', 'dest_bytes_ratio', 'tcp_flags', 'tcp_state', 'tcp_syn', 'tcp_fin', 'tcp_psh', 'tcp_ack', 'alert_signature', 'alert_severity', 'alert_category', 'mqtt_type', 'mqtt_topic', 'username', 'password', 'login_success', 'command']
+    lines incl. header: 9723238
+    first rows:
+                               timestamp                                   src_ip  src_port                                  dest_ip  dest_port   protocol  ... mqtt_type mqtt_topic username password login_success command
+      0  2026-03-02T13:08:41.493685+0000  fe80:0000:0000:0000:c609:38ff:fef6:cea2       NaN  ff02:0000:0000:0000:0000:0000:0000:0016        NaN  IPv6-ICMP  ...       NaN        NaN      NaN      NaN           NaN     NaN
+      1  2026-03-02T13:08:48.494280+0000  fe80:0000:0000:0000:0000:0000:000a:0001       NaN  ff02:0000:0000:0000:0000:0000:0000:0001        NaN  IPv6-ICMP  ...       NaN        NaN      NaN      NaN           NaN     NaN
+      2  2026-03-02T13:08:55.495077+0000                             192.168.10.6   56377.0                          239.255.255.250     1900.0        UDP  ...       NaN        NaN      NaN      NaN           NaN     NaN
+
+== Dell HoneyPot/DeceptIIoT Dataset/DeceptIIoT_enriched.csv.gz  (194.88 MB)
+    sha256: 3db77c27183429883bf949ec6880abb67f94b2d1710edca331f1261efdbb27be
+    columns (91): ['timestamp', 'src_ip', 'src_port', 'dest_ip', 'dest_port', 'protocol', 'app_proto', 'source_tool', 'event_type', 'event_detail', 'attack_label', 'attack_sub_type', 'honeypot_interaction', 'iiot_device_involved', 'session_id', 'phase', 'flow_duration', 'bytes_toserver', 'bytes_toclient', 'pkts_toserver', 'pkts_toclient', 'total_bytes', 'total_packets', 'packet_rate', 'byte_rate', 'src_pkts_ratio', 'dest_pkts_ratio', 'src_bytes_ratio', 'dest_bytes_ratio', 'tcp_flags', 'tcp_state', 'tcp_syn', 'tcp_fin', 'tcp_psh', 'tcp_ack', 'alert_signature', 'alert_severity', 'alert_category', 'mqtt_type', 'mqtt_topic', 'username', 'password', 'login_success', 'command', 'cpu_user', 'cpu_system', 'cpu_idle', 'cpu_iowait', 'mem_total_kb', 'mem_used_kb', 'mem_free_kb', 'mem_available_kb', 'disk_tps', 'disk_read_kbs', 'disk_write_kbs', 'load_avg_1', 'load_avg_5', 'load_avg_15', 'num_processes', 'context_switches', 'interrupts', 'procs_running', 'procs_blocked', 'login_attempts', 'successful_logins', 'failed_logins', 'file_activity_count', 'process_count', 'new_processes', 'privileged_processes', 'network_connections', 'established_connections', 'listening_ports', 'zombie_processes', 'root_processes', 'ssh_connections', 'sudo_events', 'cpu_usage_pct', 'mem_usage_pct', 'mem_pressure', 'disk_activity', 'login_failure_rate', 'connection_density', 'privileged_ratio', 'zombie_ratio', 'is_phase1', 'is_phase2', 'is_phase3', 'is_internal_src', 'is_external_src', 'attack_binary']
+    lines incl. header: 9723238
+    first rows:
+                               timestamp                                   src_ip  src_port                                  dest_ip  dest_port   protocol  ... is_phase1 is_phase2 is_phase3 is_internal_src is_external_src attack_binary
+      0  2026-03-02T13:08:41.493685+0000  fe80:0000:0000:0000:c609:38ff:fef6:cea2       NaN  ff02:0000:0000:0000:0000:0000:0000:0016        NaN  IPv6-ICMP  ...         1         0         0               0               1             0
+      1  2026-03-02T13:08:48.494280+0000  fe80:0000:0000:0000:0000:0000:000a:0001       NaN  ff02:0000:0000:0000:0000:0000:0000:0001        NaN  IPv6-ICMP  ...         1         0         0               0               1             0
+      2  2026-03-02T13:08:55.495077+0000                             192.168.10.6   56377.0                          239.255.255.250     1900.0        UDP  ...         1         0         0               1               0             0
+
+== Dell HoneyPot/DeceptIIoT Dataset/README.md  (0.00 MB)
+    sha256: 76f1b4e361450d71f9964bfff51c088785bfca9e4e0bdaf8d5c221ceb42dfff1
+      # DeceptIIoT Dataset
+      
+      ## Overview
+      A labeled IIoT cybersecurity dataset combining network intrusion detection,
+      cyber deception (honeypots), and real IIoT device traffic from a physical testbed.
+      
+      ## Collection Period
+      - Phase 1 (Attacks): March 2-15, 2026 (12 days)
+      - Phase 2 (Normal baseline): April 6-9, 2026 (3 days)
+      - Phase 3 (IIoT-focused attacks): April 9-14, 2026 (5 days)
+      
+      ## Testbed Components
+      - Dell OptiPlex D660 (Ubuntu 24.04) - honeypot server
+      - Kali Linux VM - attack generation
+      - ESP32 #1 - MQTT temperature sensor
+      - ESP32 #2 - Modbus TCP pressure/valve sensor
+      - ESP32 #3 - HTTP motor controller
+      - Suricata 7.x IDS - network monitoring
+      - Cowrie SSH honeypot - SSH/Telnet deception
+      - Dionaea honeypot - service emulation (FTP, MySQL, SMB, MQTT)
+
+== Dell HoneyPot/DeceptIIoT Dataset/arp_monitor.csv  (5.21 MB)
+    sha256: a55bb3f43d0e98814cf24debe176335b6622b129f08b677bc01f4a7ee29b53aa
+    columns (5): ['timestamp', 'ip', 'mac', 'interface', 'change_type']
+    lines incl. header: 78770
+    first rows:
+                   timestamp            ip                mac interface change_type
+      0  2026-04-09T14:23:47  192.168.10.4  5e:d4:a5:2b:c1:89    enp2s0  new_device
+      1  2026-04-09T14:23:47  192.168.10.8  28:05:a5:34:ec:9c    enp2s0  new_device
+      2  2026-04-09T14:23:47  192.168.10.5  12:14:89:8a:9f:96    enp2s0  new_device
+
+== Dell HoneyPot/DeceptIIoT Dataset/attack_log_phase1.txt  (1.57 MB)
+    sha256: 66888556e763f6f294692df94309ae088654603d924e06468f4e02fed804ca98
+    could not parse as table: Expected 6 fields in line 3, saw 7
+      [2026-03-04 22:59:06] ==================================================
+      [2026-03-04 22:59:06] AUTOMATED ATTACK SCRIPT STARTED
+      [2026-03-04 22:59:06] Targets: ['192.168.10.20', '192.168.10.9', '192.168.10.10', '192.168.10.11']
+      [2026-03-04 22:59:06] ==================================================
+      [2026-03-04 22:59:06] HYDRA SSH: Brute force on 192.168.10.20:2222
+
+== Dell HoneyPot/DeceptIIoT Dataset/attack_log_phase3.txt  (1.49 MB)
+    sha256: 99627c4e22dd7c771f8a6981db2699a600c3a933d590e82ff5060ab3d7abff75
+    could not parse as table: Expected 7 fields in line 5, saw 9
+      [2026-04-09 11:48:27] ==================================================
+      [2026-04-09 11:48:27] PHASE 3 ATTACK SCRIPT STARTED
+      [2026-04-09 11:48:27] Targets: D660=192.168.10.20, MQTT=192.168.10.7, MODBUS=192.168.10.9, HTTP=192.168.10.8
+      [2026-04-09 11:48:27] ==================================================
+      [2026-04-09 11:48:27] MODBUS WRITE: Writing malicious values to 192.168.10.9
+
+== Dell HoneyPot/DeceptIIoT Dataset/binary_classification_results.csv  (0.00 MB)
+    sha256: 221af049c8e5d7eb05d1559c3d39fdee425ef3a4d87bb0183bae25a52bbce2ff
+    columns (7): ['Unnamed: 0', 'Accuracy', 'Precision', 'Recall', 'F1-Score', 'Train Time (s)', 'Predict Time (s)']
+    lines incl. header: 4
+    first rows:
+            Unnamed: 0  Accuracy  Precision    Recall  F1-Score  Train Time (s)  Predict Time (s)
+      0  Decision Tree  0.998619   0.998615  0.998619  0.998616        2.522407          0.044852
+      1  Random Forest  0.996509   0.996498  0.996509  0.996467        8.767995          0.188970
+      2        XGBoost  0.998639   0.998635  0.998639  0.998636        2.011632          0.085498
+
+== Dell HoneyPot/DeceptIIoT Dataset/class_names.txt  (0.00 MB)
+    sha256: 4580f955ce41a8842bceb4bc3665650f832936b24496583ce58d77a38ab2db83
+    columns (3): ['b', 'ute_fo', 'ce']
+    lines incl. header: 8
+    first rows:
+                      b ute_fo   ce
+      0  data_injection    NaN  NaN
+      1       dos_flood    NaN  NaN
+      2            exte  nal_p  obe
+
+== Dell HoneyPot/DeceptIIoT Dataset/cm_binary.csv  (0.00 MB)
+    sha256: acd539aeb52b059d264efc05b910c05913fe411daa523a39e179bb543a3f133d
+    columns (2): ['8334', '145']
+    lines incl. header: 2
+    first rows:
+         8334     145
+      0    64  144982
+
+== Dell HoneyPot/DeceptIIoT Dataset/cm_multi.csv  (0.00 MB)
+    sha256: eb5b92db01fcd5ada2826df63c9854f68ef5da0d993a08c7058cb726483f8fcc
+    columns (8): ['43017', '224', '15', '0', '0.1', '545', '33', '71']
+    lines incl. header: 8
+    first rows:
+         43017   224  15   0  0.1  545  33  71
+      0    881  2804   1   0   12  657   2   5
+      1    197    18  64   0    0    6   0   4
+      2      0     0   0  45   28    7   0   0
+
+== Dell HoneyPot/DeceptIIoT Dataset/correlation_matrix.csv  (0.01 MB)
+    sha256: f0b22e51731766efc1422986366c8126946468c1a0652dc09adc6eaa5604c802
+    columns (20): ['Unnamed: 0', 'flow_duration', 'bytes_toserver', 'bytes_toclient', 'pkts_toserver', 'pkts_toclient', 'total_bytes', 'total_packets', 'packet_rate', 'byte_rate', 'src_pkts_ratio', 'dest_pkts_ratio', 'cpu_usage_pct', 'mem_usage_pct', 'disk_activity', 'login_attempts', 'failed_logins', 'network_connections', 'connection_density', 'login_failure_rate']
+    lines incl. header: 20
+    first rows:
+             Unnamed: 0  flow_duration  bytes_toserver  bytes_toclient  pkts_toserver  pkts_toclient  ...  disk_activity  login_attempts  failed_logins  network_connections  connection_density  login_failure_rate
+      0   flow_duration       1.000000        0.998888        0.343558       0.998953       0.995025  ...      -0.000132       -0.000108            NaN            -0.000975           -0.000973                 NaN
+      1  bytes_toserver       0.998888        1.000000        0.380715       0.999867       0.998050  ...      -0.000212       -0.000229            NaN            -0.000937           -0.000942                 NaN
+      2  bytes_toclient       0.343558        0.380715        1.000000       0.383666       0.434431  ...      -0.000306       -0.000637            NaN            -0.005755           -0.005776                 NaN
+
+== Dell HoneyPot/DeceptIIoT Dataset/cowrie_labeled.csv.gz  (48.57 MB)
+    sha256: 2cba8188050731c45567156f09fd9d8b14d9e41cf4e6b47094ad57a4d2612d59
+    columns (44): ['timestamp', 'src_ip', 'src_port', 'dest_ip', 'dest_port', 'protocol', 'app_proto', 'source_tool', 'event_type', 'event_detail', 'attack_label', 'attack_sub_type', 'honeypot_interaction', 'iiot_device_involved', 'session_id', 'phase', 'flow_duration', 'bytes_toserver', 'bytes_toclient', 'pkts_toserver', 'pkts_toclient', 'total_bytes', 'total_packets', 'packet_rate', 'byte_rate', 'src_pkts_ratio', 'dest_pkts_ratio', 'src_bytes_ratio', 'dest_bytes_ratio', 'tcp_flags', 'tcp_state', 'tcp_syn', 'tcp_fin', 'tcp_psh', 'tcp_ack', 'alert_signature', 'alert_severity', 'alert_category', 'mqtt_type', 'mqtt_topic', 'username', 'password', 'login_success', 'command']
+    lines incl. header: 2789250
+    first rows:
+                           timestamp         src_ip  src_port        dest_ip  dest_port protocol  ... mqtt_type mqtt_topic username password login_success command
+      0  2026-04-14T00:44:05.439276Z  192.168.10.10   47182.0  192.168.10.20       2222      TCP  ...       NaN        NaN      NaN      NaN           NaN     NaN
+      1  2026-04-14T00:44:05.452079Z  192.168.10.10       NaN  192.168.10.20       2222      TCP  ...       NaN        NaN      NaN      NaN           NaN     NaN
+      2  2026-04-14T00:46:48.615127Z  192.168.10.10   44848.0  192.168.10.20       2222      TCP  ...       NaN        NaN      NaN      NaN           NaN     NaN
+
+== Dell HoneyPot/DeceptIIoT Dataset/dataset_validation.py  (0.01 MB)
+    sha256: 3b7c7d125de17266275035d5625447bef25607965883d367c67858b046dfaac6
+    (not inspected: unknown type)
+
+== Dell HoneyPot/DeceptIIoT Dataset/dataset_validation_step2.py  (0.02 MB)
+    sha256: 990cd1040bdbd37653f99814abd3393f47d9657fdc1f00a098c182953a04f53e
+    (not inspected: unknown type)
+
+== Dell HoneyPot/DeceptIIoT Dataset/dionaea_labeled.csv.gz  (0.19 MB)
+    sha256: f7af9a0f171dccb3e7fce65161ba93c158b88a889b078f1da16f1216c82269d1
+    columns (44): ['timestamp', 'src_ip', 'src_port', 'dest_ip', 'dest_port', 'protocol', 'app_proto', 'source_tool', 'event_type', 'event_detail', 'attack_label', 'attack_sub_type', 'honeypot_interaction', 'iiot_device_involved', 'session_id', 'phase', 'flow_duration', 'bytes_toserver', 'bytes_toclient', 'pkts_toserver', 'pkts_toclient', 'total_bytes', 'total_packets', 'packet_rate', 'byte_rate', 'src_pkts_ratio', 'dest_pkts_ratio', 'src_bytes_ratio', 'dest_bytes_ratio', 'tcp_flags', 'tcp_state', 'tcp_syn', 'tcp_fin', 'tcp_psh', 'tcp_ack', 'alert_signature', 'alert_severity', 'alert_category', 'mqtt_type', 'mqtt_topic', 'username', 'password', 'login_success', 'command']
+    lines incl. header: 25385
+    first rows:
+                   timestamp        src_ip  src_port        dest_ip  dest_port protocol  ...  mqtt_type mqtt_topic username password login_success command
+      0  2026-03-06T18:41:58  192.168.10.7     55970  192.168.10.20       3306   mysqld  ...        NaN        NaN      NaN      NaN           NaN     NaN
+      1  2026-03-06T18:41:58  192.168.10.7     55972  192.168.10.20       3306   mysqld  ...        NaN        NaN      NaN      NaN           NaN     NaN
+      2  2026-03-06T18:41:58  192.168.10.7     55986  192.168.10.20       3306   mysqld  ...        NaN        NaN      NaN      NaN           NaN     NaN
+
+== Dell HoneyPot/DeceptIIoT Dataset/feature_importance_top25.csv  (0.00 MB)
+    sha256: ddbfc6aa8c8d6abe88d86b9bfc6c82e0d6b633b36689b4723b83cca534787c6c
+    columns (2): ['Feature', 'Importance']
+    lines incl. header: 26
+    first rows:
+                 Feature  Importance
+      0         src_port    0.088516
+      1  src_bytes_ratio    0.083774
+      2        dest_port    0.070377
+
+== Dell HoneyPot/DeceptIIoT Dataset/multiclass_classification_results.csv  (0.00 MB)
+    sha256: fb50ccd2c054add8cab685c75ed2cd824577acc0e97a22df97df8541b1827bdf
+    columns (7): ['Unnamed: 0', 'Accuracy', 'Precision', 'Recall', 'F1-Score', 'Train Time (s)', 'Predict Time (s)']
+    lines incl. header: 4
+    first rows:
+            Unnamed: 0  Accuracy  Precision    Recall  F1-Score  Train Time (s)  Predict Time (s)
+      0  Decision Tree  0.916965   0.919388  0.916965   0.91336        4.424101          0.057286
+      1  Random Forest  0.860049   0.857675  0.860049   0.85304       13.040204          0.372406
+      2        XGBoost  0.925621   0.931882  0.925621   0.92536       19.725288          0.841232
+
+== Dell HoneyPot/DeceptIIoT Dataset/normal_traffic.log  (3.43 MB)
+    sha256: 923124961442c9000b792c5836ab927d46fbfa46a4462abc4ea22d4a98aa744d
+    (not inspected: unknown type)
+
+== Dell HoneyPot/DeceptIIoT Dataset/security_events.csv  (2.29 MB)
+    sha256: 320537db4ce5ec6605b49a36089dd7868e882f2d3d3ea54953f54b32c292b1e9
+    columns (15): ['timestamp', 'login_attempts', 'successful_logins', 'failed_logins', 'file_activity_count', 'process_count', 'new_processes', 'privileged_processes', 'network_connections', 'established_connections', 'listening_ports', 'zombie_processes', 'root_processes', 'ssh_connections', 'sudo_events']
+    lines incl. header: 39950
+    first rows:
+                   timestamp  login_attempts  successful_logins  failed_logins  file_activity_count  process_count  ...  established_connections  listening_ports  zombie_processes  root_processes  ssh_connections  sudo_events
+      0  2026-04-09T14:28:04               0                  0              0                    0            153  ...                        2               56                 0             140                1           10
+      1  2026-04-09T14:28:15               0                  0              0                    0            152  ...                        2               56                 0             139                1            0
+      2  2026-04-09T14:28:25               0                  0              0                    0            151  ...                        2               56                 0             138                1            0
+
+== Dell HoneyPot/DeceptIIoT Dataset/suricata_labeled.csv.gz  (132.85 MB)
+    sha256: f71544c6755252a98ed19152459611f3970a1212e58c73de1cb9a3fcdf7019a7
+    columns (44): ['timestamp', 'src_ip', 'src_port', 'dest_ip', 'dest_port', 'protocol', 'app_proto', 'source_tool', 'event_type', 'event_detail', 'attack_label', 'attack_sub_type', 'honeypot_interaction', 'iiot_device_involved', 'session_id', 'phase', 'flow_duration', 'bytes_toserver', 'bytes_toclient', 'pkts_toserver', 'pkts_toclient', 'total_bytes', 'total_packets', 'packet_rate', 'byte_rate', 'src_pkts_ratio', 'dest_pkts_ratio', 'src_bytes_ratio', 'dest_bytes_ratio', 'tcp_flags', 'tcp_state', 'tcp_syn', 'tcp_fin', 'tcp_psh', 'tcp_ack', 'alert_signature', 'alert_severity', 'alert_category', 'mqtt_type', 'mqtt_topic', 'username', 'password', 'login_success', 'command']
+    lines incl. header: 6908605
+    first rows:
+                               timestamp                                   src_ip  src_port                                  dest_ip  dest_port   protocol  ... mqtt_type mqtt_topic username password login_success command
+      0  2026-03-02T13:08:41.493685+0000  fe80:0000:0000:0000:c609:38ff:fef6:cea2       NaN  ff02:0000:0000:0000:0000:0000:0000:0016        NaN  IPv6-ICMP  ...       NaN        NaN      NaN      NaN           NaN     NaN
+      1  2026-03-02T13:08:48.494280+0000  fe80:0000:0000:0000:0000:0000:000a:0001       NaN  ff02:0000:0000:0000:0000:0000:0000:0001        NaN  IPv6-ICMP  ...       NaN        NaN      NaN      NaN           NaN     NaN
+      2  2026-03-02T13:08:55.495077+0000                             192.168.10.6   56377.0                          239.255.255.250     1900.0        UDP  ...       NaN        NaN      NaN      NaN           NaN     NaN
+
+== Dell HoneyPot/DeceptIIoT Dataset/system_metrics.csv  (3.70 MB)
+    sha256: b7b068110a561432283a1608c9baebaecb914a80e0b3d8867948f4016a391d1c
+    columns (20): ['timestamp', 'cpu_user', 'cpu_system', 'cpu_idle', 'cpu_iowait', 'mem_total_kb', 'mem_used_kb', 'mem_free_kb', 'mem_available_kb', 'disk_tps', 'disk_read_kbs', 'disk_write_kbs', 'load_avg_1', 'load_avg_5', 'load_avg_15', 'num_processes', 'context_switches', 'interrupts', 'procs_running', 'procs_blocked']
+    lines incl. header: 30884
+    first rows:
+                   timestamp  cpu_user  cpu_system  cpu_idle  cpu_iowait  mem_total_kb  ...  load_avg_15  num_processes  context_switches  interrupts  procs_running  procs_blocked
+      0  2026-04-09T14:17:50       0.0        0.51     77.92         0.0       7540504  ...         0.03            157              8723        7930              1              0
+      1  2026-04-09T14:18:03       0.0        0.00     94.60         0.0       7540504  ...         0.03            155              1082        1280              1              0
+      2  2026-04-09T14:18:16       0.0        0.00     92.70         0.0       7540504  ...         0.04            149               458         281              0              0
+
+== Dell HoneyPot/DeceptIIoT Dataset/figures/fig1_attack_distribution.png  (0.41 MB)
+    sha256: 9853b96a40936ba48f0cc2df9a8d597c721695b94e0440fd10962685789ee887
+    (not inspected: unknown type)
+
+== Dell HoneyPot/DeceptIIoT Dataset/figures/fig2_phase_distribution.pdf  (0.02 MB)
+    sha256: 024b4d755c157796b9ebd9bb4f949cd2c76bb28784bdb6c909254e181353765f
+    (not inspected: unknown type)
+
+== Dell HoneyPot/DeceptIIoT Dataset/figures/fig2_phase_distribution.png  (0.38 MB)
+    sha256: 005c4a8f240b9181b1a4569016440ae4f101eca5e60e80426f8af1223059d554
+    (not inspected: unknown type)
+
+== Dell HoneyPot/DeceptIIoT Dataset/figures/fig3_tool_distribution.pdf  (0.02 MB)
+    sha256: 0f08214815b7dbbee06cece76236d884fa32e2b6ec27227eef07102f05c557d4
+    (not inspected: unknown type)
+
+== Dell HoneyPot/DeceptIIoT Dataset/figures/fig3_tool_distribution.png  (0.38 MB)
+    sha256: faa0ade6137cb441f236934a63b4b89771ba7f5551cbd8ff574a8776a0907a0d
+    (not inspected: unknown type)
+
+== Dell HoneyPot/DeceptIIoT Dataset/figures/fig4_correlation_heatmap.png  (1.99 MB)
+    sha256: c88243dcf42536da6b55ca2edf24a2a0f7afcf2ffe4fdd7edbbc73efe47c5f57
+    (not inspected: unknown type)
+
+== Dell HoneyPot/DeceptIIoT Dataset/figures/fig5_binary_distribution.pdf  (0.02 MB)
+    sha256: 6a79f5e83b034b1527d2cda898dbecca38cc63a2045114aa2b834f33b6f1cc0b
+    (not inspected: unknown type)
+
+== Dell HoneyPot/DeceptIIoT Dataset/figures/fig5_binary_distribution.png  (0.34 MB)
+    sha256: 1c2fd1da746a16e8a99b4d2e1ee2fca38d2c109a5107e9e0a3a64bd7725dd380
+    (not inspected: unknown type)
+
+== Dell HoneyPot/DeceptIIoT Dataset/figures/fig_topology.m  (0.01 MB)
+    sha256: 4d782845534db1897e61f1f10b08c104d390b11a35f0735bee1179e6e5e7a1e1
+    (not inspected: unknown type)
+
+== Dell HoneyPot/DeceptIIoT Dataset/figures/fig_topology.pdf  (0.03 MB)
+    sha256: 2927c17e66cae94d58d9fbc3b0bd5aafa39f63afad95305a649b0bb51ed9069c
+    (not inspected: unknown type)
+
+== EUROCAST/industrial-federated-learning-main.zip  (0.05 MB)
+    sha256: fb607b16ff9c17b043c239d256e1f9f94d880243ae6ff5d021a8c73ca2494ee8
+    zip members (65): ['industrial-federated-learning-main/', 'industrial-federated-learning-main/.gitignore', 'industrial-federated-learning-main/CITATION.cff', 'industrial-federated-learning-main/LICENSE', 'industrial-federated-learning-main/README.md', 'industrial-federated-learning-main/centralized/', 'industrial-federated-learning-main/centralized/run_centralized.py', 'industrial-federated-learning-main/config.py', 'industrial-federated-learning-main/configs/', 'industrial-federated-learning-main/configs/deepant_cl_asd.yaml', 'industrial-federated-learning-main/configs/deepant_cl_qappd.yaml', 'industrial-federated-learning-main/configs/deepant_fl_asd.yaml', 'industrial-federated-learning-main/configs/deepant_fl_qappd.yaml', 'industrial-federated-learning-main/configs/deepant_h-fl_asd.yaml', 'industrial-federated-learning-main/configs/deepant_h-fl_qappd.yaml', 'industrial-federated-learning-main/configs/lstmae_cl_asd.yaml', 'industrial-federated-learning-main/configs/lstmae_cl_qappd.yaml', 'industrial-federated-learning-main/configs/lstmae_fl_asd.yaml', 'industrial-federated-learning-main/configs/lstmae_fl_qappd.yaml', 'industrial-federated-learning-main/configs/lstmae_h-fl_asd.yaml', 'industrial-federated-learning-main/configs/lstmae_h-fl_qappd.yaml', 'industrial-federated-learning-main/configs/mtadgat_cl_asd.yaml', 'industrial-federated-learning-main/configs/mtadgat_cl_qappd.yaml', 'industrial-federated-learning-main/configs/mtadgat_fl_asd.yaml', 'industrial-federated-learning-main/configs/mtadgat_fl_qappd.yaml', 'industrial-federated-learning-main/configs/mtadgat_h-fl_asd.yaml', 'industrial-federated-learning-main/configs/mtadgat_h-fl_qappd.yaml', 'industrial-federated-learning-main/configs/tranad_cl_asd.yaml', 'industrial-federated-learning-main/configs/tranad_cl_qappd.yaml', 'industrial-federated-learning-main/configs/tranad_fl_asd.yaml']
+
+== EUROCAST/test_1.pkl  (20.38 MB)
+    sha256: ac5d8232b9621f1ca79fefeb6c42e9bc8a5334d81110a833ef6f7f92225ad550
+    (not inspected: unknown type)
+
+== EUROCAST/test_10.pkl  (20.38 MB)
+    sha256: 609ca33b0dc8ea61d6fba3e3ccce9eedf1fb0830b6d4d638e06c555aff2a2f3e
+    (not inspected: unknown type)
+
+== EUROCAST/test_2.pkl  (20.38 MB)
+    sha256: b7f95ded865c4bb9220347bfe998b711eb78356c56ce782178f1b8868442e659
+    (not inspected: unknown type)
+
+== EUROCAST/test_3.pkl  (20.38 MB)
+    sha256: 9964088999bc578b8141346c86b045a803e00e345b7a552b42ebfb02ed7029b4
+    (not inspected: unknown type)
+
+== EUROCAST/test_4.pkl  (20.38 MB)
+    sha256: edbf38a4560835fb321f451b1a41ea83ff1f005c222cc42e6a8b400284438fd7
+    (not inspected: unknown type)
+
+== EUROCAST/test_5.pkl  (20.38 MB)
+    sha256: 9ddf51208dee76896f9edec581a45d2fdd19cbac3b351c19d852790e4cc0dbbc
+    (not inspected: unknown type)
+
+== EUROCAST/test_6.pkl  (20.38 MB)
+    sha256: 5678e4ef9b234168bc788bae14f34d59a5c4060d92a3c6a2d858db42cb3de476
+    (not inspected: unknown type)
+
+== EUROCAST/test_7.pkl  (20.38 MB)
+    sha256: dde8468845059a7274932e4b1354237c42829d844274b6d455676c76e9c3d476
+    (not inspected: unknown type)
+
+== EUROCAST/test_8.pkl  (20.38 MB)
+    sha256: 9f9ec179fbb5787e3c657af788cee9d68148315c0e336ee13c6c8dc9cf29eb4f
+    (not inspected: unknown type)
+
+== EUROCAST/test_9.pkl  (20.38 MB)
+    sha256: 4f6e42564eeef045f69147af13ed284b297beb97f713fc64e8d2cd8c4a1b8861
+    (not inspected: unknown type)
+
+== EUROCAST/test_label_1.pkl  (1.46 MB)
+    sha256: 4979f970e6c2835d40cfa298096b68ba79f43bcd7d38a57b78424c03df35e762
+    (not inspected: unknown type)
+
+== EUROCAST/test_label_10.pkl  (1.46 MB)
+    sha256: 4eeaf4a79d9866d8cd1cb19ea037f6f7431c2ce5d171e182f7f44035f694c30d
+    (not inspected: unknown type)
+
+== EUROCAST/test_label_2.pkl  (1.46 MB)
+    sha256: 1b754abb343ff73f5643f8fd74a5242f317b539cfe4fc479270799cf7298a340
+    (not inspected: unknown type)
+
+== EUROCAST/test_label_3.pkl  (1.46 MB)
+    sha256: 5ac011d8100e18d605409e53a7e6002e9065dac206a2822a5664f9314574e86d
+    (not inspected: unknown type)
+
+== EUROCAST/test_label_4.pkl  (1.46 MB)
+    sha256: 72586dab0f37cf29b64118dd4d8e9272f99e1fe765c94709e786e8f528ec0639
+    (not inspected: unknown type)
+
+== EUROCAST/test_label_5.pkl  (1.46 MB)
+    sha256: 16213bbad119523bb47748a033cae098b47ac3b5ad389ed89b347571ef87a528
+    (not inspected: unknown type)
+
+== EUROCAST/test_label_6.pkl  (1.46 MB)
+    sha256: f285c41927c6900e7d9c0ae5798b9895680df71c9ca8fa6dbe55df5aceac6057
+    (not inspected: unknown type)
+
+== EUROCAST/test_label_7.pkl  (1.46 MB)
+    sha256: 66556bd96b5b4147fe4ef6e1bb0f0bf91004d669e44783592ad59d5e9862867b
+    (not inspected: unknown type)
+
+== EUROCAST/test_label_8.pkl  (1.46 MB)
+    sha256: b6f1006100417f5a671886a4488e50b92e34f7257197fb3d1fee1b12d7d2370d
+    (not inspected: unknown type)
+
+== EUROCAST/test_label_9.pkl  (1.46 MB)
+    sha256: 1c2edba2530163a0417825f394f3564d3bfc82338c2c112242d0a16dd34f6920
+    (not inspected: unknown type)
+
+== EUROCAST/train_1.pkl  (20.38 MB)
+    sha256: b6dae17bf481c436e0ff74d068dad317341753eadf60a0ab5580009c8fc7610b
+    (not inspected: unknown type)
+
+== EUROCAST/train_10.pkl  (20.38 MB)
+    sha256: 3cd8de9a53bd4525a4f37db18ef27ddf0cbcb4b1a8a2ce2d9d67c5620104720e
+    (not inspected: unknown type)
+
+== EUROCAST/train_2.pkl  (20.38 MB)
+    sha256: 876b03764f18d9ba29a04595c59baeb72de46b2e12eb54c1a741f5deddac1958
+    (not inspected: unknown type)
+
+== EUROCAST/train_3.pkl  (20.38 MB)
+    sha256: a8e3283bf901a674d55ef814e41169d34f21dd31257f3b23cdfbc8b7a2c1af07
+    (not inspected: unknown type)
+
+== EUROCAST/train_4.pkl  (20.38 MB)
+    sha256: 6c0507286cfcead7986f1ff04788315da98fbe16a4383bc0b35636dd0ed0bb67
+    (not inspected: unknown type)
+
+== EUROCAST/train_5.pkl  (20.38 MB)
+    sha256: 2d336e2bdeeb076ab9f38ecd3d4c3080ca9cf97fb33c3ad3fba0569e0012de19
+    (not inspected: unknown type)
+
+== EUROCAST/train_6.pkl  (20.38 MB)
+    sha256: 0254a987fa7828a4b660a711f66ba3fa70340834cc0287f6af4cf28460f46e37
+    (not inspected: unknown type)
+
+== EUROCAST/train_7.pkl  (20.38 MB)
+    sha256: 3dd432ac18eacde18c342754e436edc44259b4ca39e9d736c16eab32b089bdcd
+    (not inspected: unknown type)
+
+== EUROCAST/train_8.pkl  (20.38 MB)
+    sha256: 8ad084c5e91fc0505c1728e6fb3716f8c8bd53c038521bb170372d530776ad7d
+    (not inspected: unknown type)
+
+== EUROCAST/train_9.pkl  (20.38 MB)
+    sha256: 2749d6524c1b277d3ae4f3e7e398b45f68b103aa727b7adf79d44fd3f666ff10
+    (not inspected: unknown type)
+
+== HAI/hai_dataset_technical_details.pdf  (2.93 MB)
+    sha256: 0668345c4e80331b918fe17c81f8f363b13bd22886831d286e761bc62b71a556
+    (not inspected: unknown type)
+
+== HAI/graph/graph_analysis.ipynb  (1.28 MB)
+    sha256: ca32b9374453c3ceb7402404bbccbdf09da37198b9f0fce93b594c892955dc6c
+    (not inspected: unknown type)
+
+== HAI/graph/boiler/dcs_1001h.json  (0.00 MB)
+    sha256: 3cebccfed59f8f2da4fe90ea8b9055da64ace270133e8a8e281377ac37c7e602
+    (not inspected: unknown type)
+
+== HAI/graph/boiler/dcs_1001h.png  (0.95 MB)
+    sha256: 32c14825c6d4cfa52fde49ed11e1310db0c3c63151b2ce8085ccf2259e6cc259
+    (not inspected: unknown type)
+
+== HAI/graph/boiler/dcs_1002h.json  (0.01 MB)
+    sha256: d3f060df16c97a5dbf18907199d7e75f61cc58587100fe76b9d4f8a6be354fd6
+    (not inspected: unknown type)
+
+== HAI/graph/boiler/dcs_1002h.png  (1.66 MB)
+    sha256: e3d7bcfa408dbf5bfe979f5e0fd66cc96f7df4d8c00409ab673476bacd8e8f83
+    (not inspected: unknown type)
+
+== HAI/graph/boiler/dcs_1003h.json  (0.01 MB)
+    sha256: c23f069441d6acfcd3201b224d56444699fb6f6de295f438dbdcee1f4f2c3939
+    (not inspected: unknown type)
+
+== HAI/graph/boiler/dcs_1003h.png  (1.34 MB)
+    sha256: a9739ee37c7e92ed54af51d8a8347bc531bc2ec3951e9e8f48acee159315171f
+    (not inspected: unknown type)
+
+== HAI/graph/boiler/dcs_1004h.json  (0.01 MB)
+    sha256: 271be9f269d99ae546acd52df4104e0e322b36ac7052a4e66222735ea605114d
+    (not inspected: unknown type)
+
+== HAI/graph/boiler/dcs_1004h.png  (3.57 MB)
+    sha256: 9f592d802a35787fa827735ded9e04c06a12afe0b890e6e891c84e51980ed8a6
+    (not inspected: unknown type)
+
+== HAI/graph/boiler/dcs_1010h.json  (0.01 MB)
+    sha256: ca7b6548807feda9f30692add784f744644e0f89a7b69c9130800b6615a8c1e9
+    (not inspected: unknown type)
+
+== HAI/graph/boiler/dcs_1010h.png  (2.90 MB)
+    sha256: 8df56213ab1aa3bd8b14ca918bfce6ff3c11c15e316f223f7e4cc75968543a73
+    (not inspected: unknown type)
+
+== HAI/graph/boiler/dcs_1011h.json  (0.01 MB)
+    sha256: ca56538e33fe46be3582a98ef4ddf6267ccb6adc7a84a63c081278cc00800999
+    (not inspected: unknown type)
+
+== HAI/graph/boiler/dcs_1011h.png  (2.64 MB)
+    sha256: 90f758403dbdd67388cbf7429fdf8680a0cc95c41636b06f6bd77a57a402570d
+    (not inspected: unknown type)
+
+== HAI/graph/boiler/dcs_1020h.json  (0.00 MB)
+    sha256: fb46f76b5d6e75c5348156523fbf40e0fbd9259e08c9598fa7d422a3d6ac6b70
+    (not inspected: unknown type)
+
+== HAI/graph/boiler/dcs_1020h.png  (0.76 MB)
+    sha256: 239fff34c96f3726785b3577cc128075c06cf0c9c2b429e2cb694676aac3cc2d
+    (not inspected: unknown type)
+
+== HAI/graph/boiler/phy_boiler.json  (0.07 MB)
+    sha256: eca648d73c0444a35294608c2a1067256d7b32547257153226fece2de3febd07
+    (not inspected: unknown type)
+
+== HAI/graph/boiler/phy_boiler.png  (0.81 MB)
+    sha256: c9ceda41640da5a7e92d09895ce1aed45bd01a27285c039a95a61fb20e3253a0
+    (not inspected: unknown type)
+
+== HAI/hai-20.07/test1.csv  (121.84 MB)
+    sha256: 32eea046dd7c72027c636948884afc084e82e246b950009208a7ea21971997f4
+    columns (64): ['time', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT02', 'P1_TIT01', 'P1_TIT02', 'P2_24Vdc', 'P2_Auto', 'P2_Emgy', 'P2_On', 'P2_SD01', 'P2_SIT01', 'P2_TripEx', 'P2_VT01e', 'P2_VXT02', 'P2_VXT03', 'P2_VYT02', 'P2_VYT03', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH', 'P3_LL', 'P3_LT01', 'P4_HT_FD', 'P4_HT_LD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'attack', 'attack_P1', 'attack_P2', 'attack_P3']
+    lines incl. header: 291601
+    first rows:
+                        time  P1_B2004  P1_B2016  P1_B3004   P1_B3005  P1_B4002  ...  P4_ST_PT01  P4_ST_TT01  attack  attack_P1  attack_P2  attack_P3
+      0  2019-10-29 11:00:00    0.0982    1.4610  461.9883  1099.7363        32  ...       10053       27629       0          0          0          0
+      1  2019-10-29 11:00:01    0.0982    1.4578  461.9883  1099.7363        32  ...       10053       27629       0          0          0          0
+      2  2019-10-29 11:00:02    0.0982    1.4666  461.9883  1099.7363        32  ...       10053       27629       0          0          0          0
+
+== HAI/hai-20.07/test2.csv  (64.01 MB)
+    sha256: 0b21b05b0ebce16ee560c7d35aaf5ecba494d0801ebcbe93f0648e622bdc8a09
+    columns (64): ['time', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT02', 'P1_TIT01', 'P1_TIT02', 'P2_24Vdc', 'P2_Auto', 'P2_Emgy', 'P2_On', 'P2_SD01', 'P2_SIT01', 'P2_TripEx', 'P2_VT01e', 'P2_VXT02', 'P2_VXT03', 'P2_VYT02', 'P2_VYT03', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH', 'P3_LL', 'P3_LT01', 'P4_HT_FD', 'P4_HT_LD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'attack', 'attack_P1', 'attack_P2', 'attack_P3']
+    lines incl. header: 153001
+    first rows:
+                        time  P1_B2004  P1_B2016  P1_B3004   P1_B3005  P1_B4002  ...  P4_ST_PT01  P4_ST_TT01  attack  attack_P1  attack_P2  attack_P3
+      0  2019-11-04 15:00:00    0.1001    1.5270  395.3508  1120.8154   29.4139  ...       10026       27549       0          0          0          0
+      1  2019-11-04 15:00:01    0.1001    1.5260  395.3508  1120.8154   29.4139  ...       10026       27549       0          0          0          0
+      2  2019-11-04 15:00:02    0.1001    1.5298  395.3508  1120.8154   29.4139  ...       10026       27551       0          0          0          0
+
+== HAI/hai-20.07/train1.csv  (130.29 MB)
+    sha256: f5ee576aabaa1f146e671a4228129e26ea921addd577a179c7e0299aefbc7c22
+    columns (64): ['time', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT02', 'P1_TIT01', 'P1_TIT02', 'P2_24Vdc', 'P2_Auto', 'P2_Emgy', 'P2_On', 'P2_SD01', 'P2_SIT01', 'P2_TripEx', 'P2_VT01e', 'P2_VXT02', 'P2_VXT03', 'P2_VYT02', 'P2_VYT03', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH', 'P3_LL', 'P3_LT01', 'P4_HT_FD', 'P4_HT_LD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'attack', 'attack_P1', 'attack_P2', 'attack_P3']
+    lines incl. header: 309601
+    first rows:
+                        time  P1_B2004  P1_B2016  P1_B3004   P1_B3005  P1_B4002  ...  P4_ST_PT01  P4_ST_TT01  attack  attack_P1  attack_P2  attack_P3
+      0  2019-09-11 20:00:00    0.0983    1.0702  399.2321  1110.3986        32  ...        9973       27629       0          0          0          0
+      1  2019-09-11 20:00:01    0.0983    1.0699  399.2321  1110.3986        32  ...        9973       27629       0          0          0          0
+      2  2019-09-11 20:00:02    0.0983    1.0703  399.2321  1110.3986        32  ...        9973       27629       0          0          0          0
+
+== HAI/hai-20.07/train2.csv  (101.03 MB)
+    sha256: ec92d783e1f5bafa84cd0940c8acb6c5402b9bee6de7fe7539a8e4d06977a442
+    columns (64): ['time', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT02', 'P1_TIT01', 'P1_TIT02', 'P2_24Vdc', 'P2_Auto', 'P2_Emgy', 'P2_On', 'P2_SD01', 'P2_SIT01', 'P2_TripEx', 'P2_VT01e', 'P2_VXT02', 'P2_VXT03', 'P2_VYT02', 'P2_VYT03', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH', 'P3_LL', 'P3_LT01', 'P4_HT_FD', 'P4_HT_LD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'attack', 'attack_P1', 'attack_P2', 'attack_P3']
+    lines incl. header: 241201
+    first rows:
+                        time  P1_B2004  P1_B2016  P1_B3004   P1_B3005  P1_B4002  ...  P4_ST_PT01  P4_ST_TT01  attack  attack_P1  attack_P2  attack_P3
+      0  2019-11-01 20:00:00    0.0998    1.3901  404.1787  1040.8125        32  ...       10053       27618       0          0          0          0
+      1  2019-11-01 20:00:01    0.0998    1.3840  404.1787  1040.8125        32  ...       10053       27617       0          0          0          0
+      2  2019-11-01 20:00:02    0.0998    1.3837  404.1787  1040.8125        32  ...       10053       27616       0          0          0          0
+
+== HAI/hai-21.03/test1.csv  (23.77 MB)
+    sha256: 54abf91d7a7868a83fa85e2119d0554c9533430e9d73a24f7241fc16a4ea692b
+    columns (84): ['time', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P2_24Vdc', 'P2_ASD', 'P2_AutoGO', 'P2_CO_rpm', 'P2_Emerg', 'P2_HILout', 'P2_MSD', 'P2_ManualGO', 'P2_OnOff', 'P2_RTR', 'P2_SIT01', 'P2_SIT02', 'P2_TripEx', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P2_VXT02', 'P2_VXT03', 'P2_VYT02', 'P2_VYT03', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH', 'P3_LIT01', 'P3_LL', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_LD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'attack', 'attack_P1', 'attack_P2', 'attack_P3']
+    lines incl. header: 43202
+    first rows:
+                        time  P1_B2004  P1_B2016   P1_B3004   P1_B3005  P1_B4002  ...  P4_ST_PT01  P4_ST_TT01  attack  attack_P1  attack_P2  attack_P3
+      0  2020-07-07 15:00:00   0.10178   1.58771  403.78854  985.37353  32.59527  ...       10044       27567       0          0          0          0
+      1  2020-07-07 15:00:01   0.10178   1.58725  403.78854  985.37353  32.59527  ...       10040       27564       0          0          0          0
+      2  2020-07-07 15:00:02   0.10178   1.59519  403.78854  985.37353  32.59527  ...       10037       27565       0          0          0          0
+
+== HAI/hai-21.03/test2.csv  (64.87 MB)
+    sha256: 3c21f79fac3dee6b3ea3564bf752186cd954c0cafef27dbaeb7f202cbfdd771c
+    columns (84): ['time', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P2_24Vdc', 'P2_ASD', 'P2_AutoGO', 'P2_CO_rpm', 'P2_Emerg', 'P2_HILout', 'P2_MSD', 'P2_ManualGO', 'P2_OnOff', 'P2_RTR', 'P2_SIT01', 'P2_SIT02', 'P2_TripEx', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P2_VXT02', 'P2_VXT03', 'P2_VYT02', 'P2_VYT03', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH', 'P3_LIT01', 'P3_LL', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_LD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'attack', 'attack_P1', 'attack_P2', 'attack_P3']
+    lines incl. header: 118802
+    first rows:
+                        time  P1_B2004  P1_B2016   P1_B3004    P1_B3005  P1_B4002  ...  P4_ST_PT01  P4_ST_TT01  attack  attack_P1  attack_P2  attack_P3
+      0  2020-07-09 15:00:00   0.09874   1.25036  382.21698  1118.61084        32  ...       10051       27600       0          0          0          0
+      1  2020-07-09 15:00:01   0.09874   1.24944  382.21698  1118.61084        32  ...       10052       27600       0          0          0          0
+      2  2020-07-09 15:00:02   0.09874   1.24746  382.21698  1118.61084        32  ...       10052       27595       0          0          0          0
+
+== HAI/hai-21.03/test3.csv  (59.07 MB)
+    sha256: de8dc561b742d8ebc1a9bd9fafd3599b29fa0fa4b200093ce01a86e9800c9394
+    columns (84): ['time', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P2_24Vdc', 'P2_ASD', 'P2_AutoGO', 'P2_CO_rpm', 'P2_Emerg', 'P2_HILout', 'P2_MSD', 'P2_ManualGO', 'P2_OnOff', 'P2_RTR', 'P2_SIT01', 'P2_SIT02', 'P2_TripEx', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P2_VXT02', 'P2_VXT03', 'P2_VYT02', 'P2_VYT03', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH', 'P3_LIT01', 'P3_LL', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_LD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'attack', 'attack_P1', 'attack_P2', 'attack_P3']
+    lines incl. header: 108002
+    first rows:
+                        time  P1_B2004  P1_B2016  P1_B3004    P1_B3005  P1_B4002  ...  P4_ST_PT01  P4_ST_TT01  attack  attack_P1  attack_P2  attack_P3
+      0  2020-07-13 00:00:00   0.09815   1.65260  405.7941  1120.47729  32.56251  ...       10052       27556       0          0          0          0
+      1  2020-07-13 00:00:01   0.09815   1.65229  405.7941  1120.47729  32.56251  ...       10053       27551       0          0          0          0
+      2  2020-07-13 00:00:02   0.09815   1.65641  405.7941  1120.47729  32.56251  ...       10052       27552       0          0          0          0
+
+== HAI/hai-21.03/test4.csv  (21.61 MB)
+    sha256: 9eb534f9e7fac47f354ba64d32f82ebff108bc5488fa98a7b8a2c6ba76d3c934
+    columns (84): ['time', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P2_24Vdc', 'P2_ASD', 'P2_AutoGO', 'P2_CO_rpm', 'P2_Emerg', 'P2_HILout', 'P2_MSD', 'P2_ManualGO', 'P2_OnOff', 'P2_RTR', 'P2_SIT01', 'P2_SIT02', 'P2_TripEx', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P2_VXT02', 'P2_VXT03', 'P2_VYT02', 'P2_VYT03', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH', 'P3_LIT01', 'P3_LL', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_LD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'attack', 'attack_P1', 'attack_P2', 'attack_P3']
+    lines incl. header: 39602
+    first rows:
+                        time  P1_B2004  P1_B2016   P1_B3004    P1_B3005  P1_B4002  ...  P4_ST_PT01  P4_ST_TT01  attack  attack_P1  attack_P2  attack_P3
+      0  2020-07-28 12:00:00   0.09861   1.45469  374.63861  1114.95325        32  ...       10052       27626       0          0          0          0
+      1  2020-07-28 12:00:01   0.09861   1.45789  374.63861  1114.95325        32  ...       10052       27626       0          0          0          0
+      2  2020-07-28 12:00:02   0.09861   1.45179  377.01623  1107.48852        32  ...       10052       27626       0          0          0          0
+
+== HAI/hai-21.03/test5.csv  (50.44 MB)
+    sha256: 84761dbd942598f0af530c6e94ea79935eaa8814262919f8b444cdd833be4bb1
+    columns (84): ['time', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P2_24Vdc', 'P2_ASD', 'P2_AutoGO', 'P2_CO_rpm', 'P2_Emerg', 'P2_HILout', 'P2_MSD', 'P2_ManualGO', 'P2_OnOff', 'P2_RTR', 'P2_SIT01', 'P2_SIT02', 'P2_TripEx', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P2_VXT02', 'P2_VXT03', 'P2_VYT02', 'P2_VYT03', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH', 'P3_LIT01', 'P3_LL', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_LD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'attack', 'attack_P1', 'attack_P2', 'attack_P3']
+    lines incl. header: 92402
+    first rows:
+                        time  P1_B2004  P1_B2016   P1_B3004   P1_B3005  P1_B4002  ...  P4_ST_PT01  P4_ST_TT01  attack  attack_P1  attack_P2  attack_P3
+      0  2020-07-30 10:50:00   0.09819   1.63707  387.47113  1092.6554        32  ...       10053       27562       0          0          0          0
+      1  2020-07-30 10:50:01   0.09819   1.63905  387.47113  1092.6554        32  ...       10053       27561       0          0          0          0
+      2  2020-07-30 10:50:02   0.09819   1.64119  387.47113  1092.6554        32  ...       10053       27567       0          0          0          0
+
+== HAI/hai-21.03/train1.csv  (117.96 MB)
+    sha256: aa2f54a179015e279fe9623eefab0fe67ed74e3926657a93b355c290baa1d5cb
+    columns (84): ['time', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P2_24Vdc', 'P2_ASD', 'P2_AutoGO', 'P2_CO_rpm', 'P2_Emerg', 'P2_HILout', 'P2_MSD', 'P2_ManualGO', 'P2_OnOff', 'P2_RTR', 'P2_SIT01', 'P2_SIT02', 'P2_TripEx', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P2_VXT02', 'P2_VXT03', 'P2_VYT02', 'P2_VYT03', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH', 'P3_LIT01', 'P3_LL', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_LD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'attack', 'attack_P1', 'attack_P2', 'attack_P3']
+    lines incl. header: 216002
+    first rows:
+                        time  P1_B2004  P1_B2016   P1_B3004    P1_B3005  P1_B4002  ...  P4_ST_PT01  P4_ST_TT01  attack  attack_P1  attack_P2  attack_P3
+      0  2020-07-11 00:00:00   0.10121   1.29784  397.63785  1001.99799   33.6555  ...       10052       27610       0          0          0          0
+      1  2020-07-11 00:00:01   0.10121   1.29692  397.63785  1001.99799   33.6555  ...       10052       27610       0          0          0          0
+      2  2020-07-11 00:00:02   0.10121   1.29631  397.63785  1001.99799   33.6555  ...       10050       27617       0          0          0          0
+
+== HAI/hai-21.03/train2.csv  (123.40 MB)
+    sha256: 3f8f4652fc8762a0f7d1478e5596565e54f4e3f8d0838bb709953caa0142e3ed
+    columns (84): ['time', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P2_24Vdc', 'P2_ASD', 'P2_AutoGO', 'P2_CO_rpm', 'P2_Emerg', 'P2_HILout', 'P2_MSD', 'P2_ManualGO', 'P2_OnOff', 'P2_RTR', 'P2_SIT01', 'P2_SIT02', 'P2_TripEx', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P2_VXT02', 'P2_VXT03', 'P2_VYT02', 'P2_VYT03', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH', 'P3_LIT01', 'P3_LL', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_LD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'attack', 'attack_P1', 'attack_P2', 'attack_P3']
+    lines incl. header: 226802
+    first rows:
+                        time  P1_B2004  P1_B2016   P1_B3004   P1_B3005  P1_B4002  ...  P4_ST_PT01  P4_ST_TT01  attack  attack_P1  attack_P2  attack_P3
+      0  2020-07-31 22:00:00   0.10087   1.55614  405.06735  993.95294   33.4603  ...       10055       27627       0          0          0          0
+      1  2020-07-31 22:00:01   0.10087   1.55522  405.06735  993.95294   33.4603  ...       10053       27627       0          0          0          0
+      2  2020-07-31 22:00:02   0.10087   1.54927  405.06735  993.95294   33.4603  ...       10053       27627       0          0          0          0
+
+== HAI/hai-21.03/train3.csv  (261.78 MB)
+    sha256: 6849e7f41ad679bbf9afbbda2a14361a798e33d0a0a313a88334c6edbf4fb158
+    columns (84): ['time', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P2_24Vdc', 'P2_ASD', 'P2_AutoGO', 'P2_CO_rpm', 'P2_Emerg', 'P2_HILout', 'P2_MSD', 'P2_ManualGO', 'P2_OnOff', 'P2_RTR', 'P2_SIT01', 'P2_SIT02', 'P2_TripEx', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P2_VXT02', 'P2_VXT03', 'P2_VYT02', 'P2_VYT03', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH', 'P3_LIT01', 'P3_LL', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_LD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'attack', 'attack_P1', 'attack_P2', 'attack_P3']
+    lines incl. header: 478802
+    first rows:
+                        time  P1_B2004  P1_B2016   P1_B3004    P1_B3005  P1_B4002  ...  P4_ST_PT01  P4_ST_TT01  attack  attack_P1  attack_P2  attack_P3
+      0  2020-08-04 22:00:00   0.10027   1.47222  401.09204  1105.14624  32.16431  ...       10053       27565       0          0          0          0
+      1  2020-08-04 22:00:01   0.10027   1.47374  401.09204  1105.14624  32.16431  ...       10053       27561       0          0          0          0
+      2  2020-08-04 22:00:02   0.10027   1.47466  401.09204  1105.14624  32.16431  ...       10053       27569       0          0          0          0
+
+== HAI/hai-22.04/test1.csv  (50.54 MB)
+    sha256: 19627f5dac40c3a5039e7468cfd6c6e4ccd37a85055671e8c349b6bce5f50ed1
+    columns (88): ['timestamp', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT01_HH', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_PP04', 'P1_PP04SP', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03', 'P2_24Vdc', 'P2_ATSW_Lamp', 'P2_AutoGO', 'P2_AutoSD', 'P2_Emerg', 'P2_MASW', 'P2_MASW_Lamp', 'P2_ManualGO', 'P2_ManualSD', 'P2_OnOff', 'P2_RTR', 'P2_SCO', 'P2_SCST', 'P2_SIT01', 'P2_TripEx', 'P2_VIBTR01', 'P2_VIBTR02', 'P2_VIBTR03', 'P2_VIBTR04', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH01', 'P3_LIT01', 'P3_LL01', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'Attack']
+    lines incl. header: 86401
+    first rows:
+                   timestamp  P1_B2004  P1_B2016    P1_B3004     P1_B3005   P1_B4002  ...   P4_ST_LD   P4_ST_PO   P4_ST_PS  P4_ST_PT01  P4_ST_TT01  Attack
+      0  2021-07-10 00:00:01  0.059445   1.04366  431.328095  1034.712769  27.736847  ...  292.86029  334.58112  20.989594       10000       27181       0
+      1  2021-07-10 00:00:02  0.059445   1.04217  431.328095  1034.712769  27.736847  ...  295.82605  332.97162  20.989594        9999       27174       0
+      2  2021-07-10 00:00:03  0.059445   1.03920  431.328095  1034.712769  27.736847  ...  300.02173  332.15784  20.989594        9999       27172       0
+
+== HAI/hai-22.04/test2.csv  (46.62 MB)
+    sha256: b2ba5d6665deee1c86870a3970417b51a3e640a2cc18b9f8de2d6d8a21979923
+    columns (88): ['timestamp', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT01_HH', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_PP04', 'P1_PP04SP', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03', 'P2_24Vdc', 'P2_ATSW_Lamp', 'P2_AutoGO', 'P2_AutoSD', 'P2_Emerg', 'P2_MASW', 'P2_MASW_Lamp', 'P2_ManualGO', 'P2_ManualSD', 'P2_OnOff', 'P2_RTR', 'P2_SCO', 'P2_SCST', 'P2_SIT01', 'P2_TripEx', 'P2_VIBTR01', 'P2_VIBTR02', 'P2_VIBTR03', 'P2_VIBTR04', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH01', 'P3_LIT01', 'P3_LL01', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'Attack']
+    lines incl. header: 82801
+    first rows:
+                   timestamp  P1_B2004  P1_B2016   P1_B3004   P1_B3005  P1_B4002  ...   P4_ST_LD   P4_ST_PO  P4_ST_PS  P4_ST_PT01  P4_ST_TT01  Attack
+      0  2021-07-13 16:00:01    0.1868   1.06824  425.87881  981.36951  25.66094  ...  335.30457  298.73773    6.9317        9972       26979       0
+      1  2021-07-13 16:00:02    0.1868   1.08312  425.87881  981.36951  25.66094  ...  340.47668  303.80133    6.9317        9972       26981       0
+      2  2021-07-13 16:00:03    0.1868   1.09502  425.87881  981.36951  25.66094  ...  348.79559  309.17242    6.9317        9972       26983       0
+
+== HAI/hai-22.04/test3.csv  (35.07 MB)
+    sha256: f253f1c78a4a4654d843f8f670a24caa7a72ac91e4418b4505009822b3c55940
+    columns (88): ['timestamp', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT01_HH', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_PP04', 'P1_PP04SP', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03', 'P2_24Vdc', 'P2_ATSW_Lamp', 'P2_AutoGO', 'P2_AutoSD', 'P2_Emerg', 'P2_MASW', 'P2_MASW_Lamp', 'P2_ManualGO', 'P2_ManualSD', 'P2_OnOff', 'P2_RTR', 'P2_SCO', 'P2_SCST', 'P2_SIT01', 'P2_TripEx', 'P2_VIBTR01', 'P2_VIBTR02', 'P2_VIBTR03', 'P2_VIBTR04', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH01', 'P3_LIT01', 'P3_LL01', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'Attack']
+    lines incl. header: 62401
+    first rows:
+                   timestamp  P1_B2004  P1_B2016   P1_B3004    P1_B3005  P1_B4002  ...   P4_ST_LD   P4_ST_PO  P4_ST_PS  P4_ST_PT01  P4_ST_TT01  Attack
+      0  2021-07-14 17:40:01   0.19749   1.27463  489.48383  1036.90637  25.46139  ...  347.81903  361.43658  11.46726       10000       27072       0
+      1  2021-07-14 17:40:02   0.19749   1.27062  489.48383  1036.90637  25.46139  ...  343.89465  359.33881  11.46726       10000       27070       0
+      2  2021-07-14 17:40:03   0.19749   1.26456  489.48383  1036.90637  25.46139  ...  343.89465  359.33881  11.46726       10000       27070       0
+
+== HAI/hai-22.04/test4.csv  (72.93 MB)
+    sha256: 2d2e99ed3364d75d27ab84f0a6523496f7295decf363c90b8a1b9b84e1070376
+    columns (88): ['timestamp', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT01_HH', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_PP04', 'P1_PP04SP', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03', 'P2_24Vdc', 'P2_ATSW_Lamp', 'P2_AutoGO', 'P2_AutoSD', 'P2_Emerg', 'P2_MASW', 'P2_MASW_Lamp', 'P2_ManualGO', 'P2_ManualSD', 'P2_OnOff', 'P2_RTR', 'P2_SCO', 'P2_SCST', 'P2_SIT01', 'P2_TripEx', 'P2_VIBTR01', 'P2_VIBTR02', 'P2_VIBTR03', 'P2_VIBTR04', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH01', 'P3_LIT01', 'P3_LL01', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'Attack']
+    lines incl. header: 129601
+    first rows:
+                   timestamp  P1_B2004  P1_B2016   P1_B3004    P1_B3005  P1_B4002  ...   P4_ST_LD   P4_ST_PO  P4_ST_PS  P4_ST_PT01  P4_ST_TT01  Attack
+      0  2021-07-15 12:00:01   0.19464   0.99918  489.16266  1047.13831  25.46139  ...  276.47565  270.30890   28.4608        9972       27057       0
+      1  2021-07-15 12:00:02   0.19464   0.99918  489.16266  1047.13831  25.46139  ...  281.72021  272.31628   28.4608        9972       27051       0
+      2  2021-07-15 12:00:03   0.19464   1.00650  489.16266  1047.13831  25.46139  ...  287.50726  275.24597   28.4608        9972       27050       0
+
+== HAI/hai-22.04/train1.csv  (53.19 MB)
+    sha256: 63383690ffc5344ba68a019c7000854a4d341a22d743ac035f5207072a197b33
+    columns (88): ['timestamp', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT01_HH', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_PP04', 'P1_PP04SP', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03', 'P2_24Vdc', 'P2_ATSW_Lamp', 'P2_AutoGO', 'P2_AutoSD', 'P2_Emerg', 'P2_MASW', 'P2_MASW_Lamp', 'P2_ManualGO', 'P2_ManualSD', 'P2_OnOff', 'P2_RTR', 'P2_SCO', 'P2_SCST', 'P2_SIT01', 'P2_TripEx', 'P2_VIBTR01', 'P2_VIBTR02', 'P2_VIBTR03', 'P2_VIBTR04', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH01', 'P3_LIT01', 'P3_LL01', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'Attack']
+    lines incl. header: 93602
+    first rows:
+                   timestamp  P1_B2004  P1_B2016   P1_B3004    P1_B3005  P1_B4002  ...   P4_ST_LD   P4_ST_PO  P4_ST_PS  P4_ST_PT01  P4_ST_TT01  Attack
+      0  2021-07-11 10:00:00   0.08771   0.88504  476.76703  1014.79321  26.92264  ...  276.45758  267.90363   8.90254        9914       27170       0
+      1  2021-07-11 10:00:01   0.08771   0.88619  476.76703  1014.79321  26.92264  ...  278.91705  268.95258   8.90254        9914       27171       0
+      2  2021-07-11 10:00:02   0.08771   0.88836  476.76703  1014.79321  26.92264  ...  278.89899  269.76636   8.90254        9914       27170       0
+
+== HAI/hai-22.04/train2.csv  (114.20 MB)
+    sha256: f496991bbef4a6ef5881505aa242fe05cc500b4d5c4cea0d2cf1cf79e4e99285
+    columns (88): ['timestamp', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT01_HH', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_PP04', 'P1_PP04SP', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03', 'P2_24Vdc', 'P2_ATSW_Lamp', 'P2_AutoGO', 'P2_AutoSD', 'P2_Emerg', 'P2_MASW', 'P2_MASW_Lamp', 'P2_ManualGO', 'P2_ManualSD', 'P2_OnOff', 'P2_RTR', 'P2_SCO', 'P2_SCST', 'P2_SIT01', 'P2_TripEx', 'P2_VIBTR01', 'P2_VIBTR02', 'P2_VIBTR03', 'P2_VIBTR04', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH01', 'P3_LIT01', 'P3_LL01', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'Attack']
+    lines incl. header: 201601
+    first rows:
+                   timestamp  P1_B2004  P1_B2016   P1_B3004    P1_B3005  P1_B4002  ...   P4_ST_LD   P4_ST_PO  P4_ST_PS  P4_ST_PT01  P4_ST_TT01  Attack
+      0  2021-07-17 00:00:01   0.06944   1.04095  467.03854  1015.06964  25.68717  ...  319.19128  325.17725  26.76094        9916       26971       0
+      1  2021-07-17 00:00:02   0.06944   1.04507  467.03854  1015.06964  25.68717  ...  321.18060  325.14105  26.76094        9916       26967       0
+      2  2021-07-17 00:00:03   0.06944   1.04118  467.03854  1015.06964  25.68717  ...  322.04858  325.66553  26.76094        9917       26972       0
+
+== HAI/hai-22.04/train3.csv  (69.95 MB)
+    sha256: 4910c49dc07cce238e05c449972a30b7588139ef92d36067f32aadd820e63de7
+    columns (88): ['timestamp', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT01_HH', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_PP04', 'P1_PP04SP', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03', 'P2_24Vdc', 'P2_ATSW_Lamp', 'P2_AutoGO', 'P2_AutoSD', 'P2_Emerg', 'P2_MASW', 'P2_MASW_Lamp', 'P2_ManualGO', 'P2_ManualSD', 'P2_OnOff', 'P2_RTR', 'P2_SCO', 'P2_SCST', 'P2_SIT01', 'P2_TripEx', 'P2_VIBTR01', 'P2_VIBTR02', 'P2_VIBTR03', 'P2_VIBTR04', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH01', 'P3_LIT01', 'P3_LL01', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'Attack']
+    lines incl. header: 126001
+    first rows:
+                   timestamp  P1_B2004  P1_B2016   P1_B3004  P1_B3005  P1_B4002  ...   P4_ST_LD   P4_ST_PO  P4_ST_PS  P4_ST_PT01  P4_ST_TT01  Attack
+      0  2021-07-23 18:00:01   0.14126   1.24484  432.35583  964.3338        27  ...  374.51172  374.81915  12.34726       10026       27204       0
+      1  2021-07-23 18:00:02   0.14126   1.24484  432.35583  964.3338        27  ...  374.89154  375.03619  12.34726       10026       27209       0
+      2  2021-07-23 18:00:03   0.14126   1.24976  432.35583  964.3338        27  ...  372.32349  374.94574  12.34726       10026       27197       0
+
+== HAI/hai-22.04/train4.csv  (47.92 MB)
+    sha256: 81a1c3a8e1726c92c9253602b8628b72d0508a9c260ff21109433ad2b82687bf
+    columns (88): ['timestamp', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT01_HH', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_PP04', 'P1_PP04SP', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03', 'P2_24Vdc', 'P2_ATSW_Lamp', 'P2_AutoGO', 'P2_AutoSD', 'P2_Emerg', 'P2_MASW', 'P2_MASW_Lamp', 'P2_ManualGO', 'P2_ManualSD', 'P2_OnOff', 'P2_RTR', 'P2_SCO', 'P2_SCST', 'P2_SIT01', 'P2_TripEx', 'P2_VIBTR01', 'P2_VIBTR02', 'P2_VIBTR03', 'P2_VIBTR04', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH01', 'P3_LIT01', 'P3_LL01', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'Attack']
+    lines incl. header: 86402
+    first rows:
+                   timestamp  P1_B2004  P1_B2016   P1_B3004   P1_B3005  P1_B4002  ...   P4_ST_LD   P4_ST_PO  P4_ST_PS  P4_ST_PT01  P4_ST_TT01  Attack
+      0  2021-07-26 12:00:00   0.11126   1.02040  452.41907  972.89972  25.69677  ...  300.76318  302.82477  15.91843        9946       26902       0
+      1  2021-07-26 12:00:01   0.11126   1.01915  452.41907  972.89972  25.69677  ...  300.14832  302.82477  15.91843        9946       26903       0
+      2  2021-07-26 12:00:02   0.11126   1.02166  452.41907  972.89972  25.69677  ...  299.47919  302.20990  15.91843        9946       26910       0
+
+== HAI/hai-22.04/train5.csv  (131.78 MB)
+    sha256: 298468467991e73689b61f3cd3975ca21685ef8ba5b5ced4d6a7874f304d9cf7
+    columns (88): ['timestamp', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT01_HH', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_PP04', 'P1_PP04SP', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03', 'P2_24Vdc', 'P2_ATSW_Lamp', 'P2_AutoGO', 'P2_AutoSD', 'P2_Emerg', 'P2_MASW', 'P2_MASW_Lamp', 'P2_ManualGO', 'P2_ManualSD', 'P2_OnOff', 'P2_RTR', 'P2_SCO', 'P2_SCST', 'P2_SIT01', 'P2_TripEx', 'P2_VIBTR01', 'P2_VIBTR02', 'P2_VIBTR03', 'P2_VIBTR04', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH01', 'P3_LIT01', 'P3_LL01', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'Attack']
+    lines incl. header: 237601
+    first rows:
+                   timestamp  P1_B2004  P1_B2016   P1_B3004    P1_B3005  P1_B4002  ...   P4_ST_LD   P4_ST_PO  P4_ST_PS  P4_ST_PT01  P4_ST_TT01  Attack
+      0  2021-08-02 15:00:01   0.13591   1.07035  423.36737  1013.26862  31.86175  ...  331.97699  317.49127  13.60476        9972       27261       0
+      1  2021-08-02 15:00:02   0.13591   1.07115  423.36737  1013.26862  31.86175  ...  332.24829  319.13702  13.60476        9972       27268       0
+      2  2021-08-02 15:00:03   0.13591   1.07401  423.36737  1013.26862  31.86175  ...  331.97699  320.09546  13.60476        9972       27261       0
+
+== HAI/hai-22.04/train6.csv  (143.44 MB)
+    sha256: 717b37b7b88b40885cb6994c9fe00d08a941ec0c3c73801e378f84e846ae35d4
+    columns (88): ['timestamp', 'P1_B2004', 'P1_B2016', 'P1_B3004', 'P1_B3005', 'P1_B4002', 'P1_B4005', 'P1_B400B', 'P1_B4022', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT01_HH', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_PP04', 'P1_PP04SP', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03', 'P2_24Vdc', 'P2_ATSW_Lamp', 'P2_AutoGO', 'P2_AutoSD', 'P2_Emerg', 'P2_MASW', 'P2_MASW_Lamp', 'P2_ManualGO', 'P2_ManualSD', 'P2_OnOff', 'P2_RTR', 'P2_SCO', 'P2_SCST', 'P2_SIT01', 'P2_TripEx', 'P2_VIBTR01', 'P2_VIBTR02', 'P2_VIBTR03', 'P2_VIBTR04', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH01', 'P3_LIT01', 'P3_LL01', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'Attack']
+    lines incl. header: 259201
+    first rows:
+                   timestamp  P1_B2004  P1_B2016   P1_B3004   P1_B3005  P1_B4002  ...   P4_ST_LD   P4_ST_PO  P4_ST_PS  P4_ST_PT01  P4_ST_TT01  Attack
+      0  2021-08-06 09:00:01   0.09631   0.98680  476.44827  993.42383        32  ...  294.28894  300.51001   8.27546        9999       27205       0
+      1  2021-08-06 09:00:02   0.09631   0.98543  476.44827  993.42383        32  ...  294.72296  299.85895   8.27546        9999       27206       0
+      2  2021-08-06 09:00:03   0.09631   0.98566  476.44827  993.42383        32  ...  298.05048  300.94403   8.27546        9999       27213       0
+
+== HAI/hai-22.04/summary/summary(test1.csv).txt  (0.00 MB)
+    sha256: f7c6e21fd74deb1d731f44344c0356378b49ce36a901e4a7433549f438abc77f
+    columns (82): ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52', 'Unnamed: 53', 'Unnamed: 54', 'Unnamed: 55', 'Unnamed: 56', 'Unnamed: 57', 'Unnamed: 58', 'Unnamed: 59', 'Unnamed: 60', 'Unnamed: 61', 'Unnamed: 62', 'Unnamed: 63', 'Unnamed: 64', 'Unnamed: 65', 'Unnamed: 66', 'Unnamed: 67', 'Unnamed: 68', 'Unnamed: 69', 'Unnamed: 70', 'Unnamed: 71', 'Unnamed: 72', 'Unnamed: 73', 'Unnamed: 74', 'Unnamed: 75', 'Unnamed: 76', 'Unnamed: 77', 'Unnamed: 78', 'Unnamed: 79', 'Unnamed: 80', 'Unnamed: 81']
+    lines incl. header: 42
+    first rows:
+                                Unnamed: 0  Unnamed: 1  Unnamed: 2  Unnamed: 3  Unnamed: 4  Unnamed: 5  ...  Unnamed: 76  Unnamed: 77  Unnamed: 78  Unnamed: 79  Unnamed: 80  Unnamed: 81
+      0  File Name\t: hai-22.04/test1.csv          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      1            File Size\t: 48.2000 MB         NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      2                     Columns\t: 88          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+
+== HAI/hai-22.04/summary/summary(test2.csv).txt  (0.00 MB)
+    sha256: 87038e847085ec406f4da6933904ab84eb9b71fc11a266fb26170e5128c72568
+    columns (82): ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52', 'Unnamed: 53', 'Unnamed: 54', 'Unnamed: 55', 'Unnamed: 56', 'Unnamed: 57', 'Unnamed: 58', 'Unnamed: 59', 'Unnamed: 60', 'Unnamed: 61', 'Unnamed: 62', 'Unnamed: 63', 'Unnamed: 64', 'Unnamed: 65', 'Unnamed: 66', 'Unnamed: 67', 'Unnamed: 68', 'Unnamed: 69', 'Unnamed: 70', 'Unnamed: 71', 'Unnamed: 72', 'Unnamed: 73', 'Unnamed: 74', 'Unnamed: 75', 'Unnamed: 76', 'Unnamed: 77', 'Unnamed: 78', 'Unnamed: 79', 'Unnamed: 80', 'Unnamed: 81']
+    lines incl. header: 52
+    first rows:
+                                Unnamed: 0  Unnamed: 1  Unnamed: 2  Unnamed: 3  Unnamed: 4  Unnamed: 5  ...  Unnamed: 76  Unnamed: 77  Unnamed: 78  Unnamed: 79  Unnamed: 80  Unnamed: 81
+      0  File Name\t: hai-22.04/test2.csv          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      1            File Size\t: 44.4600 MB         NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      2                     Columns\t: 88          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+
+== HAI/hai-22.04/summary/summary(test3.csv).txt  (0.00 MB)
+    sha256: a09652b15036f7a31fc146935b5fa4c60c9bea330dffcae02b6e958b82dabad1
+    columns (82): ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52', 'Unnamed: 53', 'Unnamed: 54', 'Unnamed: 55', 'Unnamed: 56', 'Unnamed: 57', 'Unnamed: 58', 'Unnamed: 59', 'Unnamed: 60', 'Unnamed: 61', 'Unnamed: 62', 'Unnamed: 63', 'Unnamed: 64', 'Unnamed: 65', 'Unnamed: 66', 'Unnamed: 67', 'Unnamed: 68', 'Unnamed: 69', 'Unnamed: 70', 'Unnamed: 71', 'Unnamed: 72', 'Unnamed: 73', 'Unnamed: 74', 'Unnamed: 75', 'Unnamed: 76', 'Unnamed: 77', 'Unnamed: 78', 'Unnamed: 79', 'Unnamed: 80', 'Unnamed: 81']
+    lines incl. header: 45
+    first rows:
+                                Unnamed: 0  Unnamed: 1  Unnamed: 2  Unnamed: 3  Unnamed: 4  Unnamed: 5  ...  Unnamed: 76  Unnamed: 77  Unnamed: 78  Unnamed: 79  Unnamed: 80  Unnamed: 81
+      0  File Name\t: hai-22.04/test3.csv          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      1            File Size\t: 33.4400 MB         NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      2                     Columns\t: 88          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+
+== HAI/hai-22.04/summary/summary(test4.csv).txt  (0.00 MB)
+    sha256: 0cd5e9e78d02cce1eb980cdf090571601a9b4420ab9d53aa2cfb7c6f9d9581b9
+    columns (82): ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52', 'Unnamed: 53', 'Unnamed: 54', 'Unnamed: 55', 'Unnamed: 56', 'Unnamed: 57', 'Unnamed: 58', 'Unnamed: 59', 'Unnamed: 60', 'Unnamed: 61', 'Unnamed: 62', 'Unnamed: 63', 'Unnamed: 64', 'Unnamed: 65', 'Unnamed: 66', 'Unnamed: 67', 'Unnamed: 68', 'Unnamed: 69', 'Unnamed: 70', 'Unnamed: 71', 'Unnamed: 72', 'Unnamed: 73', 'Unnamed: 74', 'Unnamed: 75', 'Unnamed: 76', 'Unnamed: 77', 'Unnamed: 78', 'Unnamed: 79', 'Unnamed: 80', 'Unnamed: 81']
+    lines incl. header: 59
+    first rows:
+                                Unnamed: 0  Unnamed: 1  Unnamed: 2  Unnamed: 3  Unnamed: 4  Unnamed: 5  ...  Unnamed: 76  Unnamed: 77  Unnamed: 78  Unnamed: 79  Unnamed: 80  Unnamed: 81
+      0  File Name\t: hai-22.04/test4.csv          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      1            File Size\t: 69.5500 MB         NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      2                     Columns\t: 88          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+
+== HAI/hai-22.04/summary/summary(train1.csv).txt  (0.00 MB)
+    sha256: 48d2253a35f7246766af00d49f85c09d7580b600379c59f60918b9d6a1be99b6
+    columns (82): ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52', 'Unnamed: 53', 'Unnamed: 54', 'Unnamed: 55', 'Unnamed: 56', 'Unnamed: 57', 'Unnamed: 58', 'Unnamed: 59', 'Unnamed: 60', 'Unnamed: 61', 'Unnamed: 62', 'Unnamed: 63', 'Unnamed: 64', 'Unnamed: 65', 'Unnamed: 66', 'Unnamed: 67', 'Unnamed: 68', 'Unnamed: 69', 'Unnamed: 70', 'Unnamed: 71', 'Unnamed: 72', 'Unnamed: 73', 'Unnamed: 74', 'Unnamed: 75', 'Unnamed: 76', 'Unnamed: 77', 'Unnamed: 78', 'Unnamed: 79', 'Unnamed: 80', 'Unnamed: 81']
+    lines incl. header: 28
+    first rows:
+                                 Unnamed: 0  Unnamed: 1  Unnamed: 2  Unnamed: 3  Unnamed: 4  Unnamed: 5  ...  Unnamed: 76  Unnamed: 77  Unnamed: 78  Unnamed: 79  Unnamed: 80  Unnamed: 81
+      0  File Name\t: hai-22.04/train1.csv          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      1             File Size\t: 50.7300 MB         NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      2                      Columns\t: 88          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+
+== HAI/hai-22.04/summary/summary(train2.csv).txt  (0.00 MB)
+    sha256: 6c066e59804e48a76458fe41743d8b4fd8b2ed0ceebc395d2eb15d82282326c2
+    columns (82): ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52', 'Unnamed: 53', 'Unnamed: 54', 'Unnamed: 55', 'Unnamed: 56', 'Unnamed: 57', 'Unnamed: 58', 'Unnamed: 59', 'Unnamed: 60', 'Unnamed: 61', 'Unnamed: 62', 'Unnamed: 63', 'Unnamed: 64', 'Unnamed: 65', 'Unnamed: 66', 'Unnamed: 67', 'Unnamed: 68', 'Unnamed: 69', 'Unnamed: 70', 'Unnamed: 71', 'Unnamed: 72', 'Unnamed: 73', 'Unnamed: 74', 'Unnamed: 75', 'Unnamed: 76', 'Unnamed: 77', 'Unnamed: 78', 'Unnamed: 79', 'Unnamed: 80', 'Unnamed: 81']
+    lines incl. header: 28
+    first rows:
+                                 Unnamed: 0  Unnamed: 1  Unnamed: 2  Unnamed: 3  Unnamed: 4  Unnamed: 5  ...  Unnamed: 76  Unnamed: 77  Unnamed: 78  Unnamed: 79  Unnamed: 80  Unnamed: 81
+      0  File Name\t: hai-22.04/train2.csv          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      1            File Size\t: 108.9100 MB         NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      2                      Columns\t: 88          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+
+== HAI/hai-22.04/summary/summary(train3.csv).txt  (0.00 MB)
+    sha256: ab75f967b64231f6b89f423b2b99cdabfa1ce71dcd1e988bcb63736d53cc9350
+    columns (82): ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52', 'Unnamed: 53', 'Unnamed: 54', 'Unnamed: 55', 'Unnamed: 56', 'Unnamed: 57', 'Unnamed: 58', 'Unnamed: 59', 'Unnamed: 60', 'Unnamed: 61', 'Unnamed: 62', 'Unnamed: 63', 'Unnamed: 64', 'Unnamed: 65', 'Unnamed: 66', 'Unnamed: 67', 'Unnamed: 68', 'Unnamed: 69', 'Unnamed: 70', 'Unnamed: 71', 'Unnamed: 72', 'Unnamed: 73', 'Unnamed: 74', 'Unnamed: 75', 'Unnamed: 76', 'Unnamed: 77', 'Unnamed: 78', 'Unnamed: 79', 'Unnamed: 80', 'Unnamed: 81']
+    lines incl. header: 28
+    first rows:
+                                 Unnamed: 0  Unnamed: 1  Unnamed: 2  Unnamed: 3  Unnamed: 4  Unnamed: 5  ...  Unnamed: 76  Unnamed: 77  Unnamed: 78  Unnamed: 79  Unnamed: 80  Unnamed: 81
+      0  File Name\t: hai-22.04/train3.csv          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      1             File Size\t: 66.7100 MB         NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      2                      Columns\t: 88          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+
+== HAI/hai-22.04/summary/summary(train4.csv).txt  (0.00 MB)
+    sha256: b03204d67a64d249969bf9bcb9670d2e2fbcfaff41c001b92521f48deb5d1e99
+    columns (82): ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52', 'Unnamed: 53', 'Unnamed: 54', 'Unnamed: 55', 'Unnamed: 56', 'Unnamed: 57', 'Unnamed: 58', 'Unnamed: 59', 'Unnamed: 60', 'Unnamed: 61', 'Unnamed: 62', 'Unnamed: 63', 'Unnamed: 64', 'Unnamed: 65', 'Unnamed: 66', 'Unnamed: 67', 'Unnamed: 68', 'Unnamed: 69', 'Unnamed: 70', 'Unnamed: 71', 'Unnamed: 72', 'Unnamed: 73', 'Unnamed: 74', 'Unnamed: 75', 'Unnamed: 76', 'Unnamed: 77', 'Unnamed: 78', 'Unnamed: 79', 'Unnamed: 80', 'Unnamed: 81']
+    lines incl. header: 28
+    first rows:
+                                 Unnamed: 0  Unnamed: 1  Unnamed: 2  Unnamed: 3  Unnamed: 4  Unnamed: 5  ...  Unnamed: 76  Unnamed: 77  Unnamed: 78  Unnamed: 79  Unnamed: 80  Unnamed: 81
+      0  File Name\t: hai-22.04/train4.csv          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      1             File Size\t: 45.7000 MB         NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      2                      Columns\t: 88          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+
+== HAI/hai-22.04/summary/summary(train5.csv).txt  (0.00 MB)
+    sha256: 4678ae22da79a24ec0782614ff60c66827782340aa2288c3e8c60d6c595d555c
+    columns (82): ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52', 'Unnamed: 53', 'Unnamed: 54', 'Unnamed: 55', 'Unnamed: 56', 'Unnamed: 57', 'Unnamed: 58', 'Unnamed: 59', 'Unnamed: 60', 'Unnamed: 61', 'Unnamed: 62', 'Unnamed: 63', 'Unnamed: 64', 'Unnamed: 65', 'Unnamed: 66', 'Unnamed: 67', 'Unnamed: 68', 'Unnamed: 69', 'Unnamed: 70', 'Unnamed: 71', 'Unnamed: 72', 'Unnamed: 73', 'Unnamed: 74', 'Unnamed: 75', 'Unnamed: 76', 'Unnamed: 77', 'Unnamed: 78', 'Unnamed: 79', 'Unnamed: 80', 'Unnamed: 81']
+    lines incl. header: 28
+    first rows:
+                                 Unnamed: 0  Unnamed: 1  Unnamed: 2  Unnamed: 3  Unnamed: 4  Unnamed: 5  ...  Unnamed: 76  Unnamed: 77  Unnamed: 78  Unnamed: 79  Unnamed: 80  Unnamed: 81
+      0  File Name\t: hai-22.04/train5.csv          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      1            File Size\t: 125.6700 MB         NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      2                      Columns\t: 88          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+
+== HAI/hai-22.04/summary/summary(train6.csv).txt  (0.00 MB)
+    sha256: cd6b37fc81b022d157bc7c41749ee665716ba237999cf6a491e2bfc4e7649200
+    columns (82): ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52', 'Unnamed: 53', 'Unnamed: 54', 'Unnamed: 55', 'Unnamed: 56', 'Unnamed: 57', 'Unnamed: 58', 'Unnamed: 59', 'Unnamed: 60', 'Unnamed: 61', 'Unnamed: 62', 'Unnamed: 63', 'Unnamed: 64', 'Unnamed: 65', 'Unnamed: 66', 'Unnamed: 67', 'Unnamed: 68', 'Unnamed: 69', 'Unnamed: 70', 'Unnamed: 71', 'Unnamed: 72', 'Unnamed: 73', 'Unnamed: 74', 'Unnamed: 75', 'Unnamed: 76', 'Unnamed: 77', 'Unnamed: 78', 'Unnamed: 79', 'Unnamed: 80', 'Unnamed: 81']
+    lines incl. header: 28
+    first rows:
+                                 Unnamed: 0  Unnamed: 1  Unnamed: 2  Unnamed: 3  Unnamed: 4  Unnamed: 5  ...  Unnamed: 76  Unnamed: 77  Unnamed: 78  Unnamed: 79  Unnamed: 80  Unnamed: 81
+      0  File Name\t: hai-22.04/train6.csv          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      1            File Size\t: 136.7900 MB         NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      2                      Columns\t: 88          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+
+== HAI/hai-23.05/hai-test1.csv  (31.26 MB)
+    sha256: 78c7f1d4de1f2ab9ccc2f8c719f80f831033543adb0c81d0d78f84f40838d4be
+    columns (87): ['timestamp', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT01_HH', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_PP04', 'P1_PP04D', 'P1_PP04SP', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03', 'P2_24Vdc', 'P2_ATSW_Lamp', 'P2_AutoGO', 'P2_AutoSD', 'P2_Emerg', 'P2_MASW', 'P2_MASW_Lamp', 'P2_ManualGO', 'P2_ManualSD', 'P2_OnOff', 'P2_RTR', 'P2_SCO', 'P2_SCST', 'P2_SIT01', 'P2_TripEx', 'P2_VIBTR01', 'P2_VIBTR02', 'P2_VIBTR03', 'P2_VIBTR04', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH01', 'P3_LIT01', 'P3_LL01', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'x1001_05_SETPOINT_OUT', 'x1001_15_ASSIGN_OUT', 'x1002_07_SETPOINT_OUT', 'x1002_08_SETPOINT_OUT', 'x1003_10_SETPOINT_OUT', 'x1003_18_SETPOINT_OUT', 'x1003_24_SUM_OUT']
+    lines incl. header: 54001
+    first rows:
+                   timestamp  P1_FCV01D  P1_FCV01Z  P1_FCV02D  P1_FCV02Z  P1_FCV03D  ...  x1001_15_ASSIGN_OUT  x1002_07_SETPOINT_OUT  x1002_08_SETPOINT_OUT  x1003_10_SETPOINT_OUT  x1003_18_SETPOINT_OUT  x1003_24_SUM_OUT
+      0  2022-08-12 16:00:01   60.99316   60.49500         15   12.44507   50.53432  ...              1.03134              398.63086              982.02313             3111.29834               26.47805          30.25381
+      1  2022-08-12 16:00:02   60.93707   60.50262         15   12.44507   50.50559  ...              1.03420              398.63086              982.02313             3116.42798               26.47805          30.26335
+      2  2022-08-12 16:00:03   61.08963   60.50262         15   12.44507   50.52819  ...              1.04004              398.63086              982.02313             3108.17017               26.47805          30.27327
+
+== HAI/hai-23.05/hai-test2.csv  (132.95 MB)
+    sha256: b2b8dd295aefd87e39260fe43cb4c73ee86d6264b0ac4b0761e7efb0c2b545c3
+    columns (87): ['timestamp', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT01_HH', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_PP04', 'P1_PP04D', 'P1_PP04SP', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03', 'P2_24Vdc', 'P2_ATSW_Lamp', 'P2_AutoGO', 'P2_AutoSD', 'P2_Emerg', 'P2_MASW', 'P2_MASW_Lamp', 'P2_ManualGO', 'P2_ManualSD', 'P2_OnOff', 'P2_RTR', 'P2_SCO', 'P2_SCST', 'P2_SIT01', 'P2_TripEx', 'P2_VIBTR01', 'P2_VIBTR02', 'P2_VIBTR03', 'P2_VIBTR04', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH01', 'P3_LIT01', 'P3_LL01', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'x1001_05_SETPOINT_OUT', 'x1001_15_ASSIGN_OUT', 'x1002_07_SETPOINT_OUT', 'x1002_08_SETPOINT_OUT', 'x1003_10_SETPOINT_OUT', 'x1003_18_SETPOINT_OUT', 'x1003_24_SUM_OUT']
+    lines incl. header: 230401
+    first rows:
+                   timestamp  P1_FCV01D  P1_FCV01Z  P1_FCV02D  P1_FCV02Z  P1_FCV03D  ...  x1001_15_ASSIGN_OUT  x1002_07_SETPOINT_OUT  x1002_08_SETPOINT_OUT  x1003_10_SETPOINT_OUT  x1003_18_SETPOINT_OUT  x1003_24_SUM_OUT
+      0  2022-08-17 00:00:01   17.19011   16.27502   15.00000   37.91962   51.16745  ...              0.85732              373.68259              968.23212              737.07330               25.42054          28.57450
+      1  2022-08-17 00:00:02   16.38527   17.37366   15.00000   36.05804   51.22186  ...              0.86441              373.68259              968.23212              752.96283               25.42054          28.57450
+      2  2022-08-17 00:00:03   16.38527   17.37366   27.11249   33.90656   51.15362  ...              0.86441              373.68259              968.23212              807.86139               25.42054          28.59319
+
+== HAI/hai-23.05/hai-train1.csv  (162.42 MB)
+    sha256: 53007b0ba604fbf338e7ac2e08cd81d874b5d1388f3aecb213ddcba5bf2bec4a
+    columns (87): ['timestamp', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT01_HH', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_PP04', 'P1_PP04D', 'P1_PP04SP', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03', 'P2_24Vdc', 'P2_ATSW_Lamp', 'P2_AutoGO', 'P2_AutoSD', 'P2_Emerg', 'P2_MASW', 'P2_MASW_Lamp', 'P2_ManualGO', 'P2_ManualSD', 'P2_OnOff', 'P2_RTR', 'P2_SCO', 'P2_SCST', 'P2_SIT01', 'P2_TripEx', 'P2_VIBTR01', 'P2_VIBTR02', 'P2_VIBTR03', 'P2_VIBTR04', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH01', 'P3_LIT01', 'P3_LL01', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'x1001_05_SETPOINT_OUT', 'x1001_15_ASSIGN_OUT', 'x1002_07_SETPOINT_OUT', 'x1002_08_SETPOINT_OUT', 'x1003_10_SETPOINT_OUT', 'x1003_18_SETPOINT_OUT', 'x1003_24_SUM_OUT']
+    lines incl. header: 280801
+    first rows:
+                   timestamp  P1_FCV01D  P1_FCV01Z  P1_FCV02D  P1_FCV02Z  P1_FCV03D  ...  x1001_15_ASSIGN_OUT  x1002_07_SETPOINT_OUT  x1002_08_SETPOINT_OUT  x1003_10_SETPOINT_OUT  x1003_18_SETPOINT_OUT  x1003_24_SUM_OUT
+      0  2022-08-04 18:00:01   72.15386   72.59521         15   12.44507   52.55638  ...              1.10768              342.67529              981.62262             3162.22290                     28          31.53963
+      1  2022-08-04 18:00:02   72.13303   72.59521         15   12.44507   52.51562  ...              1.11615              342.67529              981.62262             3164.09961                     28          31.56786
+      2  2022-08-04 18:00:03   72.21181   72.59521         15   12.43744   52.50791  ...              1.12107              342.67529              981.62262             3159.59546                     28          31.58426
+
+== HAI/hai-23.05/hai-train2.csv  (169.12 MB)
+    sha256: 0e520e82bf78a661ab19ce4967f3c766bd809820f457a9c90c365102d4534c56
+    columns (87): ['timestamp', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT01_HH', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_PP04', 'P1_PP04D', 'P1_PP04SP', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03', 'P2_24Vdc', 'P2_ATSW_Lamp', 'P2_AutoGO', 'P2_AutoSD', 'P2_Emerg', 'P2_MASW', 'P2_MASW_Lamp', 'P2_ManualGO', 'P2_ManualSD', 'P2_OnOff', 'P2_RTR', 'P2_SCO', 'P2_SCST', 'P2_SIT01', 'P2_TripEx', 'P2_VIBTR01', 'P2_VIBTR02', 'P2_VIBTR03', 'P2_VIBTR04', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH01', 'P3_LIT01', 'P3_LL01', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'x1001_05_SETPOINT_OUT', 'x1001_15_ASSIGN_OUT', 'x1002_07_SETPOINT_OUT', 'x1002_08_SETPOINT_OUT', 'x1003_10_SETPOINT_OUT', 'x1003_18_SETPOINT_OUT', 'x1003_24_SUM_OUT']
+    lines incl. header: 291601
+    first rows:
+                   timestamp  P1_FCV01D  P1_FCV01Z  P1_FCV02D  P1_FCV02Z  P1_FCV03D  ...  x1001_15_ASSIGN_OUT  x1002_07_SETPOINT_OUT  x1002_08_SETPOINT_OUT  x1003_10_SETPOINT_OUT  x1003_18_SETPOINT_OUT  x1003_24_SUM_OUT
+      0  2022-08-13 07:00:01   14.80959   16.15295        100   41.37573   50.27081  ...              1.15691              346.10788              950.62006              622.86792               26.08518          30.00780
+      1  2022-08-13 07:00:02   13.87437   16.16821        100   39.97192   50.30694  ...              1.15496              346.10788              950.62006              622.86792               26.08518          30.00780
+      2  2022-08-13 07:00:03   12.97484   15.19165        100   40.20081   50.29350  ...              1.15325              346.10788              950.62006              687.41870               26.08518          30.00208
+
+== HAI/hai-23.05/hai-train3.csv  (72.77 MB)
+    sha256: bfcec2dc05adea103e7491546b0e28268faaa26d3cc717d10f4595c94b81e85d
+    columns (87): ['timestamp', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT01_HH', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_PP04', 'P1_PP04D', 'P1_PP04SP', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03', 'P2_24Vdc', 'P2_ATSW_Lamp', 'P2_AutoGO', 'P2_AutoSD', 'P2_Emerg', 'P2_MASW', 'P2_MASW_Lamp', 'P2_ManualGO', 'P2_ManualSD', 'P2_OnOff', 'P2_RTR', 'P2_SCO', 'P2_SCST', 'P2_SIT01', 'P2_TripEx', 'P2_VIBTR01', 'P2_VIBTR02', 'P2_VIBTR03', 'P2_VIBTR04', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH01', 'P3_LIT01', 'P3_LL01', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'x1001_05_SETPOINT_OUT', 'x1001_15_ASSIGN_OUT', 'x1002_07_SETPOINT_OUT', 'x1002_08_SETPOINT_OUT', 'x1003_10_SETPOINT_OUT', 'x1003_18_SETPOINT_OUT', 'x1003_24_SUM_OUT']
+    lines incl. header: 126001
+    first rows:
+                   timestamp  P1_FCV01D  P1_FCV01Z  P1_FCV02D  P1_FCV02Z  P1_FCV03D  ...  x1001_15_ASSIGN_OUT  x1002_07_SETPOINT_OUT  x1002_08_SETPOINT_OUT  x1003_10_SETPOINT_OUT  x1003_18_SETPOINT_OUT  x1003_24_SUM_OUT
+      0  2022-08-19 16:00:01   19.82569   19.34967         15   12.67395   56.83010  ...              1.00242              358.56918             1041.74158             1359.95251               27.06943          30.68306
+      1  2022-08-19 16:00:02   19.65874   19.38782         15   12.66632   56.87626  ...              1.00757              358.56918             1041.74158             1317.53784               27.06943          30.70022
+      2  2022-08-19 16:00:03   19.47118   19.34204         15   12.66632   56.78020  ...              1.01421              358.56918             1041.74158             1315.30542               27.06943          30.72235
+
+== HAI/hai-23.05/hai-train4.csv  (114.49 MB)
+    sha256: 56658c83657d42a65db982b864362e0d0ffeb96d1f7b357d5e76e3a5c522d940
+    columns (87): ['timestamp', 'P1_FCV01D', 'P1_FCV01Z', 'P1_FCV02D', 'P1_FCV02Z', 'P1_FCV03D', 'P1_FCV03Z', 'P1_FT01', 'P1_FT01Z', 'P1_FT02', 'P1_FT02Z', 'P1_FT03', 'P1_FT03Z', 'P1_LCV01D', 'P1_LCV01Z', 'P1_LIT01', 'P1_PCV01D', 'P1_PCV01Z', 'P1_PCV02D', 'P1_PCV02Z', 'P1_PIT01', 'P1_PIT01_HH', 'P1_PIT02', 'P1_PP01AD', 'P1_PP01AR', 'P1_PP01BD', 'P1_PP01BR', 'P1_PP02D', 'P1_PP02R', 'P1_PP04', 'P1_PP04D', 'P1_PP04SP', 'P1_SOL01D', 'P1_SOL03D', 'P1_STSP', 'P1_TIT01', 'P1_TIT02', 'P1_TIT03', 'P2_24Vdc', 'P2_ATSW_Lamp', 'P2_AutoGO', 'P2_AutoSD', 'P2_Emerg', 'P2_MASW', 'P2_MASW_Lamp', 'P2_ManualGO', 'P2_ManualSD', 'P2_OnOff', 'P2_RTR', 'P2_SCO', 'P2_SCST', 'P2_SIT01', 'P2_TripEx', 'P2_VIBTR01', 'P2_VIBTR02', 'P2_VIBTR03', 'P2_VIBTR04', 'P2_VT01', 'P2_VTR01', 'P2_VTR02', 'P2_VTR03', 'P2_VTR04', 'P3_FIT01', 'P3_LCP01D', 'P3_LCV01D', 'P3_LH01', 'P3_LIT01', 'P3_LL01', 'P3_PIT01', 'P4_HT_FD', 'P4_HT_PO', 'P4_HT_PS', 'P4_LD', 'P4_ST_FD', 'P4_ST_GOV', 'P4_ST_LD', 'P4_ST_PO', 'P4_ST_PS', 'P4_ST_PT01', 'P4_ST_TT01', 'x1001_05_SETPOINT_OUT', 'x1001_15_ASSIGN_OUT', 'x1002_07_SETPOINT_OUT', 'x1002_08_SETPOINT_OUT', 'x1003_10_SETPOINT_OUT', 'x1003_18_SETPOINT_OUT', 'x1003_24_SUM_OUT']
+    lines incl. header: 198001
+    first rows:
+                   timestamp  P1_FCV01D  P1_FCV01Z  P1_FCV02D  P1_FCV02Z  P1_FCV03D  ...  x1001_15_ASSIGN_OUT  x1002_07_SETPOINT_OUT  x1002_08_SETPOINT_OUT  x1003_10_SETPOINT_OUT  x1003_18_SETPOINT_OUT  x1003_24_SUM_OUT
+      0  2022-08-22 17:00:01    6.78663    4.15192        100   97.20763   52.71318  ...              1.16643              324.43817              955.69299               36.94299                27.3262          31.30032
+      1  2022-08-22 17:00:02    6.79326    4.50287        100   97.20763   52.71917  ...              1.16964              324.43817              955.69299               28.99807                27.3262          31.31100
+      2  2022-08-22 17:00:03    6.78448    6.37207        100   97.20763   52.67210  ...              1.17215              324.43817              955.69299               28.00514                27.3262          31.31939
+
+== HAI/hai-23.05/label-test1.csv  (1.24 MB)
+    sha256: eaf69edb9c5834bc393afd7bf658b5e408d34fd7bfc3261f80516765fb818fbc
+    columns (2): ['timestamp', 'label']
+    lines incl. header: 54001
+    first rows:
+                   timestamp  label
+      0  2022-08-12 16:00:01      0
+      1  2022-08-12 16:00:02      0
+      2  2022-08-12 16:00:03      0
+
+== HAI/hai-23.05/label-test2.csv  (4.50 MB)
+    sha256: 8090c44981176e39b0f01a7126a80248ac0b93355c00f9db4d4e2f2106452b92
+    columns (2): ['timestamp', 'label']
+    lines incl. header: 230401
+    first rows:
+               timestamp  label
+      0  2022-08-17 0:00      0
+      1  2022-08-17 0:00      0
+      2  2022-08-17 0:00      0
+
+== HAI/hai-23.05/summary_label1.txt  (0.00 MB)
+    sha256: 9d8fb32ee1e816c88f93c8d661f90a7736802582d3572a1e1ebd953783353da6
+    columns (82): ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52', 'Unnamed: 53', 'Unnamed: 54', 'Unnamed: 55', 'Unnamed: 56', 'Unnamed: 57', 'Unnamed: 58', 'Unnamed: 59', 'Unnamed: 60', 'Unnamed: 61', 'Unnamed: 62', 'Unnamed: 63', 'Unnamed: 64', 'Unnamed: 65', 'Unnamed: 66', 'Unnamed: 67', 'Unnamed: 68', 'Unnamed: 69', 'Unnamed: 70', 'Unnamed: 71', 'Unnamed: 72', 'Unnamed: 73', 'Unnamed: 74', 'Unnamed: 75', 'Unnamed: 76', 'Unnamed: 77', 'Unnamed: 78', 'Unnamed: 79', 'Unnamed: 80', 'Unnamed: 81']
+    lines incl. header: 31
+    first rows:
+                                                                                      Unnamed: 0  Unnamed: 1  Unnamed: 2  Unnamed: 3  Unnamed: 4  Unnamed: 5  ...  Unnamed: 76  Unnamed: 77  Unnamed: 78  Unnamed: 79  Unnamed: 80  Unnamed: 81
+      0  File Name\t: hai3/20220825_101225/test/split_label_220812_16_15_01_s081216_e081307.csv          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      1                                                                   File Size\t: 1.1800 MB         NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      2                                                                            Columns\t: 1          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+
+== HAI/hai-23.05/summary_label2.txt  (0.00 MB)
+    sha256: b564024a105981415a81dd1b338a48ad7ad5be511849884232540f1a6550e5c1
+    columns (82): ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52', 'Unnamed: 53', 'Unnamed: 54', 'Unnamed: 55', 'Unnamed: 56', 'Unnamed: 57', 'Unnamed: 58', 'Unnamed: 59', 'Unnamed: 60', 'Unnamed: 61', 'Unnamed: 62', 'Unnamed: 63', 'Unnamed: 64', 'Unnamed: 65', 'Unnamed: 66', 'Unnamed: 67', 'Unnamed: 68', 'Unnamed: 69', 'Unnamed: 70', 'Unnamed: 71', 'Unnamed: 72', 'Unnamed: 73', 'Unnamed: 74', 'Unnamed: 75', 'Unnamed: 76', 'Unnamed: 77', 'Unnamed: 78', 'Unnamed: 79', 'Unnamed: 80', 'Unnamed: 81']
+    lines incl. header: 55
+    first rows:
+                                                                                      Unnamed: 0  Unnamed: 1  Unnamed: 2  Unnamed: 3  Unnamed: 4  Unnamed: 5  ...  Unnamed: 76  Unnamed: 77  Unnamed: 78  Unnamed: 79  Unnamed: 80  Unnamed: 81
+      0  File Name\t: hai3/20220825_101225/test/split_label_220817_00_64_01_s081700_e081916.csv          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      1                                                                   File Size\t: 5.0500 MB         NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      2                                                                            Columns\t: 1          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+
+== HAI/haiend-23.05/end-test1.csv  (49.35 MB)
+    sha256: e1929829ce3437281eddb97f549121ebc4676384a390136c2b052ce649eb8d58
+    columns (226): ['Timestamp', 'DM-PP01-R', 'DM-FT01Z', 'DM-FT02Z', 'DM-FT03Z', '1001.2-OUT', '1001.7-OUT1', '1001.7-OUT2', '1001.8-OUT', '1002.2-OUT', '1002.6-OUT', '1002.11-OUT1', '1002.11-OUT2', '1002.12-OUT', '1002.16-OUT1', '1002.16-OUT2', '1002.19-OUT', '1002.29-OUT', '1002.34-OUT', '1003.7-OUT', '1003.12-OUT1', '1003.12-OUT2', '1003.13-OUT', '1003.27-OUT', '1004.11-OUT1', '1004.11-OUT2', '1004.12-OUT1', '1004.12-OUT2', '1004.13-OUT', '1004.15-OUT1', '1004.15-OUT2', '1004.18-OUT1', '1004.18-OUT2', '1004.21-OUT', '1004.24-OUT', '1004.29-OUT', '1004.36-OUT', '1004.37-OUT', '1004.38-OUT', '1004.39-OUT', '1004.41-OUT', '1004.44-OUT', '1004.52-OUT', '1004.53-OUT', '1004.62-OUT', '1004.76-OUT', '1004.78-OUT', '1004.79-OUT', '1004.80-OUT', '1010.2-OUT', '1010.3-OUT', '1010.4-OUT', '1010.5-OUT1', '1010.5-OUT2', '1010.5-OUT3', '1010.5-OUT4', '1010.7-OUT', '1010.8-OUT', '1010.9-OUT', '1010.10-OUT', '1010.11-OUT', '1010.12-OUT1', '1010.12-OUT2', '1010.16-OUT', '1010.17-OUT', '1010.19-OUT', '1010.23-OUT', '1010.30-OUT', '1010.31-OUT', '1010.33-OUT', '1010.35-OUT', '1010.38-OUT', '1010.39-OUT', '1010.41-OUT', '1010.42-OUT', '1010.44-OUT', '1010.46-OUT', '1010.47-OUT', '1010.50-OUT', '1010.54-OUT', '1010.56-OUT', '1011.2-OUT', '1011.3-OUT', '1011.4-OUT', '1011.5-OUT1', '1011.5-OUT2', '1011.5-OUT3', '1011.5-OUT4', '1011.7-OUT', '1011.8-OUT', '1011.9-OUT', '1011.10-OUT', '1011.11-OUT', '1011.12-OUT1', '1011.12-OUT2', '1011.16-OUT', '1011.17-OUT', '1011.19-OUT', '1011.23-OUT', '1011.30-OUT', '1011.31-OUT', '1011.33-OUT', '1011.35-OUT', '1011.38-OUT', '1011.39-OUT', '1011.41-OUT', '1011.42-OUT', '1011.44-OUT', '1011.46-OUT', '1011.47-OUT', '1011.50-OUT', '1011.54-OUT', '1011.56-OUT', '1020.2-OUT', '1020.3-OUT', '1020.5-OUT1', '1020.5-OUT2', '1020.9-OUT', '1020.10-OUT', '1020.11-OUT', '1020.18-OUT', '1020.20-OUT', '1020.21-OUT', 'DM-CIP-1ST', 'DM-CIP-2ND', 'DM-CIPH-1ST', 'DM-CIPH-2ND', 'DM-CIPH-START', 'DM-CIPH-STEP1', 'DM-CIPH-STEP11', 'DM-PP01A-D', 'DM-CIP-START', 'DM-CIP-STEP1', 'DM-CIP-STEP11', 'DM-COOL-ON', 'DM-COOL-R', 'DM-LSH-03', 'DM-LSH-04', 'DM-LSL-04', 'DM-PIT01-HH', 'DM-PP04-D', 'DM-PP01A-R', 'DM-SOL01-D', 'DM-SOL02-D', 'DM-SOL03-D', 'DM-SOL04-D', 'DQ03-LCV01-D', 'DQ04-LCV01-DEV', '1001.5-OUT', '1001.9-OUT', '1001.13-OUT', '1001.14-OUT', '1001.15-OUT', '1001.16-OUT', '1001.17-OUT', '1001.20-OUT', '1002.7-OUT', '1002.8-OUT', '1002.9-OUT', '1002.14-OUT', '1002.15-OUT', '1002.20-OUT', '1002.21-OUT', '1002.30-OUT', '1002.31-OUT', '1003.5-OUT', '1003.10-OUT', '1003.11-OUT', '1003.17-OUT', '1003.18-OUT', '1003.23-OUT', '1003.24-OUT', '1003.25-OUT', '1003.26-OUT', '1003.29-OUT', '1003.30-OUT', '1020.4-OUT', '1020.13-OUT', '1020.14-OUT', '1020.15-OUT', 'DM-AIT-DO', 'DM-AIT-PH', 'DM-PP04-AO', 'DM-PP04-SV', 'DM-TWIT-04', 'DM-TWIT-05', 'GATEOPEN', 'PP04-SP-OUT', 'DM-HT01-D', 'DM-LCV01-MIS', 'DM-LSH01', 'DM-LSH02', 'DM-LSL01', 'DM-LSL02', 'DM-PCV01-DEV', 'DM-PP01B-D', 'DM-PP01B-R', 'DM-PP02-D', 'DM-PP02-R', 'DM-SS01-RM', 'DM-ST-SP', 'DM-SW01-ST', 'DM-SW02-SP', 'DM-SW03-EM', 'DM-FCV01-D', 'DM-FCV01-Z', 'DM-FCV02-D', 'DM-FCV02-Z', 'DM-FCV03-D', 'DM-FCV03-Z', 'DM-FT01', 'DM-FT02', 'DM-FT03', 'DM-LCV01-D', 'DM-LCV01-Z', 'DM-LIT01', 'DM-PCV01-D', 'DM-PCV01-Z', 'DM-PCV02-D', 'DM-PCV02-Z', 'DM-PIT01', 'DM-PIT02', 'DM-PWIT-03', 'DM-TIT01', 'DM-TIT02', 'DM-TWIT-03']
+    lines incl. header: 54001
+    first rows:
+                   Timestamp  DM-PP01-R    DM-FT01Z     DM-FT02Z    DM-FT03Z  1001.2-OUT  ...  DM-PIT01  DM-PIT02  DM-PWIT-03   DM-TIT01   DM-TIT02  DM-TWIT-03
+      0  2022-08-12 16:00:00          0  327.919220  3111.298340  980.072021           0  ...  0.943146  0.407562    0.000639  29.211426  33.865349   26.747803
+      1  2022-08-12 16:00:01          0  336.857086  3116.427979  980.941772           0  ...  0.947723  0.407562    0.000639  29.211426  33.880611   26.747803
+      2  2022-08-12 16:00:02          0  332.884613  3108.170166  980.506836           0  ...  0.951538  0.407562    0.000639  29.211426  33.880611   26.747803
+
+== HAI/haiend-23.05/end-test2.csv  (209.74 MB)
+    sha256: 587dc7a73eb92dd119dc7e3f902d2fa308b8af47352d1aa388ea5ef9da63390c
+    columns (226): ['Timestamp', 'DM-PP01-R', 'DM-FT01Z', 'DM-FT02Z', 'DM-FT03Z', '1001.2-OUT', '1001.7-OUT1', '1001.7-OUT2', '1001.8-OUT', '1002.2-OUT', '1002.6-OUT', '1002.11-OUT1', '1002.11-OUT2', '1002.12-OUT', '1002.16-OUT1', '1002.16-OUT2', '1002.19-OUT', '1002.29-OUT', '1002.34-OUT', '1003.7-OUT', '1003.12-OUT1', '1003.12-OUT2', '1003.13-OUT', '1003.27-OUT', '1004.11-OUT1', '1004.11-OUT2', '1004.12-OUT1', '1004.12-OUT2', '1004.13-OUT', '1004.15-OUT1', '1004.15-OUT2', '1004.18-OUT1', '1004.18-OUT2', '1004.21-OUT', '1004.24-OUT', '1004.29-OUT', '1004.36-OUT', '1004.37-OUT', '1004.38-OUT', '1004.39-OUT', '1004.41-OUT', '1004.44-OUT', '1004.52-OUT', '1004.53-OUT', '1004.62-OUT', '1004.76-OUT', '1004.78-OUT', '1004.79-OUT', '1004.80-OUT', '1010.2-OUT', '1010.3-OUT', '1010.4-OUT', '1010.5-OUT1', '1010.5-OUT2', '1010.5-OUT3', '1010.5-OUT4', '1010.7-OUT', '1010.8-OUT', '1010.9-OUT', '1010.10-OUT', '1010.11-OUT', '1010.12-OUT1', '1010.12-OUT2', '1010.16-OUT', '1010.17-OUT', '1010.19-OUT', '1010.23-OUT', '1010.30-OUT', '1010.31-OUT', '1010.33-OUT', '1010.35-OUT', '1010.38-OUT', '1010.39-OUT', '1010.41-OUT', '1010.42-OUT', '1010.44-OUT', '1010.46-OUT', '1010.47-OUT', '1010.50-OUT', '1010.54-OUT', '1010.56-OUT', '1011.2-OUT', '1011.3-OUT', '1011.4-OUT', '1011.5-OUT1', '1011.5-OUT2', '1011.5-OUT3', '1011.5-OUT4', '1011.7-OUT', '1011.8-OUT', '1011.9-OUT', '1011.10-OUT', '1011.11-OUT', '1011.12-OUT1', '1011.12-OUT2', '1011.16-OUT', '1011.17-OUT', '1011.19-OUT', '1011.23-OUT', '1011.30-OUT', '1011.31-OUT', '1011.33-OUT', '1011.35-OUT', '1011.38-OUT', '1011.39-OUT', '1011.41-OUT', '1011.42-OUT', '1011.44-OUT', '1011.46-OUT', '1011.47-OUT', '1011.50-OUT', '1011.54-OUT', '1011.56-OUT', '1020.2-OUT', '1020.3-OUT', '1020.5-OUT1', '1020.5-OUT2', '1020.9-OUT', '1020.10-OUT', '1020.11-OUT', '1020.18-OUT', '1020.20-OUT', '1020.21-OUT', 'DM-CIP-1ST', 'DM-CIP-2ND', 'DM-CIPH-1ST', 'DM-CIPH-2ND', 'DM-CIPH-START', 'DM-CIPH-STEP1', 'DM-CIPH-STEP11', 'DM-PP01A-D', 'DM-CIP-START', 'DM-CIP-STEP1', 'DM-CIP-STEP11', 'DM-COOL-ON', 'DM-COOL-R', 'DM-LSH-03', 'DM-LSH-04', 'DM-LSL-04', 'DM-PIT01-HH', 'DM-PP04-D', 'DM-PP01A-R', 'DM-SOL01-D', 'DM-SOL02-D', 'DM-SOL03-D', 'DM-SOL04-D', 'DQ03-LCV01-D', 'DQ04-LCV01-DEV', '1001.5-OUT', '1001.9-OUT', '1001.13-OUT', '1001.14-OUT', '1001.15-OUT', '1001.16-OUT', '1001.17-OUT', '1001.20-OUT', '1002.7-OUT', '1002.8-OUT', '1002.9-OUT', '1002.14-OUT', '1002.15-OUT', '1002.20-OUT', '1002.21-OUT', '1002.30-OUT', '1002.31-OUT', '1003.5-OUT', '1003.10-OUT', '1003.11-OUT', '1003.17-OUT', '1003.18-OUT', '1003.23-OUT', '1003.24-OUT', '1003.25-OUT', '1003.26-OUT', '1003.29-OUT', '1003.30-OUT', '1020.4-OUT', '1020.13-OUT', '1020.14-OUT', '1020.15-OUT', 'DM-AIT-DO', 'DM-AIT-PH', 'DM-PP04-AO', 'DM-PP04-SV', 'DM-TWIT-04', 'DM-TWIT-05', 'GATEOPEN', 'PP04-SP-OUT', 'DM-HT01-D', 'DM-LCV01-MIS', 'DM-LSH01', 'DM-LSH02', 'DM-LSL01', 'DM-LSL02', 'DM-PCV01-DEV', 'DM-PP01B-D', 'DM-PP01B-R', 'DM-PP02-D', 'DM-PP02-R', 'DM-SS01-RM', 'DM-ST-SP', 'DM-SW01-ST', 'DM-SW02-SP', 'DM-SW03-EM', 'DM-FCV01-D', 'DM-FCV01-Z', 'DM-FCV02-D', 'DM-FCV02-Z', 'DM-FCV03-D', 'DM-FCV03-Z', 'DM-FT01', 'DM-FT02', 'DM-FT03', 'DM-LCV01-D', 'DM-LCV01-Z', 'DM-LIT01', 'DM-PCV01-D', 'DM-PCV01-Z', 'DM-PCV02-D', 'DM-PCV02-Z', 'DM-PIT01', 'DM-PIT02', 'DM-PWIT-03', 'DM-TIT01', 'DM-TIT02', 'DM-TWIT-03']
+    lines incl. header: 230401
+    first rows:
+                  Timestamp  DM-PP01-R    DM-FT01Z    DM-FT02Z    DM-FT03Z  1001.2-OUT  ...  DM-PIT01  DM-PIT02  DM-PWIT-03   DM-TIT01   DM-TIT02  DM-TWIT-03
+      0  2022-08-17 0:00:00          0  282.237030  737.073303  967.025818           0  ...  0.904236  0.693665     0.00303  28.433226  34.658813   27.234772
+      1  2022-08-17 0:00:01          0  282.237030  752.962830  968.330383           0  ...  0.904236  0.712738     0.00303  28.417963  34.643551   27.234772
+      2  2022-08-17 0:00:02          0  287.202423  807.861389  967.025818           0  ...  0.904236  0.758514     0.00303  28.433226  34.643551   27.234772
+
+== HAI/haiend-23.05/end-train1.csv  (256.55 MB)
+    sha256: 112ab5a553e53b14f48e6fc7c8b81a844ee82c2bf3284cc422345e129b3af476
+    columns (226): ['Timestamp', 'DM-PP01-R', 'DM-FT01Z', 'DM-FT02Z', 'DM-FT03Z', '1001.2-OUT', '1001.7-OUT1', '1001.7-OUT2', '1001.8-OUT', '1002.2-OUT', '1002.6-OUT', '1002.11-OUT1', '1002.11-OUT2', '1002.12-OUT', '1002.16-OUT1', '1002.16-OUT2', '1002.19-OUT', '1002.29-OUT', '1002.34-OUT', '1003.7-OUT', '1003.12-OUT1', '1003.12-OUT2', '1003.13-OUT', '1003.27-OUT', '1004.11-OUT1', '1004.11-OUT2', '1004.12-OUT1', '1004.12-OUT2', '1004.13-OUT', '1004.15-OUT1', '1004.15-OUT2', '1004.18-OUT1', '1004.18-OUT2', '1004.21-OUT', '1004.24-OUT', '1004.29-OUT', '1004.36-OUT', '1004.37-OUT', '1004.38-OUT', '1004.39-OUT', '1004.41-OUT', '1004.44-OUT', '1004.52-OUT', '1004.53-OUT', '1004.62-OUT', '1004.76-OUT', '1004.78-OUT', '1004.79-OUT', '1004.80-OUT', '1010.2-OUT', '1010.3-OUT', '1010.4-OUT', '1010.5-OUT1', '1010.5-OUT2', '1010.5-OUT3', '1010.5-OUT4', '1010.7-OUT', '1010.8-OUT', '1010.9-OUT', '1010.10-OUT', '1010.11-OUT', '1010.12-OUT1', '1010.12-OUT2', '1010.16-OUT', '1010.17-OUT', '1010.19-OUT', '1010.23-OUT', '1010.30-OUT', '1010.31-OUT', '1010.33-OUT', '1010.35-OUT', '1010.38-OUT', '1010.39-OUT', '1010.41-OUT', '1010.42-OUT', '1010.44-OUT', '1010.46-OUT', '1010.47-OUT', '1010.50-OUT', '1010.54-OUT', '1010.56-OUT', '1011.2-OUT', '1011.3-OUT', '1011.4-OUT', '1011.5-OUT1', '1011.5-OUT2', '1011.5-OUT3', '1011.5-OUT4', '1011.7-OUT', '1011.8-OUT', '1011.9-OUT', '1011.10-OUT', '1011.11-OUT', '1011.12-OUT1', '1011.12-OUT2', '1011.16-OUT', '1011.17-OUT', '1011.19-OUT', '1011.23-OUT', '1011.30-OUT', '1011.31-OUT', '1011.33-OUT', '1011.35-OUT', '1011.38-OUT', '1011.39-OUT', '1011.41-OUT', '1011.42-OUT', '1011.44-OUT', '1011.46-OUT', '1011.47-OUT', '1011.50-OUT', '1011.54-OUT', '1011.56-OUT', '1020.2-OUT', '1020.3-OUT', '1020.5-OUT1', '1020.5-OUT2', '1020.9-OUT', '1020.10-OUT', '1020.11-OUT', '1020.18-OUT', '1020.20-OUT', '1020.21-OUT', 'DM-CIP-1ST', 'DM-CIP-2ND', 'DM-CIPH-1ST', 'DM-CIPH-2ND', 'DM-CIPH-START', 'DM-CIPH-STEP1', 'DM-CIPH-STEP11', 'DM-PP01A-D', 'DM-CIP-START', 'DM-CIP-STEP1', 'DM-CIP-STEP11', 'DM-COOL-ON', 'DM-COOL-R', 'DM-LSH-03', 'DM-LSH-04', 'DM-LSL-04', 'DM-PIT01-HH', 'DM-PP04-D', 'DM-PP01A-R', 'DM-SOL01-D', 'DM-SOL02-D', 'DM-SOL03-D', 'DM-SOL04-D', 'DQ03-LCV01-D', 'DQ04-LCV01-DEV', '1001.5-OUT', '1001.9-OUT', '1001.13-OUT', '1001.14-OUT', '1001.15-OUT', '1001.16-OUT', '1001.17-OUT', '1001.20-OUT', '1002.7-OUT', '1002.8-OUT', '1002.9-OUT', '1002.14-OUT', '1002.15-OUT', '1002.20-OUT', '1002.21-OUT', '1002.30-OUT', '1002.31-OUT', '1003.5-OUT', '1003.10-OUT', '1003.11-OUT', '1003.17-OUT', '1003.18-OUT', '1003.23-OUT', '1003.24-OUT', '1003.25-OUT', '1003.26-OUT', '1003.29-OUT', '1003.30-OUT', '1020.4-OUT', '1020.13-OUT', '1020.14-OUT', '1020.15-OUT', 'DM-AIT-DO', 'DM-AIT-PH', 'DM-PP04-AO', 'DM-PP04-SV', 'DM-TWIT-04', 'DM-TWIT-05', 'GATEOPEN', 'PP04-SP-OUT', 'DM-HT01-D', 'DM-LCV01-MIS', 'DM-LSH01', 'DM-LSH02', 'DM-LSL01', 'DM-LSL02', 'DM-PCV01-DEV', 'DM-PP01B-D', 'DM-PP01B-R', 'DM-PP02-D', 'DM-PP02-R', 'DM-SS01-RM', 'DM-ST-SP', 'DM-SW01-ST', 'DM-SW02-SP', 'DM-SW03-EM', 'DM-FCV01-D', 'DM-FCV01-Z', 'DM-FCV02-D', 'DM-FCV02-Z', 'DM-FCV03-D', 'DM-FCV03-Z', 'DM-FT01', 'DM-FT02', 'DM-FT03', 'DM-LCV01-D', 'DM-LCV01-Z', 'DM-LIT01', 'DM-PCV01-D', 'DM-PCV01-Z', 'DM-PCV02-D', 'DM-PCV02-Z', 'DM-PIT01', 'DM-PIT02', 'DM-PWIT-03', 'DM-TIT01', 'DM-TIT02', 'DM-TWIT-03']
+    lines incl. header: 280801
+    first rows:
+                   Timestamp  DM-PP01-R    DM-FT01Z     DM-FT02Z    DM-FT03Z  1001.2-OUT  ...  DM-PIT01  DM-PIT02  DM-PWIT-03   DM-TIT01   DM-TIT02  DM-TWIT-03
+      0  2022-08-04 18:00:00          0  287.202423  3166.977539  983.985901           0  ...  1.260528  0.375519    0.000585  30.187988  35.208130   27.224792
+      1  2022-08-04 18:00:01          0  293.160736  3162.222900  982.681396           0  ...  1.249084  0.376282    0.000585  30.187988  35.192867   27.224792
+      2  2022-08-04 18:00:02          0  286.209137  3164.099609  983.550964           0  ...  1.242981  0.376282    0.000585  30.187988  35.177608   27.224792
+
+== HAI/haiend-23.05/end-train2.csv  (266.92 MB)
+    sha256: 7f2367efabbb2fa5a65ef1e95c06b687c47836577f7b2e7fbee6238e00e41855
+    columns (226): ['Timestamp', 'DM-PP01-R', 'DM-FT01Z', 'DM-FT02Z', 'DM-FT03Z', '1001.2-OUT', '1001.7-OUT1', '1001.7-OUT2', '1001.8-OUT', '1002.2-OUT', '1002.6-OUT', '1002.11-OUT1', '1002.11-OUT2', '1002.12-OUT', '1002.16-OUT1', '1002.16-OUT2', '1002.19-OUT', '1002.29-OUT', '1002.34-OUT', '1003.7-OUT', '1003.12-OUT1', '1003.12-OUT2', '1003.13-OUT', '1003.27-OUT', '1004.11-OUT1', '1004.11-OUT2', '1004.12-OUT1', '1004.12-OUT2', '1004.13-OUT', '1004.15-OUT1', '1004.15-OUT2', '1004.18-OUT1', '1004.18-OUT2', '1004.21-OUT', '1004.24-OUT', '1004.29-OUT', '1004.36-OUT', '1004.37-OUT', '1004.38-OUT', '1004.39-OUT', '1004.41-OUT', '1004.44-OUT', '1004.52-OUT', '1004.53-OUT', '1004.62-OUT', '1004.76-OUT', '1004.78-OUT', '1004.79-OUT', '1004.80-OUT', '1010.2-OUT', '1010.3-OUT', '1010.4-OUT', '1010.5-OUT1', '1010.5-OUT2', '1010.5-OUT3', '1010.5-OUT4', '1010.7-OUT', '1010.8-OUT', '1010.9-OUT', '1010.10-OUT', '1010.11-OUT', '1010.12-OUT1', '1010.12-OUT2', '1010.16-OUT', '1010.17-OUT', '1010.19-OUT', '1010.23-OUT', '1010.30-OUT', '1010.31-OUT', '1010.33-OUT', '1010.35-OUT', '1010.38-OUT', '1010.39-OUT', '1010.41-OUT', '1010.42-OUT', '1010.44-OUT', '1010.46-OUT', '1010.47-OUT', '1010.50-OUT', '1010.54-OUT', '1010.56-OUT', '1011.2-OUT', '1011.3-OUT', '1011.4-OUT', '1011.5-OUT1', '1011.5-OUT2', '1011.5-OUT3', '1011.5-OUT4', '1011.7-OUT', '1011.8-OUT', '1011.9-OUT', '1011.10-OUT', '1011.11-OUT', '1011.12-OUT1', '1011.12-OUT2', '1011.16-OUT', '1011.17-OUT', '1011.19-OUT', '1011.23-OUT', '1011.30-OUT', '1011.31-OUT', '1011.33-OUT', '1011.35-OUT', '1011.38-OUT', '1011.39-OUT', '1011.41-OUT', '1011.42-OUT', '1011.44-OUT', '1011.46-OUT', '1011.47-OUT', '1011.50-OUT', '1011.54-OUT', '1011.56-OUT', '1020.2-OUT', '1020.3-OUT', '1020.5-OUT1', '1020.5-OUT2', '1020.9-OUT', '1020.10-OUT', '1020.11-OUT', '1020.18-OUT', '1020.20-OUT', '1020.21-OUT', 'DM-CIP-1ST', 'DM-CIP-2ND', 'DM-CIPH-1ST', 'DM-CIPH-2ND', 'DM-CIPH-START', 'DM-CIPH-STEP1', 'DM-CIPH-STEP11', 'DM-PP01A-D', 'DM-CIP-START', 'DM-CIP-STEP1', 'DM-CIP-STEP11', 'DM-COOL-ON', 'DM-COOL-R', 'DM-LSH-03', 'DM-LSH-04', 'DM-LSL-04', 'DM-PIT01-HH', 'DM-PP04-D', 'DM-PP01A-R', 'DM-SOL01-D', 'DM-SOL02-D', 'DM-SOL03-D', 'DM-SOL04-D', 'DQ03-LCV01-D', 'DQ04-LCV01-DEV', '1001.5-OUT', '1001.9-OUT', '1001.13-OUT', '1001.14-OUT', '1001.15-OUT', '1001.16-OUT', '1001.17-OUT', '1001.20-OUT', '1002.7-OUT', '1002.8-OUT', '1002.9-OUT', '1002.14-OUT', '1002.15-OUT', '1002.20-OUT', '1002.21-OUT', '1002.30-OUT', '1002.31-OUT', '1003.5-OUT', '1003.10-OUT', '1003.11-OUT', '1003.17-OUT', '1003.18-OUT', '1003.23-OUT', '1003.24-OUT', '1003.25-OUT', '1003.26-OUT', '1003.29-OUT', '1003.30-OUT', '1020.4-OUT', '1020.13-OUT', '1020.14-OUT', '1020.15-OUT', 'DM-AIT-DO', 'DM-AIT-PH', 'DM-PP04-AO', 'DM-PP04-SV', 'DM-TWIT-04', 'DM-TWIT-05', 'GATEOPEN', 'PP04-SP-OUT', 'DM-HT01-D', 'DM-LCV01-MIS', 'DM-LSH01', 'DM-LSH02', 'DM-LSL01', 'DM-LSL02', 'DM-PCV01-DEV', 'DM-PP01B-D', 'DM-PP01B-R', 'DM-PP02-D', 'DM-PP02-R', 'DM-SS01-RM', 'DM-ST-SP', 'DM-SW01-ST', 'DM-SW02-SP', 'DM-SW03-EM', 'DM-FCV01-D', 'DM-FCV01-Z', 'DM-FCV02-D', 'DM-FCV02-Z', 'DM-FCV03-D', 'DM-FCV03-Z', 'DM-FT01', 'DM-FT02', 'DM-FT03', 'DM-LCV01-D', 'DM-LCV01-Z', 'DM-LIT01', 'DM-PCV01-D', 'DM-PCV01-Z', 'DM-PCV02-D', 'DM-PCV02-Z', 'DM-PIT01', 'DM-PIT02', 'DM-PWIT-03', 'DM-TIT01', 'DM-TIT02', 'DM-TWIT-03']
+    lines incl. header: 291601
+    first rows:
+                  Timestamp  DM-PP01-R    DM-FT01Z    DM-FT02Z    DM-FT03Z  1001.2-OUT  ...  DM-PIT01  DM-PIT02  DM-PWIT-03   DM-TIT01   DM-TIT02  DM-TWIT-03
+      0  2022-08-13 7:00:00          0  286.209137  584.136963  954.414368           0  ...  1.299438  0.538788    0.000814  28.921505  38.381950    28.95993
+      1  2022-08-13 7:00:01          0  287.202423  622.867920  955.284119           0  ...  1.298675  0.585327    0.000814  28.921505  38.381950    28.95993
+      2  2022-08-13 7:00:02          0  284.223267  687.418701  953.979614           0  ...  1.298675  0.631866    0.000814  28.936768  38.366699    28.95993
+
+== HAI/haiend-23.05/end-train3.csv  (115.38 MB)
+    sha256: 92dbb6a92a4f05cbd5cf9d6d9747a9e9938d544ef7fe1edb1954cabce52a4c08
+    columns (226): ['Timestamp', 'DM-PP01-R', 'DM-FT01Z', 'DM-FT02Z', 'DM-FT03Z', '1001.2-OUT', '1001.7-OUT1', '1001.7-OUT2', '1001.8-OUT', '1002.2-OUT', '1002.6-OUT', '1002.11-OUT1', '1002.11-OUT2', '1002.12-OUT', '1002.16-OUT1', '1002.16-OUT2', '1002.19-OUT', '1002.29-OUT', '1002.34-OUT', '1003.7-OUT', '1003.12-OUT1', '1003.12-OUT2', '1003.13-OUT', '1003.27-OUT', '1004.11-OUT1', '1004.11-OUT2', '1004.12-OUT1', '1004.12-OUT2', '1004.13-OUT', '1004.15-OUT1', '1004.15-OUT2', '1004.18-OUT1', '1004.18-OUT2', '1004.21-OUT', '1004.24-OUT', '1004.29-OUT', '1004.36-OUT', '1004.37-OUT', '1004.38-OUT', '1004.39-OUT', '1004.41-OUT', '1004.44-OUT', '1004.52-OUT', '1004.53-OUT', '1004.62-OUT', '1004.76-OUT', '1004.78-OUT', '1004.79-OUT', '1004.80-OUT', '1010.2-OUT', '1010.3-OUT', '1010.4-OUT', '1010.5-OUT1', '1010.5-OUT2', '1010.5-OUT3', '1010.5-OUT4', '1010.7-OUT', '1010.8-OUT', '1010.9-OUT', '1010.10-OUT', '1010.11-OUT', '1010.12-OUT1', '1010.12-OUT2', '1010.16-OUT', '1010.17-OUT', '1010.19-OUT', '1010.23-OUT', '1010.30-OUT', '1010.31-OUT', '1010.33-OUT', '1010.35-OUT', '1010.38-OUT', '1010.39-OUT', '1010.41-OUT', '1010.42-OUT', '1010.44-OUT', '1010.46-OUT', '1010.47-OUT', '1010.50-OUT', '1010.54-OUT', '1010.56-OUT', '1011.2-OUT', '1011.3-OUT', '1011.4-OUT', '1011.5-OUT1', '1011.5-OUT2', '1011.5-OUT3', '1011.5-OUT4', '1011.7-OUT', '1011.8-OUT', '1011.9-OUT', '1011.10-OUT', '1011.11-OUT', '1011.12-OUT1', '1011.12-OUT2', '1011.16-OUT', '1011.17-OUT', '1011.19-OUT', '1011.23-OUT', '1011.30-OUT', '1011.31-OUT', '1011.33-OUT', '1011.35-OUT', '1011.38-OUT', '1011.39-OUT', '1011.41-OUT', '1011.42-OUT', '1011.44-OUT', '1011.46-OUT', '1011.47-OUT', '1011.50-OUT', '1011.54-OUT', '1011.56-OUT', '1020.2-OUT', '1020.3-OUT', '1020.5-OUT1', '1020.5-OUT2', '1020.9-OUT', '1020.10-OUT', '1020.11-OUT', '1020.18-OUT', '1020.20-OUT', '1020.21-OUT', 'DM-CIP-1ST', 'DM-CIP-2ND', 'DM-CIPH-1ST', 'DM-CIPH-2ND', 'DM-CIPH-START', 'DM-CIPH-STEP1', 'DM-CIPH-STEP11', 'DM-PP01A-D', 'DM-CIP-START', 'DM-CIP-STEP1', 'DM-CIP-STEP11', 'DM-COOL-ON', 'DM-COOL-R', 'DM-LSH-03', 'DM-LSH-04', 'DM-LSL-04', 'DM-PIT01-HH', 'DM-PP04-D', 'DM-PP01A-R', 'DM-SOL01-D', 'DM-SOL02-D', 'DM-SOL03-D', 'DM-SOL04-D', 'DQ03-LCV01-D', 'DQ04-LCV01-DEV', '1001.5-OUT', '1001.9-OUT', '1001.13-OUT', '1001.14-OUT', '1001.15-OUT', '1001.16-OUT', '1001.17-OUT', '1001.20-OUT', '1002.7-OUT', '1002.8-OUT', '1002.9-OUT', '1002.14-OUT', '1002.15-OUT', '1002.20-OUT', '1002.21-OUT', '1002.30-OUT', '1002.31-OUT', '1003.5-OUT', '1003.10-OUT', '1003.11-OUT', '1003.17-OUT', '1003.18-OUT', '1003.23-OUT', '1003.24-OUT', '1003.25-OUT', '1003.26-OUT', '1003.29-OUT', '1003.30-OUT', '1020.4-OUT', '1020.13-OUT', '1020.14-OUT', '1020.15-OUT', 'DM-AIT-DO', 'DM-AIT-PH', 'DM-PP04-AO', 'DM-PP04-SV', 'DM-TWIT-04', 'DM-TWIT-05', 'GATEOPEN', 'PP04-SP-OUT', 'DM-HT01-D', 'DM-LCV01-MIS', 'DM-LSH01', 'DM-LSH02', 'DM-LSL01', 'DM-LSL02', 'DM-PCV01-DEV', 'DM-PP01B-D', 'DM-PP01B-R', 'DM-PP02-D', 'DM-PP02-R', 'DM-SS01-RM', 'DM-ST-SP', 'DM-SW01-ST', 'DM-SW02-SP', 'DM-SW03-EM', 'DM-FCV01-D', 'DM-FCV01-Z', 'DM-FCV02-D', 'DM-FCV02-Z', 'DM-FCV03-D', 'DM-FCV03-Z', 'DM-FT01', 'DM-FT02', 'DM-FT03', 'DM-LCV01-D', 'DM-LCV01-Z', 'DM-LIT01', 'DM-PCV01-D', 'DM-PCV01-Z', 'DM-PCV02-D', 'DM-PCV02-Z', 'DM-PIT01', 'DM-PIT02', 'DM-PWIT-03', 'DM-TIT01', 'DM-TIT02', 'DM-TWIT-03']
+    lines incl. header: 126001
+    first rows:
+                   Timestamp  DM-PP01-R    DM-FT01Z     DM-FT02Z     DM-FT03Z  1001.2-OUT  ...  DM-PIT01  DM-PIT02  DM-PWIT-03   DM-TIT01   DM-TIT02  DM-TWIT-03
+      0  2022-08-19 16:00:00          0  303.091888  1317.537842  1042.319580           0  ...  1.130066  1.470337    0.000116  32.675167  37.115479   27.999573
+      1  2022-08-19 16:00:01          0  306.071045  1315.305420  1044.551880           0  ...  1.130829  1.472626    0.000116  32.705688  37.130730   27.999573
+      2  2022-08-19 16:00:02          0  309.050598  1315.943237  1043.595215           0  ...  1.130829  1.469574    0.000116  32.690430  37.115479   27.999573
+
+== HAI/haiend-23.05/end-train4.csv  (180.19 MB)
+    sha256: b995dabac6321a34e5b69bdd01abec08f7f844dbdc489bdb5f9935a8da0b2038
+    columns (226): ['Timestamp', 'DM-PP01-R', 'DM-FT01Z', 'DM-FT02Z', 'DM-FT03Z', '1001.2-OUT', '1001.7-OUT1', '1001.7-OUT2', '1001.8-OUT', '1002.2-OUT', '1002.6-OUT', '1002.11-OUT1', '1002.11-OUT2', '1002.12-OUT', '1002.16-OUT1', '1002.16-OUT2', '1002.19-OUT', '1002.29-OUT', '1002.34-OUT', '1003.7-OUT', '1003.12-OUT1', '1003.12-OUT2', '1003.13-OUT', '1003.27-OUT', '1004.11-OUT1', '1004.11-OUT2', '1004.12-OUT1', '1004.12-OUT2', '1004.13-OUT', '1004.15-OUT1', '1004.15-OUT2', '1004.18-OUT1', '1004.18-OUT2', '1004.21-OUT', '1004.24-OUT', '1004.29-OUT', '1004.36-OUT', '1004.37-OUT', '1004.38-OUT', '1004.39-OUT', '1004.41-OUT', '1004.44-OUT', '1004.52-OUT', '1004.53-OUT', '1004.62-OUT', '1004.76-OUT', '1004.78-OUT', '1004.79-OUT', '1004.80-OUT', '1010.2-OUT', '1010.3-OUT', '1010.4-OUT', '1010.5-OUT1', '1010.5-OUT2', '1010.5-OUT3', '1010.5-OUT4', '1010.7-OUT', '1010.8-OUT', '1010.9-OUT', '1010.10-OUT', '1010.11-OUT', '1010.12-OUT1', '1010.12-OUT2', '1010.16-OUT', '1010.17-OUT', '1010.19-OUT', '1010.23-OUT', '1010.30-OUT', '1010.31-OUT', '1010.33-OUT', '1010.35-OUT', '1010.38-OUT', '1010.39-OUT', '1010.41-OUT', '1010.42-OUT', '1010.44-OUT', '1010.46-OUT', '1010.47-OUT', '1010.50-OUT', '1010.54-OUT', '1010.56-OUT', '1011.2-OUT', '1011.3-OUT', '1011.4-OUT', '1011.5-OUT1', '1011.5-OUT2', '1011.5-OUT3', '1011.5-OUT4', '1011.7-OUT', '1011.8-OUT', '1011.9-OUT', '1011.10-OUT', '1011.11-OUT', '1011.12-OUT1', '1011.12-OUT2', '1011.16-OUT', '1011.17-OUT', '1011.19-OUT', '1011.23-OUT', '1011.30-OUT', '1011.31-OUT', '1011.33-OUT', '1011.35-OUT', '1011.38-OUT', '1011.39-OUT', '1011.41-OUT', '1011.42-OUT', '1011.44-OUT', '1011.46-OUT', '1011.47-OUT', '1011.50-OUT', '1011.54-OUT', '1011.56-OUT', '1020.2-OUT', '1020.3-OUT', '1020.5-OUT1', '1020.5-OUT2', '1020.9-OUT', '1020.10-OUT', '1020.11-OUT', '1020.18-OUT', '1020.20-OUT', '1020.21-OUT', 'DM-CIP-1ST', 'DM-CIP-2ND', 'DM-CIPH-1ST', 'DM-CIPH-2ND', 'DM-CIPH-START', 'DM-CIPH-STEP1', 'DM-CIPH-STEP11', 'DM-PP01A-D', 'DM-CIP-START', 'DM-CIP-STEP1', 'DM-CIP-STEP11', 'DM-COOL-ON', 'DM-COOL-R', 'DM-LSH-03', 'DM-LSH-04', 'DM-LSL-04', 'DM-PIT01-HH', 'DM-PP04-D', 'DM-PP01A-R', 'DM-SOL01-D', 'DM-SOL02-D', 'DM-SOL03-D', 'DM-SOL04-D', 'DQ03-LCV01-D', 'DQ04-LCV01-DEV', '1001.5-OUT', '1001.9-OUT', '1001.13-OUT', '1001.14-OUT', '1001.15-OUT', '1001.16-OUT', '1001.17-OUT', '1001.20-OUT', '1002.7-OUT', '1002.8-OUT', '1002.9-OUT', '1002.14-OUT', '1002.15-OUT', '1002.20-OUT', '1002.21-OUT', '1002.30-OUT', '1002.31-OUT', '1003.5-OUT', '1003.10-OUT', '1003.11-OUT', '1003.17-OUT', '1003.18-OUT', '1003.23-OUT', '1003.24-OUT', '1003.25-OUT', '1003.26-OUT', '1003.29-OUT', '1003.30-OUT', '1020.4-OUT', '1020.13-OUT', '1020.14-OUT', '1020.15-OUT', 'DM-AIT-DO', 'DM-AIT-PH', 'DM-PP04-AO', 'DM-PP04-SV', 'DM-TWIT-04', 'DM-TWIT-05', 'GATEOPEN', 'PP04-SP-OUT', 'DM-HT01-D', 'DM-LCV01-MIS', 'DM-LSH01', 'DM-LSH02', 'DM-LSL01', 'DM-LSL02', 'DM-PCV01-DEV', 'DM-PP01B-D', 'DM-PP01B-R', 'DM-PP02-D', 'DM-PP02-R', 'DM-SS01-RM', 'DM-ST-SP', 'DM-SW01-ST', 'DM-SW02-SP', 'DM-SW03-EM', 'DM-FCV01-D', 'DM-FCV01-Z', 'DM-FCV02-D', 'DM-FCV02-Z', 'DM-FCV03-D', 'DM-FCV03-Z', 'DM-FT01', 'DM-FT02', 'DM-FT03', 'DM-LCV01-D', 'DM-LCV01-Z', 'DM-LIT01', 'DM-PCV01-D', 'DM-PCV01-Z', 'DM-PCV02-D', 'DM-PCV02-Z', 'DM-PIT01', 'DM-PIT02', 'DM-PWIT-03', 'DM-TIT01', 'DM-TIT02', 'DM-TWIT-03']
+    lines incl. header: 198001
+    first rows:
+                   Timestamp  DM-PP01-R    DM-FT01Z   DM-FT02Z    DM-FT03Z  1001.2-OUT  ...  DM-PIT01  DM-PIT02  DM-PWIT-03   DM-TIT01   DM-TIT02  DM-TWIT-03
+      0  2022-08-22 17:00:00          0  316.995117  28.998068  958.328247           0  ...  1.027069  0.369415    0.006183  33.041374  38.198853    29.13739
+      1  2022-08-22 17:00:01          0  317.988068  28.005140  959.197998           0  ...  1.027069  0.364075    0.006183  33.056637  38.183590    29.13739
+      2  2022-08-22 17:00:02          0  320.967590  28.005140  958.763062           0  ...  1.027832  0.373993    0.006183  33.041374  38.198853    29.13739
+
+== HAI/haiend-23.05/label-test1.csv  (1.24 MB)
+    sha256: eaf69edb9c5834bc393afd7bf658b5e408d34fd7bfc3261f80516765fb818fbc
+    columns (2): ['timestamp', 'label']
+    lines incl. header: 54001
+    first rows:
+                   timestamp  label
+      0  2022-08-12 16:00:01      0
+      1  2022-08-12 16:00:02      0
+      2  2022-08-12 16:00:03      0
+
+== HAI/haiend-23.05/label-test2.csv  (4.50 MB)
+    sha256: 8090c44981176e39b0f01a7126a80248ac0b93355c00f9db4d4e2f2106452b92
+    columns (2): ['timestamp', 'label']
+    lines incl. header: 230401
+    first rows:
+               timestamp  label
+      0  2022-08-17 0:00      0
+      1  2022-08-17 0:00      0
+      2  2022-08-17 0:00      0
+
+== HAI/haiend-23.05/summary_label1.txt  (0.00 MB)
+    sha256: 9d8fb32ee1e816c88f93c8d661f90a7736802582d3572a1e1ebd953783353da6
+    columns (82): ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52', 'Unnamed: 53', 'Unnamed: 54', 'Unnamed: 55', 'Unnamed: 56', 'Unnamed: 57', 'Unnamed: 58', 'Unnamed: 59', 'Unnamed: 60', 'Unnamed: 61', 'Unnamed: 62', 'Unnamed: 63', 'Unnamed: 64', 'Unnamed: 65', 'Unnamed: 66', 'Unnamed: 67', 'Unnamed: 68', 'Unnamed: 69', 'Unnamed: 70', 'Unnamed: 71', 'Unnamed: 72', 'Unnamed: 73', 'Unnamed: 74', 'Unnamed: 75', 'Unnamed: 76', 'Unnamed: 77', 'Unnamed: 78', 'Unnamed: 79', 'Unnamed: 80', 'Unnamed: 81']
+    lines incl. header: 31
+    first rows:
+                                                                                      Unnamed: 0  Unnamed: 1  Unnamed: 2  Unnamed: 3  Unnamed: 4  Unnamed: 5  ...  Unnamed: 76  Unnamed: 77  Unnamed: 78  Unnamed: 79  Unnamed: 80  Unnamed: 81
+      0  File Name\t: hai3/20220825_101225/test/split_label_220812_16_15_01_s081216_e081307.csv          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      1                                                                   File Size\t: 1.1800 MB         NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      2                                                                            Columns\t: 1          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+
+== HAI/haiend-23.05/summary_label2.txt  (0.00 MB)
+    sha256: b564024a105981415a81dd1b338a48ad7ad5be511849884232540f1a6550e5c1
+    columns (82): ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52', 'Unnamed: 53', 'Unnamed: 54', 'Unnamed: 55', 'Unnamed: 56', 'Unnamed: 57', 'Unnamed: 58', 'Unnamed: 59', 'Unnamed: 60', 'Unnamed: 61', 'Unnamed: 62', 'Unnamed: 63', 'Unnamed: 64', 'Unnamed: 65', 'Unnamed: 66', 'Unnamed: 67', 'Unnamed: 68', 'Unnamed: 69', 'Unnamed: 70', 'Unnamed: 71', 'Unnamed: 72', 'Unnamed: 73', 'Unnamed: 74', 'Unnamed: 75', 'Unnamed: 76', 'Unnamed: 77', 'Unnamed: 78', 'Unnamed: 79', 'Unnamed: 80', 'Unnamed: 81']
+    lines incl. header: 55
+    first rows:
+                                                                                      Unnamed: 0  Unnamed: 1  Unnamed: 2  Unnamed: 3  Unnamed: 4  Unnamed: 5  ...  Unnamed: 76  Unnamed: 77  Unnamed: 78  Unnamed: 79  Unnamed: 80  Unnamed: 81
+      0  File Name\t: hai3/20220825_101225/test/split_label_220817_00_64_01_s081700_e081916.csv          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      1                                                                   File Size\t: 5.0500 MB         NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN
+      2                                                                            Columns\t: 1          NaN         NaN         NaN         NaN         NaN  ...          NaN          NaN          NaN          NaN          NaN          NaN

@@ -16,3 +16,8 @@ D10 2026-11-03 Sampling rate conflict: Zenodo says 100 Hz, paper says 50 Hz. Res
 D11 2026-11-03 HAI 23.05 confirmed: 1 Hz, no gaps; train 4 files = 896,400 s (~10.4 days) normal; test 2 files = 284,400 s;
                52 attack segments (14 + 38), 56-2052 s each. 6 clean command/response pairs: P1_{FCV01,FCV02,FCV03,LCV01,PCV01,PCV02} D->Z,
                plus 7 controller setpoint outputs (x1001_05 ... x1003_24).
+D12 2026-11-03 QAPPD sampling rate = 100 Hz, measured from data (yaw 99.5-102.1 Hz, pitch 97.8-107.1 Hz); matches Zenodo, not the paper's 50 Hz.
+               ~30 min per file, cycle ~49 s (~37 cycles/file). Short anomalies 2-17 s (within one cycle); test_7 voltage anomaly 194 s.
+D13 2026-11-03 HAI 23.05: 52 attacks (14 + 38). summary_label2 header says 40 but lists 38; we use 38 (matches labels and README).
+               Licence stated as CC BY-SA 4.0 (README) and CC BY 4.0 (metadata); follow BY-SA for any derived release.
+               Attack targets must come from hai_dataset_technical_details.pdf before HAI attacks are used as probe tests.
