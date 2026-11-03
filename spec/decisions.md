@@ -23,3 +23,6 @@ D13 2026-11-03 HAI 23.05: 52 attacks (14 + 38). summary_label2 header says 40 bu
                Attack targets must come from hai_dataset_technical_details.pdf before HAI attacks are used as probe tests.
 D14 2026-11-03 HAI 23.05 attacks classified from technical PDF pp.31-32: 14 command-only (probe ground truth, spec/hai2305_command_attacks.csv),
                8 setpoint-only, 12 with sensor masking (excluded), 8 internal-logic (later), 10 combined (excluded). Decoy scope: P1 loops PC, FC, LC, TC, CC.
+D15 2026-11-03 All 14 command-attack onsets match PDF start times. Pre-window z-score invalid when tag constant (PP04); use training-range
+               normalisation. Short-term attacks show valve position lagging demand (A105 8.2 vs 2.6, A218 5.8 vs 1.2 sd): real dynamics a decoy must
+               reproduce. haiend PP04-SP-OUT available -> A213, A234 secondary setpoint probes. Inclusion rule fixed in PROTOCOL 3.3 before training.
