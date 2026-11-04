@@ -10,9 +10,11 @@ Stage 3a - gate before any held-out value is read.
       variants, A3 layered) within 0.01; stochastic B4-B7 within max(2.0, 3 x sd of the 5 recorded seeds, ddof=1).
       B8-L (B8 + C2/C3, D33) has no Phase 2 record: its validation FIT is computed and recorded.
   --smoke: seed 0 only, writes nothing. Full run: all seeds, writes results/phase3/stage3a.json.
+Stage det - physics-rule detector (D35) rebuilt and gated on training/validation data only (D38).
+Stage 3b - held-out window positions (E2-E5), P-syn probe specs (D39), detector rates on real held-out windows.
 New Phase 3 code lives in this script or new modules; Phase 2 modules stay frozen.
 """
-import argparse, json, platform, subprocess, sys, time
+import argparse, csv, json, math, platform, re, subprocess, sys, time
 from pathlib import Path
 
 import numpy as np
@@ -318,14 +320,14 @@ D35_CHECK = {  # D35 text (val R2, k, gains, false alarms, kept) + D35 check-run
     "qappd": {"k": {"PitchDot": 10, "YawDot": 10}, "gain": {"PitchDot": .998, "YawDot": 1.000},
               "va_r2": {"PitchDot": .969, "YawDot": .994}, "va_fa": {"PitchDot": .005, "YawDot": .000},
               "kept": ["PitchDot", "YawDot"]}}
-DET_TOL = {"r2": 0.002, "gain": 0.002, "fa": 0.002, "thr_rel": 0.01}
+D35_TOL = {"r2": 0.002, "gain": 0.002, "fa": 0.002, "thr_rel": 0.01}  # detector gate (D38); DET_TOL above is 3a
 
 
 def detector_gate(cfg, prov, smoke):
     out = OUT / "detector.json"
     if not smoke and out.exists():
         stop(f"{out.relative_to(ROOT)} exists; detector gate already passed")
-    res, fails = {"stage": "det", "provenance": prov, "check": D35_CHECK, "tolerance": DET_TOL, "plants": {}}, []
+    res, fails = {"stage": "det", "provenance": prov, "check": D35_CHECK, "tolerance": D35_TOL, "plants": {}}, []
     for pn in PLANTS:
         P = data.load_plant(cfg, pn)
         det = detector.fit(P, int(cfg[pn]["fs_hz"]))
@@ -343,11 +345,11 @@ def detector_gate(cfg, prov, smoke):
                     bad.append(f"{name} {got:.4g} vs D35 {want:.4g}")
             if r[key] != ck[key][t]:
                 bad.append(f"{key} {r[key]} vs D35 {ck[key][t]}")
-            cmp("train R2", r["tr_r2"], ck.get("tr_r2", {}).get(t), DET_TOL["r2"])
-            cmp("val R2", r["va_r2"], ck["va_r2"][t], DET_TOL["r2"])
-            cmp("threshold", r["thr"], ck.get("thr", {}).get(t), DET_TOL["thr_rel"], rel=True)
-            cmp("gain", r["coef"][0], ck.get("gain", {}).get(t), DET_TOL["gain"])
-            cmp("val false alarm", r["va_fa"], ck["va_fa"].get(t), DET_TOL["fa"])
+            cmp("train R2", r["tr_r2"], ck.get("tr_r2", {}).get(t), D35_TOL["r2"])
+            cmp("val R2", r["va_r2"], ck["va_r2"][t], D35_TOL["r2"])
+            cmp("threshold", r["thr"], ck.get("thr", {}).get(t), D35_TOL["thr_rel"], rel=True)
+            cmp("gain", r["coef"][0], ck.get("gain", {}).get(t), D35_TOL["gain"])
+            cmp("val false alarm", r["va_fa"], ck["va_fa"].get(t), D35_TOL["fa"])
             g = f"  gain {r['coef'][0]:.3f}" if r["kind"] == "rate" else ""
             say(f"  {t:9s} {key} {r[key]:>2}{g}  tr R2 {r['tr_r2']:.3f}  va R2 {r['va_r2']:.3f}  thr {r['thr']:.4g}"
                 f"  va FA {r['va_fa']:.4f}  {'KEEP' if r['kept'] else 'drop'}  {'OK' if not bad else 'MISMATCH: ' + '; '.join(bad)}")
@@ -368,9 +370,281 @@ def detector_gate(cfg, prov, smoke):
     say("SMOKE DETECTOR GATE PASSED" if smoke else "DETECTOR GATE PASSED -> results/phase3/detector.json")
 
 
+# ---------------------------------------------------------------- stage 3b: held-out windows (E2-E5), real-data detector rates
+EDGE_S = 600                                    # PROTOCOL 3.1 / E4: first and last 600 s of hai-test1/2
+PULSE_S = {"hai": 30.0, "qappd": 0.5}           # E5
+VOLT_LIM = 24.0                                 # D34
+PSYN_SEED, PSYN_N, AMP = 33, 20, 0.25           # E5
+OOR = (("hi", 0.10), ("hi", 0.25), ("lo", 0.10), ("lo", 0.25))
+OOC_ATTACKS = ["A103", "A105", "A110", "A205"]  # D27
+PUMP_MIN = 0.0                                  # D39: pump command cannot be negative; no documented upper limit
+D39_OOR_EXPECT = {"P1_FCV01D": 20, "P1_LCV01D": 60, "P1_PP04": 40}  # D39: distinct out-of-range probes
+
+
+def segments(y):                                # identical to scripts/01_preprocess.py
+    d = np.diff(np.r_[0, np.asarray(y, np.int8), 0])
+    return np.where(d == 1)[0], np.where(d == -1)[0]
+
+
+def passed(name):
+    j = rjson(OUT / name)
+    pv = j.get("provenance", {})
+    if j.get("gate") != "PASS" or pv.get("dirty") or pv.get("smoke"):
+        stop(f"results/phase3/{name} is not a clean passed gate")
+    return j
+
+
+def heldout(cfg, P, folder, f, man):
+    p = ROOT / cfg["paths"]["processed"] / folder / f"{f}.npz"
+    key = f"{folder}/{f}"
+    if key not in man:
+        stop(f"{key} is not in the stage 3a held-out manifest")
+    if data.file_sha(p) != man[key]["sha256"]:
+        stop(f"{key}: sha256 differs from the stage 3a manifest")
+    with np.load(p, allow_pickle=False) as z:
+        cols = list(z["columns"].astype(str))
+        X = z["X"][:, [cols.index(c) for c in P.info["columns"]]].astype(np.float64)
+        rec = {"X": X, "y": z["y"].astype(np.int8), "normal": z["normal"].astype(bool), "fs": int(z["fs"]),
+               "t": z["t"].astype(np.int64) if "t" in z.files else None}
+    if not np.isfinite(X).all():
+        stop(f"{key}: non-finite values")
+    return rec
+
+
+def normal_starts(rec, L, stride, edge, key):
+    v = rec["normal"].copy()
+    if edge:
+        v[:edge] = False
+        v[-edge:] = False
+    bad = np.concatenate([[0], np.cumsum(~v)])
+    s = np.arange(0, len(v) - L + 1, stride)
+    s = s[(bad[s + L] - bad[s]) == 0]
+    if len(s) == 0:
+        stop(f"{key}: no normal windows")
+    return s
+
+
+def det_hits(det, cols, X, starts, L):
+    thr = np.array([r["thr"] for r in det["rules"]])
+    starts = np.asarray(starts, np.int64)
+    out = [detector.window_max(det, cols, np.stack([X[s:s + L] for s in starts[i:i + 512]])) > thr
+           for i in range(0, len(starts), 512)]
+    return np.concatenate(out)
+
+
+def rate(h):
+    return {"windows": int(len(h)), "rate": float(h.any(1).mean()), "per_rule": h.mean(0).tolist()}
+
+
+def tiles(rec, s0, e0, W, H, edge, key):
+    L = W + H
+    st = s0 - W + H * np.arange(int(math.ceil((e0 - s0) / H)))
+    if st[0] < edge or st[-1] + L > len(rec["y"]) - edge:
+        stop(f"{key}: tiled windows leave the evaluable part of the file")
+    sid = np.zeros(len(rec["y"]), np.int64)
+    for j, (a, b) in enumerate(zip(*segments(rec["y"])), 1):
+        sid[a:b] = j
+    for s in st:
+        other = set(np.unique(sid[s:s + L]).tolist()) - {0, int(sid[s0])}
+        if other:
+            stop(f"{key}: window at row {s} contains another labelled segment {sorted(other)}")
+    return st
+
+
+def p_real(P, recs, edge):
+    att = {r["attack"]: r for r in csv.DictReader(open(ROOT / "spec/hai2305_command_attacks.csv"))}
+    inc = [r for r in csv.DictReader(open(ROOT / "results/phase1/probe_inclusion.csv")) if r["included"] == "True"]
+    if len(inc) != 10:
+        stop(f"probe_inclusion.csv lists {len(inc)} included attacks; protocol 3.3 has 10")
+    out = []
+    for r in inc:
+        a = att.get(r["attack"])
+        if a is None or a["file"] != r["file"] or a["command"] != r["command"]:
+            stop(f"{r['attack']}: attack list and probe_inclusion.csv disagree")
+        if a["response"] not in P.resp_names:
+            stop(f"{r['attack']}: response tag {a['response']} is not a modelled response")
+        f = f"hai-{r['file']}"
+        rec = recs[f]
+        st, en = segments(rec["y"])
+        k = int(a["segment"]) - 1
+        if not 0 <= k < len(st):
+            stop(f"{r['attack']}: segment {a['segment']} not in {f} ({len(st)} segments)")
+        s0, e0 = int(st[k]), int(en[k])
+        onset = int(np.datetime64(r["onset"].replace(" ", "T"), "s").astype(np.int64))
+        if int(rec["t"][s0]) != onset or e0 - s0 != int(r["duration_s"]) * rec["fs"]:
+            stop(f"{r['attack']}: segment {k + 1} starts {int(rec['t'][s0])} with {e0 - s0} rows; "
+                 f"probe_inclusion.csv says {onset} and {r['duration_s']} s")
+        out.append({"attack": r["attack"], "file": f, "segment": k + 1, "onset_row": s0, "end_row": e0,
+                    "command": a["command"], "response": a["response"], "out_of_coverage": r["attack"] in OOC_ATTACKS,
+                    "starts": tiles(rec, s0, e0, P.W, P.H, edge, r["attack"]).tolist()})
+    if [len(p["starts"]) for p in out if p["attack"] == "A207"] != [3]:
+        stop("A207 must tile into 3 windows (E3)")
+    if sorted(p["attack"] for p in out if p["out_of_coverage"]) != OOC_ATTACKS:
+        stop("out-of-coverage attacks differ from D27")
+    return out
+
+
+def p_anom(P, rec):
+    st, en = segments(rec["y"])
+    rows = [r for r in csv.DictReader(open(ROOT / "results/phase1/qappd_anomaly_segments.csv")) if r["run"] == "test_7"]
+    if len(st) != 1 or len(rows) != 1:
+        stop(f"test_7: {len(st)} labelled segments, {len(rows)} in qappd_anomaly_segments.csv; expected 1 and 1")
+    s0, e0, fs = int(st[0]), int(en[0]), rec["fs"]
+    if s0 != round(float(rows[0]["start_s"]) * fs) or e0 - s0 != round(float(rows[0]["length_s"]) * fs):
+        stop(f"test_7: labelled rows {s0}..{e0} disagree with Phase 1 start_s/length_s")
+    return {"file": "test_7", "onset_row": s0, "end_row": e0, "starts": tiles(rec, s0, e0, P.W, P.H, 0, "test_7").tolist()}
+
+
+def probe_trace(kind, c0, amp, H, npulse):
+    k = np.arange(H)
+    if kind == "step":
+        return np.full(H, c0 + amp)
+    if kind == "pulse":
+        return np.where(k < npulse, c0 + amp, c0)
+    return c0 + amp * (k + 1) / H          # ramp
+
+
+def p_syn(pn, P, pool, recs, fs):
+    lo = np.min([X.min(0) for X, _ in P.train_raw], 0).astype(np.float64)
+    hi = np.max([X.max(0) for X, _ in P.train_raw], 0).astype(np.float64)
+    base = np.sort(np.random.default_rng(PSYN_SEED).choice(len(pool), PSYN_N, replace=False))
+    W, H, npulse = P.W, P.H, int(round(PULSE_S[pn] * fs))
+    probes, counts = [], {}
+    for j in range(P.nc):
+        name, r = P.info["columns"][j], hi[j] - lo[j]
+        if re.fullmatch(r"P1_[A-Z]CV\d+D", name):
+            lim = (0.0, 100.0)
+        elif name.startswith("Voltage"):
+            lim = (-VOLT_LIM, VOLT_LIM)
+        elif name == "P1_PP04":
+            lim = (PUMP_MIN, None)
+        else:
+            stop(f"{pn}: command {name} has no physical-limit rule (D34/D39)")
+        c = counts[name] = {"lo": lo[j], "hi": hi[j], "limit": lim, "in_kept": 0, "in_dropped": 0, "oor_kept": 0,
+                            "oor_dropped": 0, "oor_duplicate": 0, "oor_clipped": 0, "oor_targets": []}
+        seen = []                                   # D39: distinct out-of-range command sequences only
+        for side, frac in OOR:
+            raw = hi[j] + frac * r if side == "hi" else lo[j] - frac * r
+            tgt = raw if lim[0] is None else max(raw, lim[0])
+            tgt = tgt if lim[1] is None else min(tgt, lim[1])
+            c["oor_targets"].append({"probe": f"{side}+{int(frac * 100)}%", "raw": raw, "target": tgt,
+                                     "clipped": tgt != raw, "kept": not (lo[j] <= tgt <= hi[j]), "duplicate_of": None})
+            o = c["oor_targets"][-1]
+            if o["kept"]:
+                u = np.full(H, o["target"])             # out-of-range probe holds the target over the horizon
+                dup = [q for q, v in seen if np.array_equal(v, u)]
+                if dup:
+                    o["kept"], o["duplicate_of"] = False, dup[0]
+                else:
+                    seen.append((o["probe"], u))
+        for b in base:
+            f, s = pool[b]
+            c0 = float(recs[f]["X"][s + W - 1, j])
+            for d in (1, -1):
+                for kind in ("step", "pulse", "ramp"):
+                    u = probe_trace(kind, c0, d * AMP * r, H, npulse)
+                    if u.min() < lo[j] or u.max() > hi[j]:
+                        c["in_dropped"] += 1
+                        continue
+                    c["in_kept"] += 1
+                    probes.append({"base": int(b), "file": f, "start": int(s), "tag": name, "col": j, "set": "in",
+                                   "kind": kind, "sign": d, "c0": c0, "amp": d * AMP * r})
+            for o in c["oor_targets"]:
+                if not o["kept"]:
+                    c["oor_duplicate" if o["duplicate_of"] else "oor_dropped"] += 1
+                    continue
+                c["oor_kept"] += 1
+                c["oor_clipped"] += int(o["clipped"])
+                probes.append({"base": int(b), "file": f, "start": int(s), "tag": name, "col": j, "set": "oor",
+                               "kind": "step", "probe": o["probe"], "c0": c0, "target": o["target"]})
+    return {"seed": PSYN_SEED, "base": [list(pool[b]) for b in base], "pulse_samples": npulse,
+            "rule": "attacker holds the command tag over the horizon from its last warm-up value c0",
+            "counts": counts, "probes": probes}
+
+
+def stage3b(cfg, prov, smoke):
+    out = OUT / "stage3b.json"
+    if not smoke and out.exists():
+        stop(f"{out.relative_to(ROOT)} exists; stage 3b already done")
+    man = passed("stage3a.json")["heldout_manifest"]
+    dets = passed("detector.json")["plants"]
+    res = {"stage": "3b", "provenance": prov, "plants": {}}
+    for pn in PLANTS:
+        P = data.load_plant(cfg, pn)
+        fs = int(cfg[pn]["fs_hz"])
+        cols, L, stride = list(P.info["columns"]), P.W + P.H, int(P.info["stride"])
+        det = dets[pn]["detector"]
+        where = same(jsonable(detector.fit(P, fs)), det, "detector")
+        if where:
+            stop(f"{pn}: refitted detector differs from detector.json at {where}")
+        if pn == "hai":
+            files, folder, edge = list(cfg["hai"]["test"]), "hai", EDGE_S * fs
+        else:
+            files, folder, edge = [f"train_{i}" for i in cfg["qappd"]["heldout_normal"]], "qappd", 0
+        recs = {f: heldout(cfg, P, folder, f, man) for f in files}
+        if any(r["fs"] != fs for r in recs.values()):
+            stop(f"{pn}: held-out sampling rate differs from {fs} Hz")
+        pool, per_file, hits = [], {}, []
+        for f in files:
+            s = normal_starts(recs[f], L, stride, edge, f)
+            pool += [(f, int(i)) for i in s]
+            h = det_hits(det, cols, recs[f]["X"], s, L)
+            hits.append(h)
+            per_file[f] = rate(h)
+        R = {"rules": [r["target"] for r in det["rules"]], "W": P.W, "H": P.H, "stride": stride, "edge_rows": edge,
+             "normal": {"starts": [list(x) for x in pool], "per_file": per_file, "false_alarm": rate(np.concatenate(hits))}}
+        say(f"== {pn} (rules {R['rules']}) ==")
+        for f, v in per_file.items():
+            say(f"  normal   {f:10s} windows {v['windows']:5d}  detector false alarm {v['rate']:.4f}")
+        if pn == "hai":
+            R["p_real"] = p_real(P, recs, edge)
+            for p in R["p_real"]:
+                p["detector"] = rate(det_hits(det, cols, recs[p["file"]]["X"], p["starts"], L))
+                say(f"  P-real   {p['attack']} {p['file']} seg {p['segment']:2d} rows {p['onset_row']}+{p['end_row'] - p['onset_row']}"
+                    f"  windows {len(p['starts'])}  {p['command']}->{p['response']}{'  OOC' if p['out_of_coverage'] else ''}"
+                    f"  detector {p['detector']['rate']:.2f}  per rule {[round(x, 2) for x in p['detector']['per_rule']]}")
+            cross, ch, cpf = [], [], {}
+            for f in cfg["hai_crosstime"]["files"]:
+                rc = heldout(cfg, P, "hai2204", f, man)
+                s = normal_starts(rc, L, stride, 0, f"hai2204/{f}")
+                cross += [[f, int(i)] for i in s]
+                ch.append(det_hits(det, cols, rc["X"], s, L))
+                cpf[f] = rate(ch[-1])
+                del rc
+            R["crosstime"] = {"starts": cross, "per_file": cpf, "false_alarm": rate(np.concatenate(ch))}
+            fa = R["crosstime"]["false_alarm"]
+            say(f"  crosstime HAI 22.04 windows {len(cross)}  detector false alarm {fa['rate']:.4f}  per rule "
+                + ", ".join(f"{t} {v:.4f}" for t, v in zip(R["rules"], fa["per_rule"])))
+            for f, v in cpf.items():
+                say(f"    22.04 {f:7s} windows {v['windows']:5d}  false alarm {v['rate']:.4f}  per rule "
+                    + ", ".join(f"{x:.4f}" for x in v["per_rule"]))
+        else:
+            rc = heldout(cfg, P, "qappd", "test_7", man)
+            R["p_anom"] = p_anom(P, rc)
+            R["p_anom"]["detector"] = rate(det_hits(det, cols, rc["X"], R["p_anom"]["starts"], L))
+            pa = R["p_anom"]
+            say(f"  P-anom   test_7 rows {pa['onset_row']}+{pa['end_row'] - pa['onset_row']}  windows {len(pa['starts'])}"
+                f"  detector {pa['detector']['rate']:.2f}")
+        R["p_syn"] = ps = p_syn(pn, P, pool, recs, fs)
+        say(f"  P-syn    {PSYN_N} base windows (seed {PSYN_SEED}) from {len(pool)} normal windows; pulse {ps['pulse_samples']} samples")
+        for name, c in ps["counts"].items():
+            t = ", ".join(f"{o['probe']} {o['target']:.4g}{' (clipped)' if o['clipped'] else ''}{' DUPLICATE of ' + o['duplicate_of'] if o['duplicate_of'] else '' if o['kept'] else ' DROPPED'}"
+                          for o in c["oor_targets"])
+            say(f"    {name:10s} train {c['lo']:.4g}..{c['hi']:.4g}  in-range kept {c['in_kept']}/{c['in_kept'] + c['in_dropped']}"
+                f"  out-of-range kept {c['oor_kept']} (duplicates removed {c['oor_duplicate']})  [{t}]")
+        if pn == "hai":
+            got = {k: ps["counts"][k]["oor_kept"] for k in D39_OOR_EXPECT}
+            if got != D39_OOR_EXPECT:
+                stop(f"P-syn out-of-range counts {got} != D39 {D39_OOR_EXPECT}")
+        res["plants"][pn] = R
+    if not smoke:
+        wjson(out, res)
+    say("SMOKE 3b PASSED (nothing written)" if smoke else "STAGE 3b DONE -> results/phase3/stage3b.json")
+
+
 def main():
     ap = argparse.ArgumentParser(description="Phase 3 held-out evaluation")
-    ap.add_argument("--stage", required=True, choices=["3a", "det"])
+    ap.add_argument("--stage", required=True, choices=["3a", "det", "3b"])
     ap.add_argument("--smoke", action="store_true", help="seed 0 only; writes nothing")
     a = ap.parse_args()
     t_all = time.time()
@@ -381,6 +655,8 @@ def main():
     cfg = data.load_cfg()
     if a.stage == "det":
         return detector_gate(cfg, prov, a.smoke)
+    if a.stage == "3b":
+        return stage3b(cfg, prov, a.smoke)
     T = cfg["train"]
     seeds_all = [int(T["seed_select"])] + [int(s) for s in T["seeds_final"]]
     run_seeds = seeds_all[:1] if a.smoke else seeds_all
