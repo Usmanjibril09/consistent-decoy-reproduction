@@ -28,7 +28,9 @@ def fit(P, config):
             phi=np.column_stack([raw[:,i],raw[:,w],np.ones(len(raw))])
             coef=np.linalg.lstsq(phi,raw[:,v],rcond=None)[0]
             if coef[0]<=0 or coef[1]<=0:raise ValueError(f'QAPPD motor {k}: unexpected resistance/back-EMF signs {coef}')
-            motors.append({'voltage':v,'current':i-ncu,'speed':w-ncu,'R':float(coef[0]),'k':float(coef[1]),'c':float(coef[2])})
+            rel=(raw[:,v]-coef[1]*raw[:,w]-coef[2])/coef[0]
+            band=float(np.quantile(np.abs(raw[:,i]-rel),.999))
+            motors.append({'voltage':v,'current':i-ncu,'speed':w-ncu,'R':float(coef[0]),'k':float(coef[1]),'c':float(coef[2]),'band':band})
     result={'mu':mu.tolist(),'sd':sd.tolist(),'lo':lo.tolist(),'hi':hi.tolist(),'rates':rates.tolist(),
             'valves':valves,'motors':motors,'config':config,'ncu':ncu,'nc':P.nc,'W':P.W}
     # Audit local range/rate rules on true adjacent training samples, not accumulated generated paths.
@@ -36,6 +38,13 @@ def fit(P, config):
     changed=np.abs(actual-clipped)>1e-5
     result['training_limit_change_per_tag']=dict(zip(P.resp_names,changed.mean(0).tolist()))
     if changed.mean(0).max()>=.05:raise AssertionError('C2 range/rate rules change >=5% of a real training tag')
+    if motors:
+        full=local_limit(result,before[:,ncu:],actual,after[:,:ncu])
+        result['training_motor_change']={}
+        for p in motors:
+            fr=float((np.abs(full[:,p['current']]-actual[:,p['current']])>1e-5).mean())
+            result['training_motor_change'][P.resp_names[p['current']]]=fr
+            if fr>=.01:raise AssertionError(f'D32: full C2 changes {fr:.4f} of real training {P.resp_names[p["current"]]} (>=1%)')
     return result
 
 
@@ -54,9 +63,10 @@ def local_limit(c,prev,y,u,limits_only=False):
         else:cap=rate[j]
         y[...,j]=prev[...,j]+np.clip(y[...,j]-prev[...,j],-cap,cap)
     if not limits_only:
-        # Algebraic relation takes precedence over generic rate/range clips for current.
+        # D32: keep predicted current unless outside the algebraic relation's training tolerance band.
         for p in c['motors']:
-            y[...,p['current']]=(u[...,p['voltage']]-p['k']*y[...,p['speed']]-p['c'])/p['R']
+            rel=(u[...,p['voltage']]-p['k']*y[...,p['speed']]-p['c'])/p['R']
+            y[...,p['current']]=np.clip(y[...,p['current']],rel-p['band'],rel+p['band'])
     return y
 
 

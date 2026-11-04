@@ -231,6 +231,74 @@ def build_layers(P,T,out,dev,smoke,include_a3=True):
     say(f'{P.name}: Full/A1/A2/A3/A4/A5 layers saved; training coverage and limits checks passed')
 
 
+def relayer(src, dst, dev):
+    """D32: recompute C2/C3 layer variants from saved C1/A3 weights (no training). Source folders are read-only."""
+    cfg = data.load_cfg(); T = dict(cfg["train"])
+    if subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True).strip():
+        raise SystemExit("STOP: --relayer needs a clean git tree")
+    commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+    src, dst = Path(src).resolve(), Path(dst).resolve()
+    if dst.exists():
+        raise SystemExit(f"STOP: {dst} exists; choose a new folder")
+    seeds = [T["seed_select"]] + list(T["seeds_final"])
+    summary, lines = {"commit": commit, "config_sha12": data.cfg_hash(), "source": str(src), "plants": {}}, []
+    for pn in ("hai", "qappd"):
+        P = data.load_plant(cfg, pn)
+        sel = json.loads((src / pn / "C1" / "selection.json").read_text()); hp, k = sel["hp"], sel["best"]
+        ident = json.loads((src / pn / "C1" / f"cfg{k:02d}_seed0" / "identity.json").read_text())
+        kf = ident.get("files")
+        if not kf:
+            raise SystemExit(f"STOP: {pn} identity.json has no 'files' record")
+        for f, i in P.info["files"].items():
+            if kf.get(f, {}).get("sha256") != i["sha256"]:
+                raise SystemExit(f"STOP: {pn}/{f} differs from the data used on Kaggle")
+        c = constraints.fit(P, T["c2"])
+        if np.any(constraints.coverage(c, P.tr) > 0):
+            raise AssertionError("C3 activated on training windows")
+        grey = json.loads((src / pn / "B3" / "parameters.json").read_text())
+        old = json.loads((src / pn / "layers" / "validation.json").read_text())
+        y = P.va[:, P.W:, P.nc + P.ne:]
+        rep, maxdev = {}, 0.0
+        for base in ("C1", "A3"):
+            rep[base] = {}
+            for sd in seeds:
+                root = src / pn / base / f"cfg{k:02d}_seed{sd}"
+                m = models.build(base, P, hp).to(dev)
+                m.load_state_dict(torch.load(root / "model.pt", map_location=dev, weights_only=True))
+                pred = models.predict(m, P.va, dev)
+                rec = json.loads((root / "done.json").read_text())["val_fit"]
+                got = metrics.fit_percent(y, pred)[1]
+                maxdev = max(maxdev, abs(got - rec))
+                if abs(got - rec) > 0.01:
+                    raise AssertionError(f"{pn} {base} seed {sd}: reloaded {got:.4f} != recorded {rec:.4f}")
+                res = {}
+                for v in (["Full", "A1", "A2", "A4", "A5"] if base == "C1" else ["A3"]):
+                    yh = constraints.apply(c, grey, P.va, pred, v)
+                    if not np.isfinite(yh).all():
+                        raise AssertionError(f"non-finite {v} output")
+                    per, mean = metrics.fit_percent(y, yh)
+                    res[v] = {"val_fit": mean, "per_tag": dict(zip(P.resp_names, per.tolist()))}
+                rep[base][str(sd)] = res
+        wjson(dst / pn / "layers" / "parameters.json", c)
+        wjson(dst / pn / "layers" / "validation.json", rep)
+        cov = float((constraints.coverage(c, P.va) > 0).mean())
+        ps = {"reload_max_dev": maxdev, "val_windows_c3_active": cov, "motor_bands": {P.resp_names[mm["current"]]: mm["band"] for mm in c["motors"]},
+              "training_motor_change": c.get("training_motor_change", {}), "variants": {}}
+        for base, vs in rep.items():
+            for v in vs["0"]:
+                new = [vs[str(sd)][v]["val_fit"] for sd in seeds]
+                od = [old[base][str(sd)][v]["val_fit"] for sd in seeds]
+                if pn == "hai" and max(abs(a - b) for a, b in zip(new, od)) > 0.01:
+                    raise AssertionError(f"HAI {v} changed by D32 (no motors on HAI): {od} -> {new}")
+                ps["variants"][v] = {"new_mean": float(np.mean(new)), "new_sd": float(np.std(new, ddof=1)), "old_mean": float(np.mean(od))}
+                lines.append(f"{pn:6s} {v:5s} new {np.mean(new):6.2f} +- {np.std(new, ddof=1):.2f} | old {np.mean(od):6.2f}")
+        lines.append(f"{pn:6s} reload max deviation {maxdev:.5f} FIT | val windows with C3 active {cov:.4f}")
+        summary["plants"][pn] = ps
+    wjson(dst / "relayer_summary.json", summary)
+    (dst / "relayer_summary.txt").write_text("\n".join(lines) + "\n")
+    say("\n".join(lines)); say(f"RELAYER DONE -> {dst}")
+
+
 def selftest(P, T, out, dev):
     with tempfile.TemporaryDirectory(prefix="decoy-selftest-") as tmp:
         _selftest(P, T, Path(tmp), dev)
@@ -322,7 +390,11 @@ def main():
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--out", default=None)
     ap.add_argument("--device", default="auto")
+    ap.add_argument("--relayer", nargs=2, metavar=("SRC", "DST"), help="D32: recompute layer variants from saved weights; no training")
     args = ap.parse_args()
+    if args.relayer:
+        relayer(*args.relayer, torch.device('cpu'))
+        return
     cfg = data.load_cfg()
     if args.export_kaggle:
         export_kaggle(Path(args.export_kaggle), cfg); return
