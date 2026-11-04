@@ -1,0 +1,76 @@
+# Phase 3 stage 3d settings (D42). Fixed before any decoy output is scored.
+# Separate from experiment.toml so the training config hash 59a11b235108 stays valid.
+
+[input]
+horizon_only = true            # classifiers and SimProcess see the free-run horizon only
+response_only = true           # response tags only (E2 convention)
+columns_by_name = true         # real horizon = X[:, warm:, response columns] matched by name
+cast_float32 = ["B2"]          # B2 stored float64; cast before any classifier/feature step
+fit_in_float64 = true          # FIT computed in float64 for every method (Phase 2 path)
+
+[split]
+order_hai = ["hai-test1", "hai-test2"]
+order_qappd = ["train_9", "train_10"]
+train_fraction = 0.5           # first half (time order) trains, second half tests
+pair_same_half = true          # real window i and decoy window i never separated
+scaler_fit = "train_half"
+save_per_window_predictions = true
+
+[bootstrap]
+block_s_hai = 3600
+block_s_qappd = 60
+resamples = 10000
+seed = 4242
+
+[simprocess]
+repo = "https://github.com/donadelden/SimProcess"
+commit = "7533f59e94e9f54d8e3f151cc53a02a5c6146b6f"
+classifier = "random_forest"   # protocol; RF hyperparameters copied from Discriminator/simprocess/ml.py at commit
+noise = "kalman"
+kalman_q = 1e-5
+kalman_r = 1e-1
+window = 20                    # repository default; paper section 5.2.2 value not retrieved
+overlap = 0.8
+eps = 0.3
+filter_scope = "all_tags"
+n_features = 11
+smote = false                  # classes paired and balanced
+report_filter_pass_rate = true
+m2b_plants = ["hai"]           # QAPPD: M2b not applicable (filter passes 0.0000 of training windows)
+filter_hai = true
+filter_qappd = false           # M2 on QAPPD: tsfresh + RF without the filter (labelled adaptation)
+
+[yoon]
+code = "https://github.com/jsyoon0823/TimeGAN/blob/master/metrics/discriminative_metrics.py"
+cell = "gru"
+layers = 2                     # protocol; official code uses 1 (noted)
+hidden = "dim_div_2"
+iterations = 2000
+batch = 128
+threshold = 0.5
+score = "abs(acc-0.5)"
+
+[minirocket]
+implementation = "sktime 1.2.0 MiniRocketMultivariate"
+num_kernels = 10000
+classifier = "RidgeClassifierCV"
+alphas = "logspace(-3,3,10)"
+
+[context_fid]
+encoder = "ts2vec"
+repo = "https://github.com/zhihanyue/ts2vec"
+commit = "b0088e14a99706c05451316dc6db8d3da9351163"
+train_on = "training_windows_real_only"
+output_dims = 320
+seed = 0
+
+[p_real]
+units = 10
+pool_tiles = true              # A207: 3 tiles pooled into one FIT (D36 one-set rule)
+
+[crosstime]
+fit_from_sums = true           # SSE + real_sum + real_sumsq
+verify_on = "normal"           # formula checked against full outputs before use
+
+[latency]
+step = "last"                  # B8 has no cache of earlier steps; worst case reported
