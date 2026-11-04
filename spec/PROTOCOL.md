@@ -1,4 +1,4 @@
-# PROTOCOL v1.4 (D33 Phase 3 evaluation specification; frozen before any held-out data is opened)
+# PROTOCOL v1.5 (D33 Phase 3 specification, amended by D36; frozen before any held-out data is opened)
 
 ## 1 Question
 Can a lightweight learned industrial decoy remain behaviourally consistent when an attacker actively changes its commands
@@ -64,7 +64,8 @@ Secondary: physics-rule detector detection rate on P-syn; predictive score TSTR 
 DTW; held-out normal FIT%; per-step latency; model size.
 
 ## 9 Hypotheses (each tested and reported separately; no combined pass condition)
-H1 Full method has higher M1 than every baseline on P-real.
+H1 Full method has higher M1 than every baseline on P-real. M1 on P-real = FIT of the attack's response tag listed in
+   spec/hai2305_command_attacks.csv (fixed D14, before training); all-tag FIT reported as secondary (D36).
 H2 Full method has lower M2 than the best baseline, on each plant. Best baseline = lowest mean held-out M2 among B1-B9
    (choosing the strongest opponent after the fact can only work against H2).
 H3 On out-of-range P-syn probes, removing C3 (A2 vs Full) raises the physics-rule detection rate, on each plant. M1 of A2 vs Full
@@ -107,7 +108,8 @@ E2 Decoy window = recorded command and exogenous traces plus the method's respon
    (HAI 60 + 300 s, QAPPD 1 + 5 s, as in training). Events longer than H are tiled into consecutive windows, each re-warmed from real
    data; re-synchronisation every H is reported as a limitation. B4-B7 contribute their response channels only.
 E3 P-real: the 10 attacks of 3.3; first window starts W before onset, tiled to cover the attack (A207: 3 windows); no window may
-   contain another attack. M1 per attack over its windows.
+   contain another attack. M1 per attack = response-tag FIT over its windows scored as one
+   set, mean over training seeds (D36). Held-out normal, cross-time and P-anom FIT: all response tags, pooled over windows.
 E4 P-anom: QAPPD test_7 anomaly segment, tiled as in E3. Held-out normal FIT: normal windows of hai-test1/2 (600 s file edges
    excluded), QAPPD train_9/10, HAI 22.04 (cross-time); training stride.
 E5 P-syn: 20 base windows per plant drawn with seed 33 from held-out normal windows; probes start at the first free-run step.
