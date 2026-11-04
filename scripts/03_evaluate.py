@@ -12,9 +12,10 @@ Stage 3a - gate before any held-out value is read.
   --smoke: seed 0 only, writes nothing. Full run: all seeds, writes results/phase3/stage3a.json.
 Stage det - physics-rule detector (D35) rebuilt and gated on training/validation data only (D38).
 Stage 3b - held-out window positions (E2-E5), P-syn probe specs (D39), detector rates on real held-out windows.
+Stage 3c - frozen decoy responses on every held-out window set, after a bit-exact validation self-check (no scoring).
 New Phase 3 code lives in this script or new modules; Phase 2 modules stay frozen.
 """
-import argparse, csv, json, math, platform, re, subprocess, sys, time
+import argparse, csv, json, math, os, platform, re, shutil, subprocess, sys, time
 from pathlib import Path
 
 import numpy as np
@@ -642,9 +643,281 @@ def stage3b(cfg, prov, smoke):
     say("SMOKE 3b PASSED (nothing written)" if smoke else "STAGE 3b DONE -> results/phase3/stage3b.json")
 
 
+# ---------------------------------------------------------------- stage 3c: frozen decoys on every held-out window set (no scoring)
+SELF_TOL = 1e-6          # same machine and code path as stage 3a: validation outputs must reproduce stage3a.json
+SMOKE_N = 8              # windows per set in --smoke
+MIN_FREE = 12e9          # bytes free required before a full run (outputs about 6 GB)
+DECOY = OUT / "decoy"
+SEEDLESS = ("B2", "B3")
+
+
+def logged(name):
+    p = OUT / name
+    j = rjson(p)
+    pv = j.get("provenance", {})
+    if pv.get("dirty") or pv.get("smoke"):
+        stop(f"results/phase3/{name} was not written by a clean full run")
+    hits = set(re.findall(rf"{re.escape(name)} sha256 ([0-9a-f]{{64}})", (ROOT / "spec/decisions.md").read_text()))
+    if len(hits) != 1:
+        stop(f"spec/decisions.md logs {len(hits)} sha256 values for {name}; expected 1")
+    if data.file_sha(p) != hits.pop():
+        stop(f"results/phase3/{name} differs from the sha256 logged in spec/decisions.md")
+    return j
+
+
+def zfile(P, X):                                # identical arithmetic to data.load_plant (float64, then float32)
+    return ((X - np.asarray(P.info["mu"], np.float64)) / np.asarray(P.info["sd"], np.float64)).astype(np.float32)
+
+
+def cut(Z, starts, L):
+    return np.stack([Z[int(s):int(s) + L] for s in starts])
+
+
+def npsave(p, a):
+    p.parent.mkdir(parents=True, exist_ok=True)
+    tmp = p.with_name(p.name + ".tmp")
+    with open(tmp, "wb") as fh:
+        np.save(fh, a, allow_pickle=False)
+    os.replace(tmp, p)
+
+
+def val_rebuild(cfg, P):
+    proc = ROOT / cfg["paths"]["processed"] / P.name
+    idx, L, out = P.info["window_index"]["val"], P.W + P.H, []
+    for f in cfg["train"][P.name]["files_val"]:
+        with np.load(proc / f"{f}.npz", allow_pickle=False) as z:
+            data.check_split(str(z["split"]), "val", f)
+            cols = list(z["columns"].astype(str))
+            X = z["X"][:, [cols.index(c) for c in P.info["columns"]]].astype(np.float64)
+        st = [s for g, s in idx if g == f]
+        if st:
+            out.append(cut(zfile(P, X), st, L))
+    V = np.concatenate(out)
+    if V.shape != P.va.shape or not np.array_equal(V, P.va):
+        stop(f"{P.name}: 3c window builder does not reproduce the Phase 2 validation windows bit for bit")
+
+
+def respond(method, m, X, seed):                # Phase 2 / stage 3a scoring paths
+    if method in STOCHASTIC:
+        return models.generate(m, X, DEV, seed)[..., m.ncu:]
+    return models.predict(m, X, DEV)
+
+
+def outputs(P, c, grey, b2, X, seed, mods, first):
+    o = {"B1": baselines.b1_replay(P.tr, X, P.nc, P.ne, P.W, seed)}
+    if first:
+        th, hp = b2
+        o["B2"] = baselines.arx_sim(th, X, P.nc, P.ne, P.W, hp["na"], hp["nb"])
+        o["B3"] = baselines.grey_sim(grey, X, P.W, P.nc + P.ne)
+    for method, m in mods.items():
+        o[method] = respond(method, m, X, seed)
+    for v in VARIANTS:
+        o[f"C1-{v}"] = constraints.apply(c, grey, X, o["C1"], v)
+    o["A3-L"] = constraints.apply(c, grey, X, o["A3"], "A3")
+    o["B8-L"] = constraints.apply(c, grey, X, o["B8"], "Full")
+    return o
+
+
+def frozen(pn, P, seed):
+    mods = {}
+    for method in NEURAL:
+        k, hp = selection(pn, method)
+        done(pn, method, k, hp, seed)
+        mods[method] = load_model(pn, method, k, hp, seed, P)
+    return mods
+
+
+def psyn_windows(P, ps, recs, Z):
+    W, H, L = P.W, P.H, P.W + P.H
+    mu, sd = np.asarray(P.info["mu"], np.float64), np.asarray(P.info["sd"], np.float64)
+    out = []
+    for i, p in enumerate(ps["probes"]):
+        s, j = p["start"], p["col"]
+        if float(recs[p["file"]]["X"][s + W - 1, j]) != p["c0"]:
+            stop(f"P-syn probe {i}: c0 differs from the real last warm-up command")
+        u = (probe_trace(p["kind"], p["c0"], p["amp"], H, ps["pulse_samples"]) if p["set"] == "in"
+             else np.full(H, p["target"], np.float64))
+        w = Z[p["file"]][s:s + L].copy()
+        w[W:, j] = ((u - mu[j]) / sd[j]).astype(np.float32)
+        back = w[W:, j].astype(np.float64) * sd[j] + mu[j]
+        if np.abs(back - u).max() > 1e-3 * max(1.0, float(np.abs(u).max())):
+            stop(f"P-syn probe {i}: injected command does not round-trip")
+        out.append(w)
+    return np.stack(out)
+
+
+def window_sets(cfg, pn, P, R, man):
+    L, fs, stride = P.W + P.H, int(cfg[pn]["fs_hz"]), int(P.info["stride"])
+    if pn == "hai":
+        files, folder, edge = list(cfg["hai"]["test"]), "hai", EDGE_S * fs
+    else:
+        files, folder, edge = [f"train_{i}" for i in cfg["qappd"]["heldout_normal"]], "qappd", 0
+    recs = {f: heldout(cfg, P, folder, f, man) for f in files}
+    pool = []
+    for f in files:
+        pool += [(f, int(i)) for i in normal_starts(recs[f], L, stride, edge, f)]
+    if [list(x) for x in pool] != R["normal"]["starts"]:
+        stop(f"{pn}: rebuilt normal windows differ from stage3b.json")
+    Z = {f: zfile(P, r["X"]) for f, r in recs.items()}
+    sets = {"normal": (np.stack([Z[f][s:s + L] for f, s in pool]), [{"file": f, "start": s} for f, s in pool])}
+    if pn == "hai":
+        pr = p_real(P, recs, edge)
+        if [(p["attack"], p["starts"]) for p in pr] != [(p["attack"], p["starts"]) for p in R["p_real"]]:
+            stop("rebuilt P-real windows differ from stage3b.json")
+        idx = [{"attack": p["attack"], "file": p["file"], "start": s, "tile": t, "out_of_coverage": p["out_of_coverage"]}
+               for p in pr for t, s in enumerate(p["starts"])]
+        sets["p_real"] = (np.stack([Z[i["file"]][i["start"]:i["start"] + L] for i in idx]), idx)
+    else:
+        rc = heldout(cfg, P, "qappd", "test_7", man)
+        pa = p_anom(P, rc)
+        if pa["starts"] != R["p_anom"]["starts"]:
+            stop("rebuilt P-anom windows differ from stage3b.json")
+        sets["p_anom"] = (cut(zfile(P, rc["X"]), pa["starts"], L), [{"file": "test_7", "start": s} for s in pa["starts"]])
+        del rc
+    ps = p_syn(pn, P, pool, recs, fs)
+    where = same(jsonable(ps), R["p_syn"], "p_syn")
+    if where:
+        stop(f"{pn}: rebuilt P-syn specs differ from stage3b.json at {where}")
+    sets["p_syn"] = (psyn_windows(P, ps, recs, Z), [dict(p, probe=i) for i, p in enumerate(ps["probes"])])
+    if pn == "hai":
+        for f in cfg["hai_crosstime"]["files"]:
+            rc = heldout(cfg, P, "hai2204", f, man)
+            s = normal_starts(rc, L, stride, 0, f"hai2204/{f}")
+            if [[f, int(i)] for i in s] != [x for x in R["crosstime"]["starts"] if x[0] == f]:
+                stop(f"hai2204/{f}: rebuilt cross-time windows differ from stage3b.json")
+            sets[f"crosstime_{f}"] = (cut(zfile(P, rc["X"]), s, L), [{"file": f, "start": int(i)} for i in s])
+            del rc
+    return sets
+
+
+def stage3c(cfg, prov, smoke):
+    if (OUT / "stage3c.json").exists():
+        stop("results/phase3/stage3c.json exists; stage 3c already done")
+    if DECOY.exists():
+        stop("results/phase3/decoy exists without stage3c.json; inspect it before rerunning")
+    part = OUT / "decoy.partial"
+    if not smoke:
+        if part.exists():
+            say("  removing results/phase3/decoy.partial left by an interrupted run")
+            shutil.rmtree(part)
+        if shutil.disk_usage(OUT).free < MIN_FREE:
+            stop(f"less than {MIN_FREE / 1e9:.0f} GB free disk")
+    a3, b3 = passed("stage3a.json"), logged("stage3b.json")
+    T = cfg["train"]
+    seeds_all = [int(T["seed_select"])] + [int(s) for s in T["seeds_final"]]
+    seeds = seeds_all[:1] if smoke else seeds_all
+    res = {"stage": "3c", "provenance": prov, "stage3b_sha256": data.file_sha(OUT / "stage3b.json"),
+           "self_tol": SELF_TOL, "seeds": seeds, "plants": {},
+           "storage": "decoy responses (N,H,nr) z-scored per set/method/seed; HAI 22.04: per-window per-tag SSE + real sums"}
+    proj = 0.0
+    for pn in PLANTS:
+        P = data.load_plant(cfg, pn)
+        ncu = P.nc + P.ne
+        c = constraints.fit(P, T["c2"])
+        where = same(jsonable(c), rjson(LAYERS / pn / "layers" / "parameters.json"), "c2")
+        if where:
+            stop(f"{pn}: refitted C2/C3 parameters differ from results/phase2_d32 at {where}")
+        grey = rjson(PHASE2 / pn / "B3" / "parameters.json")
+        k2, hp2 = selection(pn, "B2")
+        b2 = (np.load(PHASE2 / pn / "B2" / f"cfg{k2:02d}" / "theta.npy", allow_pickle=False), hp2)
+        val_rebuild(cfg, P)
+        say(f"== {pn}: window builder reproduces all {len(P.va)} Phase 2 validation windows bit for bit ==")
+        rec = {(r["method"], r["seed"]): r["val_fit"] for r in a3["plants"][pn]["rows"]}
+        sets = window_sets(cfg, pn, P, b3["plants"][pn], a3["heldout_manifest"])
+        report, full_n = {}, {}
+        for name, (X, idx) in sets.items():
+            act = (constraints.coverage(c, X) > 0).any(1)
+            r = report[name] = {"windows": int(len(X)), "c3_active": float(act.mean())}
+            extra = ""
+            if name == "p_syn":
+                oor = np.array([i["set"] == "oor" for i in idx])
+                if not act[oor].all():
+                    stop(f"{pn}: C3 inactive on {int((~act[oor]).sum())} out-of-range P-syn windows")
+                r.update(in_range=int((~oor).sum()), out_of_range=int(oor.sum()), c3_active_in_range=float(act[~oor].mean()))
+                extra = f"  (in-range {r['in_range']} C3 {r['c3_active_in_range']:.4f}; out-of-range {r['out_of_range']} C3 1.0000)"
+            if name == "p_real":
+                atts = list(dict.fromkeys(i["attack"] for i in idx))
+                r["c3_active_per_attack"] = {a: float(act[[i["attack"] == a for i in idx]].mean()) for a in atts}
+                extra = "  " + ", ".join(f"{a} {v:.2f}" for a, v in r["c3_active_per_attack"].items())
+            full_n[name] = len(X)
+            say(f"  set {name:17s} windows {len(X):5d}  C3 active {r['c3_active']:.4f}{extra}")
+        if smoke:
+            sets = {n: (X[sel], [idx[i] for i in sel]) for n, (X, idx) in sets.items()
+                    for sel in [np.unique(np.linspace(0, len(X) - 1, min(SMOKE_N, len(X))).astype(int))]}
+        else:
+            for name, (X, idx) in sets.items():
+                d = part / pn / name
+                if name.startswith("crosstime"):
+                    yt = X[:, P.W:, ncu:].astype(np.float64)
+                    npsave(d / "real_sum.npy", yt.sum(1))
+                    npsave(d / "real_sumsq.npy", np.square(yt).sum(1))
+                else:
+                    npsave(d / "X.npy", X)
+                wjson(d / "index.json", idx)
+        nonfin, secs = {}, {}
+        y = P.va[:, P.W:, ncu:]
+        for s in seeds:
+            first = s == seeds_all[0]
+            t0 = time.time()
+            mods = frozen(pn, P, s)
+            o = outputs(P, c, grey, b2, P.va, s, mods, first)
+            worst = 0.0
+            for m, yh in o.items():
+                key = (m, None if m in SEEDLESS else s)
+                if key not in rec:
+                    stop(f"{pn}: stage3a.json has no validation record for {m} seed {key[1]}")
+                d = abs(metrics.fit_percent(y, yh)[1] - rec[key])
+                if not d <= SELF_TOL:
+                    stop(f"{pn} {m} seed {s}: validation FIT differs from stage3a.json by {d:.3g}; nothing held-out written for this seed")
+                worst = max(worst, d)
+            secs[f"val seed {s}"] = time.time() - t0
+            say(f"  seed {s}: validation self-check {len(o)} outputs = stage3a.json (max |d| {worst:.1e})")
+            del o
+            t0 = time.time()
+            for name, (X, idx) in sets.items():
+                o = outputs(P, c, grey, b2, X, s, mods, first)
+                if not np.array_equal(o.pop("C1-A5"), o["C1"]):
+                    stop(f"{pn} {name}: C1-A5 differs from C1")
+                for m, yh in o.items():
+                    if yh.shape != (len(X), P.H, P.nr):
+                        stop(f"{pn} {name} {m}: output shape {yh.shape}")
+                    tag = m if m in SEEDLESS else f"{m}_s{s}"
+                    k = int((~np.isfinite(yh)).any((1, 2)).sum())
+                    if k:
+                        nonfin[f"{name}/{tag}"] = k
+                    if smoke:
+                        continue
+                    if name.startswith("crosstime"):
+                        e = X[:, P.W:, ncu:].astype(np.float64) - yh.astype(np.float64)
+                        npsave(part / pn / name / f"{tag}.sse.npy", np.square(e).sum(1))
+                    else:
+                        npsave(part / pn / name / f"{tag}.npy", yh)
+                del o
+            secs[f"heldout seed {s}"] = time.time() - t0
+            say(f"  seed {s}: held-out outputs, {len(sets)} sets, {secs[f'heldout seed {s}']:.0f} s")
+            del mods
+        if smoke:
+            n_sm = sum(len(X) for X, _ in sets.values())
+            proj += len(seeds_all) * (secs[f"val seed {seeds[0]}"]
+                                      + secs[f"heldout seed {seeds[0]}"] / n_sm * sum(full_n.values()))
+        if nonfin:
+            say(f"  non-finite output windows: {nonfin}")
+        res["plants"][pn] = {"sets": report, "non_finite_windows": nonfin, "seconds": secs}
+    if smoke:
+        say(f"  projected full run (rough): about {proj / 60:.0f} min")
+        say("SMOKE 3c PASSED (nothing written)")
+        return
+    files = {str(p.relative_to(part)): {"sha256": data.file_sha(p), "bytes": p.stat().st_size}
+             for p in sorted(part.rglob("*")) if p.is_file()}
+    os.replace(part, DECOY)
+    res["files"], res["gigabytes"] = files, sum(v["bytes"] for v in files.values()) / 1e9
+    wjson(OUT / "stage3c.json", res)
+    say(f"STAGE 3c DONE -> results/phase3/stage3c.json ({len(files)} files, {res['gigabytes']:.1f} GB in results/phase3/decoy)")
+
+
 def main():
     ap = argparse.ArgumentParser(description="Phase 3 held-out evaluation")
-    ap.add_argument("--stage", required=True, choices=["3a", "det", "3b"])
+    ap.add_argument("--stage", required=True, choices=["3a", "det", "3b", "3c"])
     ap.add_argument("--smoke", action="store_true", help="seed 0 only; writes nothing")
     a = ap.parse_args()
     t_all = time.time()
@@ -657,6 +930,8 @@ def main():
         return detector_gate(cfg, prov, a.smoke)
     if a.stage == "3b":
         return stage3b(cfg, prov, a.smoke)
+    if a.stage == "3c":
+        return stage3c(cfg, prov, a.smoke)
     T = cfg["train"]
     seeds_all = [int(T["seed_select"])] + [int(s) for s in T["seeds_final"]]
     run_seeds = seeds_all[:1] if a.smoke else seeds_all
