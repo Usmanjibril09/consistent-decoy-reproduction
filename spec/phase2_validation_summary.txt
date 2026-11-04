@@ -1,0 +1,14 @@
+hai    Full  new  85.94 +- 0.95 | old  85.94
+hai    A1    new  85.94 +- 0.97 | old  85.94
+hai    A2    new  86.07 +- 0.97 | old  86.07
+hai    A4    new  85.94 +- 0.95 | old  85.94
+hai    A5    new  86.08 +- 0.98 | old  86.08
+hai    A3    new  66.35 +- 0.18 | old  66.35
+hai    reload max deviation 0.00001 FIT | val windows with C3 active 0.0155
+qappd  Full  new  87.07 +- 0.37 | old  77.59
+qappd  A1    new  87.16 +- 0.41 | old  87.16
+qappd  A2    new  87.07 +- 0.37 | old  77.59
+qappd  A4    new  87.08 +- 0.37 | old  87.08
+qappd  A5    new  87.16 +- 0.41 | old  87.16
+qappd  A3    new  56.99 +- 0.84 | old  41.48
+qappd  reload max deviation 0.00007 FIT | val windows with C3 active 0.0000
