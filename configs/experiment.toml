@@ -78,3 +78,60 @@ max_windows = 64
 max_epochs = 2
 grid = 2
 seeds = 2
+gan_iters = 4
+ckpt_every = 2
+kdev_epochs = 2
+
+# ---- Phase 2 stage 2 (D29) ----
+[train.grid.B4]
+hidden = [32, 64, 128]
+layers = [1, 2]
+lr = [0.001, 0.003]
+
+[train.grid.B5]
+hidden = [32, 64, 128]
+noise = [8, 16]
+lr = [0.0001, 0.0005]
+
+[train.grid.B6]
+latent = [8, 16, 32]
+hidden = [64, 128]
+lr = [0.0001, 0.0005]
+
+[train.grid.B7]
+hidden = [24, 48, 96]
+layers = [2, 3]
+lr = [0.001, 0.0005]
+
+[train.grid.B8]
+d_model = [32, 64, 128]
+layers = [1, 2]
+lr = [0.001, 0.0003]
+
+[train.grid.B9]
+hidden = [32, 64, 128]
+layers = [1, 2]
+lr = [0.001, 0.003]
+
+[train.micro]
+B8 = 64
+
+[train.gan]
+iters = 2000
+ckpt_every = 200
+
+[train.kdev]
+epochs = 20
+lr = 0.001
+batch = 128
+
+[train.b3]
+hai_delays = [0, 1, 2, 5, 10]
+qappd_delays = [0, 1, 2, 5, 10]
+max_eval = 512
+
+[train.c2]
+exclude = ["P1_PCV02Z"]
+valve_range = [0.0, 100.0]
+clip_nonvalve = true
+c3_frac = 0.05

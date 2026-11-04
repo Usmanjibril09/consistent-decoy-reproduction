@@ -15,6 +15,11 @@ def stop(msg):
     raise SystemExit("STOP: " + msg)
 
 
+def check_split(found, part, name):
+    if part not in SPLITS or found not in SPLITS[part]:
+        stop(f"{name} has split '{found}', expected one of {sorted(SPLITS.get(part, []))}")
+
+
 def load_cfg():
     with open(CFG_PATH, "rb") as f:
         return tomllib.load(f)
@@ -31,7 +36,7 @@ def file_sha(p):
 @dataclass
 class Plant:
     name: str
-    tr: np.ndarray          # (N, W+H, nc+ne+nr) float32, column order [command, exogenous, response]
+    tr: np.ndarray          # (N, W+H, nc+ne+nr) float32 z-scored, column order [command, exogenous, response]
     va: np.ndarray
     nc: int
     ne: int
@@ -40,6 +45,7 @@ class Plant:
     H: int
     resp_names: list
     info: dict = field(default_factory=dict)
+    train_raw: list = field(default_factory=list)   # [(X physical, ordered columns, float32), normal mask] per training file
 
 
 def load_plant(cfg, name, smoke=False):
@@ -59,8 +65,7 @@ def load_plant(cfg, name, smoke=False):
                 stop(f"missing {p}")
             z = np.load(p, allow_pickle=False)
             sp = str(z["split"])
-            if sp not in SPLITS[part]:
-                stop(f"{p.name} has split '{sp}', expected one of {sorted(SPLITS[part])}")
+            check_split(sp, part, p.name)
             recs[f] = {k: z[k] for k in ("X", "columns", "roles", "normal")}
             info["files"][f] = {"part": part, "split": sp, "rows": int(len(z["X"])), "sha256": file_sha(p)}
     ref = recs[parts["train"][0]]
@@ -82,8 +87,10 @@ def load_plant(cfg, name, smoke=False):
     edge_files, er = set(T["edge_files"]), int(T["edge_rows"])
     cap = int(cfg["train"]["smoke"]["max_windows"])
 
+    info["window_index"] = {}
+
     def wins(part):
-        out = []
+        out, index = [], []
         for f in parts[part]:
             r = recs[f]
             Xn = ((r["X"][:, order].astype(np.float64) - mu) / sd).astype(np.float32)
@@ -98,15 +105,20 @@ def load_plant(cfg, name, smoke=False):
             s = s[(bad[s + L] - bad[s]) == 0]
             info["files"][f]["windows"] = int(len(s))
             out += [Xn[i:i + L] for i in s]
+            index += [(f, int(i)) for i in s]
         if not out:
             stop(f"{name} {part}: no valid windows")
         A = np.stack(out)
         if smoke and len(A) > cap:
-            A = A[np.unique(np.linspace(0, len(A) - 1, cap).astype(int))]
+            selected = np.unique(np.linspace(0, len(A) - 1, cap).astype(int))
+            A = A[selected]
+            index = [index[i] for i in selected]
+        info["window_index"][part] = index
         return A
 
     tr, va = wins("train"), wins("val")
     info.update({"columns": cols[order].tolist(), "nc": int(len(ic)), "ne": int(len(ie)), "nr": int(len(ir)),
                  "mu": mu.tolist(), "sd": sd.tolist(), "warm": W, "horizon": H, "stride": stride,
                  "windows_train": int(len(tr)), "windows_val": int(len(va)), "smoke": bool(smoke)})
-    return Plant(name, tr, va, len(ic), len(ie), len(ir), W, H, cols[ir].tolist(), info)
+    train_raw = [(recs[f]["X"][:, order].astype(np.float32), recs[f]["normal"].astype(bool)) for f in parts["train"]]
+    return Plant(name, tr, va, len(ic), len(ie), len(ir), W, H, cols[ir].tolist(), info, train_raw)

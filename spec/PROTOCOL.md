@@ -1,4 +1,4 @@
-# PROTOCOL v1.2 (frozen before any training; amends v1.1 per D28, no model trained yet)
+# PROTOCOL v1.3 (D30 implementation amendments before full training; development smoke runs only)
 
 ## 1 Question
 Can a lightweight learned industrial decoy remain behaviourally consistent when an attacker actively changes its commands
@@ -39,7 +39,7 @@ Training specification: D28 (spec/decisions.md); free-run evaluation, windows, s
 B1 Record-and-replay (low-interaction honeypot practice)    B2 Linear ARX / state-space identification
 B3 First-order-plus-dead-time grey-box per loop (physics only)
 B4 Unconditioned LSTM generator (Sassnick et al., EUROCAST 2024)    B5 Recurrent conditional GAN, RCGAN (Esteban, Hyland, Ratsch 2017)
-B6 GAN + autoencoder (NeuralPot, ISCC 2020)    B7 TimeGAN    B8 Command-conditioned Transformer
+B6 GAN + autoencoder adaptation (inspired by NeuralPot, ISCC 2020; not a reproduction, D30)    B7 TimeGAN    B8 Command-conditioned Transformer
 B9 Seq2seq forecaster with Huber loss (NeuPot, IEEE TII 2023; re-implemented from published description, full text unavailable)
 
 ## 6 Ablations

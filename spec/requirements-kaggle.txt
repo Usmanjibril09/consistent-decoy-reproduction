@@ -1,0 +1,5 @@
+# Phase 2 uses only the standard library, NumPy and PyTorch.
+# Keep Kaggle's preinstalled CUDA-compatible torch; do not replace it with Mac wheels.
+# Tested locally: Python 3.12, numpy 1.26.4, torch 2.2.2.
+numpy>=1.26,<3
+torch>=2.2,<3

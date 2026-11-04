@@ -47,3 +47,47 @@ def arx_sim(theta, va, nc, ne, W, na, nb):
             phi = np.concatenate([Ys[:, t - k] for k in range(1, na + 1)] + [U[:, t - k] for k in range(nb)] + [one], 1)
             Ys[:, t] = phi @ theta
     return Ys[:, W:]
+
+
+def grey_sim(params, X, W, ncu):
+    """Causal first-order-plus-delay model. No real future responses are used."""
+    N, L, _ = X.shape
+    out = np.empty((N, L-W, len(params)), dtype=np.float64)
+    prev = X[:, W-1, ncu:].astype('float64').copy()
+    for t in range(W, L):
+        for j, p in enumerate(params):
+            prev[:, j] = p['a'] * prev[:, j] + p['b'] * X[:, t-1-p['delay'], p['input']] + p['c']
+        out[:, t-W] = prev
+    return out.astype('float32')
+
+
+def grey_fit(P, delays, max_eval=512):
+    """Fit constrained equation error on all training windows, select input/delay on training free runs only."""
+    ncu = P.nc + P.ne
+    if max(delays) >= P.W:
+        raise ValueError('B3 delay exceeds warm-up')
+    ev = P.tr[np.unique(np.linspace(0, len(P.tr)-1, min(max_eval, len(P.tr))).astype(int))]
+    params = []
+    for j in range(P.nr):
+        best = None
+        for u in range(ncu):
+            for d in delays:
+                # Sufficient statistics in chunks, avoiding a huge least-squares design matrix.
+                xx, xy = np.zeros((3,3)), np.zeros(3)
+                for start in range(0, len(P.tr), 64):
+                    X = P.tr[start:start+64].astype('float64'); t0=d+1
+                    target = X[:,t0:,ncu+j].reshape(-1)
+                    phi = np.stack([X[:,t0-1:-1,ncu+j].reshape(-1),
+                                    X[:,:-t0,u].reshape(-1), np.ones_like(target)], 1)
+                    xx += phi.T @ phi; xy += phi.T @ target
+                coef = np.linalg.lstsq(xx, xy, rcond=1e-12)[0]
+                a = float(np.clip(coef[0], 0, .999))
+                bc = np.linalg.lstsq(xx[1:,1:], xy[1:] - a*xx[1:,0], rcond=1e-12)[0]
+                p = dict(a=a,b=float(bc[0]),c=float(bc[1]),input=u,delay=d)
+                prev = ev[:,P.W-1,ncu+j].astype('float64').copy(); err=0.
+                for t in range(P.W, ev.shape[1]):
+                    prev = a*prev + p['b']*ev[:,t-1-d,u]+p['c']
+                    err += float(np.square(prev-ev[:,t,ncu+j]).sum())
+                if best is None or err < best[0]: best=(err,p)
+        params.append(best[1])
+    return params

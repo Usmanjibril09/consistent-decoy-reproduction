@@ -1,0 +1,33 @@
+{
+  "snapshot": "1aa53fbc93cbb2d62b3b2a7d67ce1d7994df5df4fb6291e77d5c6e671288ed49",
+  "sha256": {
+    "scripts/02_train.py": "1836f555dee32294a6c8c488c2ec6a829895908ba35e818029b1d51b88d6776a",
+    "configs/experiment.toml": "59a11b2351087e592558468dd2e2df9ebe94fd757b2879c3fc57a03b7b150cf7",
+    "spec/PROTOCOL.md": "6d49aeb37260263e102a809a5b7720ed7e2b5ff7bc3c50a28c52882179465ce0",
+    "spec/decisions.md": "b7887c52186cf3dfdc2c21b61adf337e86f3b249c9155187261b390557ed644f",
+    "README.md": "50c19a817deef59b8696b1973849694bd77120e301aaab565fa4972d8b288a85",
+    "spec/requirements-kaggle.txt": "a98d2318f5b3c102f8e797b448f764eb26766153603c5ec68c6d666564cd62e7",
+    "src/decoy/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/decoy/attacker.py": "cc24ab890c6cb96d566488639147018398aec29d4cd9813a8816e35f237f5bb4",
+    "src/decoy/baselines.py": "5049c04c5ec3285a05e20ef5f1255bd2f1cadae7473e60ba310c08a76df004ff",
+    "src/decoy/constraints.py": "d62dd5b70cc89eeb2616fbff22daafde62481bd6acf1f0a2dece7e76730d2bf7",
+    "src/decoy/data.py": "f9964a80924797bf3b75dfb24cbec8674a525876e00539040aa65e37067195fe",
+    "src/decoy/metrics.py": "ce836858288e83c7f3c39fd96bd96b6e01158cc4a2a20497909fc906ee8db438",
+    "src/decoy/models.py": "cbffe0a76cb87f36373ab2f9746b53a138ff6bd11771118648142b79a32e2dc3",
+    "tests/test_phase2.py": "88c7f4b237dc0fac376f8af2c175657c808b166e78718cafbc1d3e9cec5626ea",
+    "data/processed/hai/hai-train1.npz": "7c8bbd60b4e00263ec9dc0047a2bc28a0888ab413af61fc435f2795831ea4e98",
+    "data/processed/hai/hai-train2.npz": "f0dc43aeaf58a4ed07285d17717cd53c1e472eb2b41ea494ca3fac132ac5a299",
+    "data/processed/hai/hai-train3.npz": "548562732ba9945bcacacd780bd1d25780b8f920f399d87e2ff1752728649a19",
+    "data/processed/hai/hai-train4.npz": "6794caa17eb6749914d03c8af5fc51b9bf26a12e61e196797c3a589b56d8e90c",
+    "data/processed/qappd/train_1.npz": "9370bfc2941ded06d9757a89007b588ceaadf4caeef446a584e71879d6eace7a",
+    "data/processed/qappd/train_2.npz": "e70264434bf0baae8ae2d14655cc5bf5d52e0e49830ecaa172d54c1098ef5c23",
+    "data/processed/qappd/train_3.npz": "0abb350892254d38893116d6b24cf88b2d8c49b282013be44d6b25b2e460323f",
+    "data/processed/qappd/train_4.npz": "2c874a1a11d58d50fec4001543a334f8ebda6b730f5c807257e2cdd2538d4680",
+    "data/processed/qappd/train_5.npz": "7e9d5f058998c0404cda9b004cd1175cbb67af69f94e9fd6700b12e81319da47",
+    "data/processed/qappd/train_6.npz": "f277e97337e9a7351eb38f499457a498c7604339648cff750ac38d5dba64ca92",
+    "data/processed/qappd/train_7.npz": "3ee03ef0940d98b1fef4f70315a5e8986483ba1e0a570ac18f53b86b82f98b39",
+    "data/processed/qappd/train_8.npz": "0d72bcae7a1fca736ae4ad8ad14786e572d22a9fccb7bf7c0f5a3b37c97f2537",
+    "CODE_COMMIT": "8cf7f7fb6814cbdc6dcd86a9b3cc81e2a9f4d861c8d3cb8f1a64ead911f8c5e5"
+  },
+  "scope": "training and validation only; no raw or held-out data"
+}
