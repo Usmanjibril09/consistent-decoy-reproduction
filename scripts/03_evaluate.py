@@ -20,7 +20,7 @@ import torch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from decoy import baselines, constraints, data, metrics, models  # noqa: E402
+from decoy import baselines, constraints, data, detector, metrics, models  # noqa: E402
 
 PHASE2 = ROOT / "results/phase2_kaggle/extracted/phase2"
 LAYERS = ROOT / "results/phase2_d32"
@@ -31,6 +31,7 @@ NEURAL = ("B4", "B5", "B6", "B7", "B8", "B9", "C1", "A3")
 VARIANTS = ("Full", "A1", "A2", "A4", "A5")
 DET_TOL = 0.01
 THIS = "scripts/03_evaluate.py"
+MINE = {THIS, "src/decoy/detector.py"}
 FROZEN = ["src/decoy/data.py", "src/decoy/models.py", "src/decoy/baselines.py", "src/decoy/constraints.py",
           "src/decoy/metrics.py", "src/decoy/attacker.py", "scripts/02_train.py", "configs/experiment.toml"]
 DEV = torch.device("cpu")
@@ -95,7 +96,7 @@ def same(a, b, path):
 # ---------------------------------------------------------------- provenance
 def provenance(smoke):
     st = [l for l in sh("git", "status", "--porcelain").stdout.splitlines() if l]
-    other = [l for l in st if l[3:] != THIS]
+    other = [l for l in st if l[3:] not in MINE]
     if other:
         stop(f"uncommitted changes other than {THIS}: {other}")
     if st and not smoke:
@@ -306,17 +307,80 @@ def reproduce(cfg, pn, seeds_all, run_seeds):
             "val_windows_c3_active": float((constraints.coverage(c, P.va) > 0).mean())}
 
 
+# ---------------------------------------------------------------- physics-rule detector gate (D35)
+D35_CHECK = {  # D35 text (val R2, k, gains, false alarms, kept) + D35 check-run log (lags, train R2, thresholds)
+    "hai": {"lag": {"P1_FT01": 0, "P1_FT01Z": 1, "P1_FT02": 0, "P1_FT02Z": 1, "P1_FT03": 30, "P1_FT03Z": 20},
+            "tr_r2": {"P1_FT01": .920, "P1_FT01Z": .925, "P1_FT02": .964, "P1_FT02Z": .972, "P1_FT03": .625, "P1_FT03Z": .619},
+            "va_r2": {"P1_FT01": .887, "P1_FT01Z": .893, "P1_FT02": .949, "P1_FT02Z": .966, "P1_FT03": .623, "P1_FT03Z": .599},
+            "thr": {"P1_FT01": 69.48, "P1_FT01Z": 269.3, "P1_FT02": 901.0, "P1_FT02Z": 827.1, "P1_FT03": 46.8, "P1_FT03Z": 93.19},
+            "va_fa": {"P1_FT01": 0.0, "P1_FT01Z": 0.0, "P1_FT02": 0.0, "P1_FT02Z": 0.0, "P1_FT03": 0.0},
+            "kept": ["P1_FT01Z", "P1_FT02Z", "P1_FT03"]},
+    "qappd": {"k": {"PitchDot": 10, "YawDot": 10}, "gain": {"PitchDot": .998, "YawDot": 1.000},
+              "va_r2": {"PitchDot": .969, "YawDot": .994}, "va_fa": {"PitchDot": .005, "YawDot": .000},
+              "kept": ["PitchDot", "YawDot"]}}
+DET_TOL = {"r2": 0.002, "gain": 0.002, "fa": 0.002, "thr_rel": 0.01}
+
+
+def detector_gate(cfg, prov, smoke):
+    out = OUT / "detector.json"
+    if not smoke and out.exists():
+        stop(f"{out.relative_to(ROOT)} exists; detector gate already passed")
+    res, fails = {"stage": "det", "provenance": prov, "check": D35_CHECK, "tolerance": DET_TOL, "plants": {}}, []
+    for pn in PLANTS:
+        P = data.load_plant(cfg, pn)
+        det = detector.fit(P, int(cfg[pn]["fs_hz"]))
+        ck = D35_CHECK[pn]
+        say(f"== {pn}: windows train {len(P.tr)} val {len(P.va)} (training/validation only) ==")
+        for r in det["candidates"]:
+            t, key = r["target"], ("lag" if r["kind"] == "flow" else "k")
+            bad = []
+
+            def cmp(name, got, want, tol, rel=False):
+                if want is None:
+                    return
+                d = abs(got / want - 1) if rel else abs(got - want)
+                if d > tol:
+                    bad.append(f"{name} {got:.4g} vs D35 {want:.4g}")
+            if r[key] != ck[key][t]:
+                bad.append(f"{key} {r[key]} vs D35 {ck[key][t]}")
+            cmp("train R2", r["tr_r2"], ck.get("tr_r2", {}).get(t), DET_TOL["r2"])
+            cmp("val R2", r["va_r2"], ck["va_r2"][t], DET_TOL["r2"])
+            cmp("threshold", r["thr"], ck.get("thr", {}).get(t), DET_TOL["thr_rel"], rel=True)
+            cmp("gain", r["coef"][0], ck.get("gain", {}).get(t), DET_TOL["gain"])
+            cmp("val false alarm", r["va_fa"], ck["va_fa"].get(t), DET_TOL["fa"])
+            g = f"  gain {r['coef'][0]:.3f}" if r["kind"] == "rate" else ""
+            say(f"  {t:9s} {key} {r[key]:>2}{g}  tr R2 {r['tr_r2']:.3f}  va R2 {r['va_r2']:.3f}  thr {r['thr']:.4g}"
+                f"  va FA {r['va_fa']:.4f}  {'KEEP' if r['kept'] else 'drop'}  {'OK' if not bad else 'MISMATCH: ' + '; '.join(bad)}")
+            fails += [f"{pn} {t}: {b}" for b in bad]
+        kept = [r["target"] for r in det["rules"]]
+        if kept != ck["kept"]:
+            fails.append(f"{pn}: kept rules {kept} vs D35 {ck['kept']}")
+        res["plants"][pn] = {"detector": det, "train_val_sha256": {f: i["sha256"] for f, i in P.info["files"].items()}}
+    gate = "FAIL" if fails else "PASS"
+    res["gate"] = gate
+    if not smoke:
+        wjson(out if gate == "PASS" else OUT / f"detector_FAILED_{time.strftime('%Y%m%d-%H%M%S')}.json", res)
+    if fails:
+        say("== MISMATCHES ==")
+        for f in fails:
+            say("  " + f)
+        stop(f"detector gate FAILED ({len(fails)}); no held-out value has been read")
+    say("SMOKE DETECTOR GATE PASSED" if smoke else "DETECTOR GATE PASSED -> results/phase3/detector.json")
+
+
 def main():
     ap = argparse.ArgumentParser(description="Phase 3 held-out evaluation")
-    ap.add_argument("--stage", required=True, choices=["3a"])
+    ap.add_argument("--stage", required=True, choices=["3a", "det"])
     ap.add_argument("--smoke", action="store_true", help="seed 0 only; writes nothing")
     a = ap.parse_args()
     t_all = time.time()
     prov = provenance(a.smoke)
-    say(f"Phase 3 stage 3a | commit {prov['commit'][:7]}{' (dirty: ' + THIS + ')' if prov['dirty'] else ''}"
+    say(f"Phase 3 stage {a.stage} | commit {prov['commit'][:7]}{' (dirty: ' + THIS + ')' if prov['dirty'] else ''}"
         f" | config {prov['config_sha12']} | torch {prov['torch']} numpy {prov['numpy']}"
         f" | {prov['threads']} threads | {'SMOKE (seed 0)' if a.smoke else 'FULL'}")
     cfg = data.load_cfg()
+    if a.stage == "det":
+        return detector_gate(cfg, prov, a.smoke)
     T = cfg["train"]
     seeds_all = [int(T["seed_select"])] + [int(s) for s in T["seeds_final"]]
     run_seeds = seeds_all[:1] if a.smoke else seeds_all
