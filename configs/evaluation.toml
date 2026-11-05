@@ -27,7 +27,7 @@ seed = 4242
 [simprocess]
 repo = "https://github.com/donadelden/SimProcess"
 commit = "7533f59e94e9f54d8e3f151cc53a02a5c6146b6f"
-classifier = "random_forest"   # protocol; RF hyperparameters copied from Discriminator/simprocess/ml.py at commit
+classifier = "random_forest"   # protocol; grid, CV and scoring in [simprocess_d45] (D45)
 noise = "kalman"
 kalman_q = 1e-5
 kalman_r = 1e-1
@@ -36,7 +36,7 @@ window_qappd = "H"             # protocol E7: QAPPD window length = H (500 sampl
 overlap = 0.8
 eps = 0.3
 filter_scope = "all_tags"
-n_features = 11
+features_per_tag = 62          # 11 signal + 51 noise (features.py at commit); corrects D42 initial count (D45)
 smote = false                  # classes paired and balanced
 report_filter_pass_rate = true
 m2b_plants = ["hai"]           # QAPPD: M2b not applicable (filter passes 0.0000 of training windows)
@@ -79,3 +79,24 @@ verify_on = "normal"           # formula checked against full outputs before use
 steps = 1000                   # protocol E8: median of 1,000 steps, Mac CPU
 batch = 1
 position = "last"              # each timed step at the last horizon position (B8 keeps no cache; worst case)
+
+[simprocess_d45]               # D45, before any decoy output is scored
+stride = 4                     # window 20, 80% overlap (features.py: range step window_size//5)
+rf_n_estimators = [50, 200]    # our reduced grid (cost); other RF settings sklearn 1.5.2 defaults
+cv = "GroupKFold5_parent_window"
+cv_scoring = "accuracy"
+smote = false
+window_score = "mean_p_real_passing_subwindows"
+zero_pass_window = "p_real_0"  # counted as detected (against the method); as-published value also reported
+report_as_published = true
+subsample_seed = 4545
+subsample_per_half_hai = {"hai-test1" = 26, "hai-test2" = 134}
+subsample_per_half_qappd = {"train_9" = 80, "train_10" = 80}
+psyn_max_hai = 280             # stratified by set, kind, tag (largest remainder); QAPPD: all windows
+psyn_strata = ["set", "kind", "tag"]
+psyn_store = "predictions_only"
+store_features = "passing_subwindows_float32_compressed"
+disk_cap_gb = 15
+disk_min_free_gb = 5
+processes = 4
+other_metrics_all_windows = true   # RNN, MiniRocket, FIT, detector, Context-FID unchanged

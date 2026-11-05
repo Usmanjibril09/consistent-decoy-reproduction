@@ -1,4 +1,4 @@
-# PROTOCOL v1.6 (D33 Phase 3 specification, amended by D36 and D43; D43 made before any decoy output is scored)
+# PROTOCOL v1.7 (D33 Phase 3 spec, amended by D36, D43, D45; D45 made before any decoy output is scored)
 
 ## 1 Question
 Can a lightweight learned industrial decoy remain behaviourally consistent when an attacker actively changes its commands
@@ -58,8 +58,8 @@ HAI valve opening vs measured flow, pump command vs TIT03 direction. Only detect
 ## 8 Metrics (established only)
 Primary:
 M1 FIT% = 100(1 - ||y - y_hat|| / ||y - mean(y)||) on response tags (system identification; Ljung). P-real, P-anom.
-M2 Discriminative score = |accuracy - 0.5| of each K-test classifier, real vs decoy windows (Yoon et al., NeurIPS 2019). 0 = indistinguishable. Held-out normal windows only (needs real windows, D33).
-M2b SimProcess fidelity score = mean P(real) over decoy windows from the SimProcess classifier (Donadel et al. 2025). Higher = better. HAI normal windows only (SimProcess discards windows with large variations, D33); not applicable on QAPPD, where its window filter passes no training window (D43).
+M2 Discriminative score = |accuracy - 0.5| of each K-test classifier, real vs decoy windows (Yoon et al., NeurIPS 2019). 0 = indistinguishable. Held-out normal windows only (needs real windows, D33). SimProcess component scored on a fixed, seeded window subsample (D45); other classifiers on all windows.
+M2b SimProcess fidelity score = mean P(real) over decoy windows from the SimProcess classifier (Donadel et al. 2025). Higher = better. HAI normal windows only (SimProcess discards windows with large variations, D33); not applicable on QAPPD, where its window filter passes no training window (D43). Scored on the fixed D45 subsample (160 base windows per test half); filter pass rate reported beside it.
 Secondary: physics-rule detector detection rate on P-syn; predictive score TSTR (Yoon et al. 2019); Context-FID (Jeha et al., ICLR 2022);
 DTW; held-out normal FIT%; per-step latency; model size.
 
