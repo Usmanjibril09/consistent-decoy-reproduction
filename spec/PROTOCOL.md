@@ -1,4 +1,4 @@
-# PROTOCOL v1.5 (D33 Phase 3 specification, amended by D36; frozen before any held-out data is opened)
+# PROTOCOL v1.6 (D33 Phase 3 specification, amended by D36 and D43; D43 made before any decoy output is scored)
 
 ## 1 Question
 Can a lightweight learned industrial decoy remain behaviourally consistent when an attacker actively changes its commands
@@ -59,7 +59,7 @@ HAI valve opening vs measured flow, pump command vs TIT03 direction. Only detect
 Primary:
 M1 FIT% = 100(1 - ||y - y_hat|| / ||y - mean(y)||) on response tags (system identification; Ljung). P-real, P-anom.
 M2 Discriminative score = |accuracy - 0.5| of each K-test classifier, real vs decoy windows (Yoon et al., NeurIPS 2019). 0 = indistinguishable. Held-out normal windows only (needs real windows, D33).
-M2b SimProcess fidelity score = mean P(real) over decoy windows from the SimProcess classifier (Donadel et al. 2025). Higher = better. Normal windows only (SimProcess discards windows with large variations, D33).
+M2b SimProcess fidelity score = mean P(real) over decoy windows from the SimProcess classifier (Donadel et al. 2025). Higher = better. HAI normal windows only (SimProcess discards windows with large variations, D33); not applicable on QAPPD, where its window filter passes no training window (D43).
 Secondary: physics-rule detector detection rate on P-syn; predictive score TSTR (Yoon et al. 2019); Context-FID (Jeha et al., ICLR 2022);
 DTW; held-out normal FIT%; per-step latency; model size.
 
@@ -122,7 +122,7 @@ E6 Physics-rule detector (section 7): threshold per rule = p99.9 of its residual
 E7 K-test: one classifier per method, training seed and classifier type, trained on held-out normal windows, real vs decoy (same
    commands). Each held-out file split in time: first half train, second half test, purge gap of one window. 5 classifier seeds per
    training seed (B2/B3 deterministic: one model; B1: replay seeds 0-4). Post-hoc 2-layer RNN (Yoon et al.); MiniRocket +
-   RidgeClassifierCV; SimProcess as published (window filter, tsfresh, random forest), QAPPD window length = H. On P-syn the
+   RidgeClassifierCV; SimProcess as published on HAI (Kalman noise, window 20, filter eps 0.3, tsfresh, random forest); QAPPD window length = H without the window filter (it passes 0 training windows; D43). On P-syn the
    trained K-test classifiers score decoy probe windows (flag rate, secondary).
 E8 Secondary: TSTR (post-hoc 2-layer next-step predictor trained on the decoy train half, MAE on the real test half); Context-FID
    with the official TS2Vec encoder trained on real training windows only, fixed before Phase 3; DTW; per-step latency on the Mac CPU

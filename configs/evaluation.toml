@@ -8,13 +8,15 @@ columns_by_name = true         # real horizon = X[:, warm:, response columns] ma
 cast_float32 = ["B2"]          # B2 stored float64; cast before any classifier/feature step
 fit_in_float64 = true          # FIT computed in float64 for every method (Phase 2 path)
 
-[split]
-order_hai = ["hai-test1", "hai-test2"]
-order_qappd = ["train_9", "train_10"]
-train_fraction = 0.5           # first half (time order) trains, second half tests
+[split]                        # protocol E7; D43 supersedes D42(d)
+files_hai = ["hai-test1", "hai-test2"]
+files_qappd = ["train_9", "train_10"]
+per_file = true                # each held-out file split in time: first half train, second half test
+purge_gap_windows = 1          # windows within one window length of a file's split point are dropped
 pair_same_half = true          # real window i and decoy window i never separated
 scaler_fit = "train_half"
 save_per_window_predictions = true
+classifier_seeds = 5           # per training seed (E7)
 
 [bootstrap]
 block_s_hai = 3600
@@ -29,7 +31,8 @@ classifier = "random_forest"   # protocol; RF hyperparameters copied from Discri
 noise = "kalman"
 kalman_q = 1e-5
 kalman_r = 1e-1
-window = 20                    # repository default; paper section 5.2.2 value not retrieved
+window = 20                    # HAI: paper section 5.2.2 (window 20 chosen)
+window_qappd = "H"             # protocol E7: QAPPD window length = H (500 samples)
 overlap = 0.8
 eps = 0.3
 filter_scope = "all_tags"
@@ -73,4 +76,6 @@ fit_from_sums = true           # SSE + real_sum + real_sumsq
 verify_on = "normal"           # formula checked against full outputs before use
 
 [latency]
-step = "last"                  # B8 has no cache of earlier steps; worst case reported
+steps = 1000                   # protocol E8: median of 1,000 steps, Mac CPU
+batch = 1
+position = "last"              # each timed step at the last horizon position (B8 keeps no cache; worst case)
