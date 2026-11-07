@@ -1,0 +1,13 @@
+"# Donadel et al., CPSS 2025 (arXiv 2505.22638), Table 2 verbatim: best noise per measurement; Prob = P(classified real); Delta = change for dynamic samples. 'column' = our preprocessed EPIC column name (added)."
+value,column,best_noise,prob,delta
+voltage V1,V1,GMM,0.267,0.064
+voltage V2,V2,Autoencoder,0.397,0.078
+voltage V3,V3,Autoencoder,0.356,0.076
+current I1,C1,Gaussian2,0.688,0.052
+current I2,C2,Gaussian2,0.365,0.074
+current I3,C3,Gaussian2,0.525,0.065
+frequency,frequency,GMM,0.331,0.233
+power_apparent,power_apparent,Gaussian2,0.605,0.039
+power_reactive,power_reactive,Laplace+Uniform,0.133,0.045
+power_real,power_real,Gaussian2,0.707,0.073
+all values,all,GMM,0.418,0.119
