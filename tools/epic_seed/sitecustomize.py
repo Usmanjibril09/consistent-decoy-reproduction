@@ -11,3 +11,9 @@ if _seed is not None:
         pass
     else:
         _np.random.seed(int(_seed))
+# Smoke part 2 (VRNN): also seed torch's global RNG when EPIC_TORCH_SEED is set.
+# The power generators never set it, so smoke-1 behaviour is unchanged.
+_tseed = _os.environ.get("EPIC_TORCH_SEED")
+if _tseed is not None:
+    import torch as _torch
+    _torch.manual_seed(int(_tseed))
