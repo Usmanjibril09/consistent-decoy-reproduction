@@ -1,0 +1,195 @@
+{
+ "upstream_commit": "7533f59e94e9f54d8e3f151cc53a02a5c6146b6f",
+ "repo_head": "2aabe69c41f6f5b941ab29ec5358112b99570ea6",
+ "script_sha256": "82c51cf0efdac5d7a551168ded2eae2337ff4ceebbd37a760a7eeab9d1910847",
+ "requirements_epic_sha256": "d40286fa9c5ba57532d85de9e63d0c3921ac88bebf9001b1ee7da4262b285676",
+ "location": "/Users/ujw/epic_work/generation",
+ "jobs": [
+  {
+   "label": "static_s0",
+   "seed": 0,
+   "kind": "static",
+   "seconds": {
+    "Pandapower": 2227.8,
+    "Mosaik": 375.4
+   }
+  },
+  {
+   "label": "dynamic_s100",
+   "seed": 100,
+   "kind": "dynamic",
+   "seconds": {
+    "Pandapower": 2227.9,
+    "Mosaik": 375.5
+   }
+  },
+  {
+   "label": "static_s1",
+   "seed": 1,
+   "kind": "static",
+   "seconds": {
+    "Pandapower": 2227.8,
+    "Mosaik": 375.4
+   }
+  },
+  {
+   "label": "static_s2",
+   "seed": 2,
+   "kind": "static",
+   "seconds": {
+    "Pandapower": 2232.8,
+    "Mosaik": 375.5
+   }
+  },
+  {
+   "label": "static_s3",
+   "seed": 3,
+   "kind": "static",
+   "seconds": {
+    "Pandapower": 2207.8,
+    "Mosaik": 375.5
+   }
+  },
+  {
+   "label": "static_s4",
+   "seed": 4,
+   "kind": "static",
+   "seconds": {
+    "Pandapower": 2212.8,
+    "Mosaik": 370.5
+   }
+  },
+  {
+   "label": "dynamic_s101",
+   "seed": 101,
+   "kind": "dynamic",
+   "seconds": {
+    "Pandapower": 2212.8,
+    "Mosaik": 370.5
+   }
+  },
+  {
+   "label": "dynamic_s102",
+   "seed": 102,
+   "kind": "dynamic",
+   "seconds": {
+    "Pandapower": 2207.6,
+    "Mosaik": 370.5
+   }
+  },
+  {
+   "label": "dynamic_s103",
+   "seed": 103,
+   "kind": "dynamic",
+   "seconds": {
+    "Pandapower": 1852.5,
+    "Mosaik": 320.4
+   }
+  },
+  {
+   "label": "dynamic_s104",
+   "seed": 104,
+   "kind": "dynamic",
+   "seconds": {
+    "Pandapower": 1852.5,
+    "Mosaik": 320.4
+   }
+  }
+ ],
+ "static_rule": "generator.sh unmodified; 'dynamic_' prefix stripped from file names (D49)",
+ "seed0_equals_smoke1": true,
+ "seed0_clock_only_differences": {
+  "dynamic_Panda+gaussian+uniform.csv": [
+   "timestamp"
+  ],
+  "dynamic_Panda+gaussian1.csv": [
+   "timestamp"
+  ],
+  "dynamic_Panda+gaussian2.csv": [
+   "timestamp"
+  ],
+  "dynamic_Panda+gmm.csv": [
+   "timestamp"
+  ],
+  "dynamic_Panda+laplace+poisson.csv": [
+   "timestamp"
+  ],
+  "dynamic_Panda+laplace+uniform.csv": [
+   "timestamp"
+  ],
+  "dynamic_Panda+laplace.csv": [
+   "timestamp"
+  ],
+  "dynamic_Panda+pink.csv": [
+   "timestamp"
+  ],
+  "dynamic_Panda+poisson.csv": [
+   "timestamp"
+  ],
+  "dynamic_Panda+uniform.csv": [
+   "timestamp"
+  ],
+  "dynamic_Panda_clean.csv": [
+   "timestamp"
+  ],
+  "dynamic_Panda_denoised.csv": [
+   "timestamp"
+  ],
+  "dynamic_Mosaik+gaussian+uniform.csv": [
+   "timestamp"
+  ],
+  "dynamic_Mosaik+gaussian1.csv": [
+   "timestamp"
+  ],
+  "dynamic_Mosaik+gaussian2.csv": [
+   "timestamp"
+  ],
+  "dynamic_Mosaik+gmm.csv": [
+   "timestamp"
+  ],
+  "dynamic_Mosaik+laplace+poisson.csv": [
+   "timestamp"
+  ],
+  "dynamic_Mosaik+laplace+uniform.csv": [
+   "timestamp"
+  ],
+  "dynamic_Mosaik+laplace.csv": [
+   "timestamp"
+  ],
+  "dynamic_Mosaik+pink.csv": [
+   "timestamp"
+  ],
+  "dynamic_Mosaik+poisson.csv": [
+   "timestamp"
+  ],
+  "dynamic_Mosaik+uniform.csv": [
+   "timestamp"
+  ],
+  "dynamic_Mosaik.csv": [
+   "timestamp"
+  ]
+ },
+ "vrnn": {
+  "epochs_saved": [
+   1,
+   11,
+   21,
+   31,
+   41
+  ],
+  "seconds": 958.4,
+  "last_losses": {
+   "epoch": 41.0,
+   "train_loss": 55.65830727192401,
+   "kld_loss": 4.128553334949086e-05,
+   "nll_loss": 57.14714730272015
+  },
+  "weights_sha256": "5e726c974743e3c470fcd78c3ef4f014ae2403d262961d4adea066c3e9a5e631",
+  "smoke_copied_checkpoint": false
+ },
+ "vrnn_generate_rule": "generate.py unmodified on noise-free Mosaik / Panda_clean; power_reactive->power_effective; EPIC_SEED=EPIC_TORCH_SEED=generation seed; renamed +autoencoder",
+ "n_files": 250,
+ "megabytes": 179.9,
+ "manifest_sha256": "e6d2aa92a83062de4dd3b791a0a8e48f9882544af4d403a37913b77599e769d0",
+ "wall_seconds": 8492.7
+}
