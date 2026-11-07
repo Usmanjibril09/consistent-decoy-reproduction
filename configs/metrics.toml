@@ -1,0 +1,73 @@
+# Stage 3d-2..3d-4 metric settings (D51). Fixed before any of these metrics is computed.
+# Separate file: experiment.toml (59a11b235108) and evaluation.toml stay unchanged.
+
+[fit]
+dtype = "float64"
+units = "training_z"                 # FIT invariant to per-tag affine scaling; smoke checks equality with physical units
+p_real_tag = "spec/hai2305_command_attacks.csv:response"
+pool_tiles = true                    # A207: 3 tiles scored as one set (D36)
+per_attack = "fit_per_seed_then_mean_over_seeds"
+all_tag_secondary = true
+nonfinite = "minus_inf_kept_ranks_worst"
+crosstime = "from_sse_and_real_sums"  # FIT = 100(1 - sqrt(SSE)/sqrt(sumsq - sum^2/n)), checked against direct FIT on normal set
+
+[detector]
+decoy_window = "real_warmup_real_command_exogenous_decoy_response_physical"
+h3_h4_unit = "base_window_mean_over_oor_probes_and_seeds"
+secondary = ["in_range_rate", "per_rule_rate", "decoy_normal_rate", "decoy_p_real_rate"]
+
+[dtw]
+implementation = "own_numpy_unit_tested"
+band_frac = 0.10                     # Sakoe-Chiba, 30 steps HAI, 50 QAPPD
+local_cost = "squared_euclidean_response_tags"
+distance = "sqrt_total_cost"
+pairing = "same_window"
+summary = "median_over_windows"
+sets = ["normal", "p_real", "p_anom"]
+
+[context_fid]
+real = "heldout_normal_all_windows_horizon_response"
+decoy = "same_windows"
+per = "method_seed"
+reference = "real_first_half_vs_real_second_half"
+
+[rnn]                                 # evaluation.toml [yoon] plus:
+input = "horizon_response"
+scale = "minmax_train_half_both_classes"
+halves = "results/phase3/simprocess/selection.json"   # D46(b), all windows of each half
+classifier_seed = "torch_manual_seed"
+
+[minirocket]                          # evaluation.toml [minirocket] plus:
+input = "horizon_response"
+scale = "standard_scaler_on_features_train_half"
+random_state = "classifier_seed"
+
+[psyn_flag]
+classifiers = ["rnn", "minirocket"]
+windows = "all_p_syn"
+report_by = ["set", "kind"]
+
+[tstr]
+cell = "gru"
+layers = 2                            # protocol E8; Yoon code uses 1 (noted)
+hidden = "int(dim_in/2)"
+iterations = 5000                     # Yoon predictive_metrics.py
+batch = 128
+optimizer = "adam_default"
+input = "horizon_command_exogenous_response_t"
+target = "response_t_plus_1_all_tags"  # Yoon: last feature only (adaptation, noted)
+output = "linear"                      # Yoon: sigmoid (adaptation: real values outside training range not clipped)
+scale = "minmax_phase2_training_windows"
+train = "decoy_train_half"
+test = "real_test_half"
+metric = "mae_mean_over_tags"
+seeds_per_training_seed = 1
+reference = "trtr_real_train_half_to_real_test_half"
+
+[latency]                             # evaluation.toml [latency] plus:
+threads = 1
+warmup_steps = 50
+gru = "one_recurrent_step_state_carried"
+transformer = "full_context_recompute_no_cache"
+layers_included = true                # C2/C3 cost counted for Full, B8-L
+model_size = "trainable_parameters; B2 theta size; B3 parameter count"
