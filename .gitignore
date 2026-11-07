@@ -7,3 +7,4 @@ __pycache__/
 .venv-train/
 dist/
 .venv-eval/
+.venv-epic/

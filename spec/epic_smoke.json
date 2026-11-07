@@ -1,0 +1,169 @@
+{
+ "upstream_commit": "7533f59e94e9f54d8e3f151cc53a02a5c6146b6f",
+ "repo_head": "204e15d",
+ "python": "3.12.14",
+ "numpy": "1.26.4",
+ "requirements_epic_sha256": "cad8663dc62ebee5b6154b007f77da056e8e74da3e1884ba3458db99498e0b53",
+ "epic_copies": {
+  "EPIC1.csv": {
+   "source": "processed_EpicLog_Scenario 1_19_Oct_2018_14_44.csv",
+   "sha256": "ce7befcc880452f213696728f2a19f903dc25757df9c055632f4238c19ede6a6"
+  },
+  "EPIC2.csv": {
+   "source": "processed_EpicLog_Scenario 2_19_Oct_2018_14_56.csv",
+   "sha256": "ac3982f554f66cd8023ecafbe86ebe0d43b729f45d822ad47b41ce29457e5a41"
+  },
+  "EPIC3.csv": {
+   "source": "processed_EpicLog_Scenario 3_19_Oct_2018_15_02.csv",
+   "sha256": "620238ef3d4241f4e6668629d8f345c05bfe2711382bbe76931baae562bd0d8a"
+  },
+  "EPIC4.csv": {
+   "source": "processed_EpicLog_Scenario 4_19_Oct_2018_15_23.csv",
+   "sha256": "a7406910d5fb91dc05ab39b6a152af608f52e0c500d7de2b4f0c476fe22958ac"
+  },
+  "EPIC5.csv": {
+   "source": "processed_EpicLog_Scenario 5_19_Oct_2018_15_45.csv",
+   "sha256": "47c13224f3770d1c0448748e4015ae3434914b49946a32aacf12a7404c3101d1"
+  },
+  "EPIC6.csv": {
+   "source": "processed_EpicLog_Scenario 6_19_Oct_2018_16_06.csv",
+   "sha256": "5d780f1109fbb5fa43d8771de0cfd7146d39ec7c155a35f80534da6ec9441fe2"
+  },
+  "EPIC7.csv": {
+   "source": "processed_EpicLog_Scenario 7_07_Nov_2018_14_40.csv",
+   "sha256": "af572a26733b4664375d78ea77a7d0b23cf691358ac31be45f7a98387bd04cf1"
+  },
+  "EPIC8.csv": {
+   "source": "processed_EpicLog_Scenario 8_07_Nov_2018_14_57.csv",
+   "sha256": "375c651318401969ddfd67efba9676c32c368de8ad13d44a8924d721d826ac8d"
+  }
+ },
+ "rule": "seed0 twice identical (bytes, or only time/date columns differ); noisy outputs change with seed 1; noise-free outputs exempt",
+ "clock_column_exemptions": {
+  "Generators/Pandapower/dynamic_Panda+gaussian+uniform.csv": [
+   "timestamp"
+  ],
+  "Generators/Pandapower/dynamic_Panda+gaussian1.csv": [
+   "timestamp"
+  ],
+  "Generators/Pandapower/dynamic_Panda+gaussian2.csv": [
+   "timestamp"
+  ],
+  "Generators/Pandapower/dynamic_Panda+gmm.csv": [
+   "timestamp"
+  ],
+  "Generators/Pandapower/dynamic_Panda+laplace+poisson.csv": [
+   "timestamp"
+  ],
+  "Generators/Pandapower/dynamic_Panda+laplace+uniform.csv": [
+   "timestamp"
+  ],
+  "Generators/Pandapower/dynamic_Panda+laplace.csv": [
+   "timestamp"
+  ],
+  "Generators/Pandapower/dynamic_Panda+pink.csv": [
+   "timestamp"
+  ],
+  "Generators/Pandapower/dynamic_Panda+poisson.csv": [
+   "timestamp"
+  ],
+  "Generators/Pandapower/dynamic_Panda+uniform.csv": [
+   "timestamp"
+  ],
+  "Generators/Pandapower/dynamic_Panda_clean.csv": [
+   "timestamp"
+  ],
+  "Generators/Pandapower/dynamic_Panda_denoised.csv": [
+   "timestamp"
+  ],
+  "Generators/Mosaik/dynamic_Mosaik+gaussian+uniform.csv": [
+   "timestamp"
+  ],
+  "Generators/Mosaik/dynamic_Mosaik+gaussian1.csv": [
+   "timestamp"
+  ],
+  "Generators/Mosaik/dynamic_Mosaik+gaussian2.csv": [
+   "timestamp"
+  ],
+  "Generators/Mosaik/dynamic_Mosaik+gmm.csv": [
+   "timestamp"
+  ],
+  "Generators/Mosaik/dynamic_Mosaik+laplace+poisson.csv": [
+   "timestamp"
+  ],
+  "Generators/Mosaik/dynamic_Mosaik+laplace+uniform.csv": [
+   "timestamp"
+  ],
+  "Generators/Mosaik/dynamic_Mosaik+laplace.csv": [
+   "timestamp"
+  ],
+  "Generators/Mosaik/dynamic_Mosaik+pink.csv": [
+   "timestamp"
+  ],
+  "Generators/Mosaik/dynamic_Mosaik+poisson.csv": [
+   "timestamp"
+  ],
+  "Generators/Mosaik/dynamic_Mosaik+uniform.csv": [
+   "timestamp"
+  ],
+  "Generators/Mosaik/dynamic_Mosaik.csv": [
+   "timestamp"
+  ],
+  "Generators/Mosaik/results.csv": [
+   "date"
+  ]
+ },
+ "noise_free": {
+  "Pandapower": [
+   "dynamic_Panda_clean.csv",
+   "dynamic_Panda_denoised.csv"
+  ],
+  "Mosaik": [
+   "dynamic_Mosaik.csv"
+  ]
+ },
+ "seed0_outputs": {
+  "Pandapower": {
+   "Generators/Pandapower/dynamic_Panda+gaussian+uniform.csv": "8f5be311d0b066037d0720a43478c97994da3b57cc23a2f14aa1ee4985368350",
+   "Generators/Pandapower/dynamic_Panda+gaussian1.csv": "f4bd7ca88af5c1750f28658a0accea1fe3dc27c4bab048c6a204d9636bb4ac78",
+   "Generators/Pandapower/dynamic_Panda+gaussian2.csv": "eeba4969f9cf0aec5845bf203cc915aecc83f79c0a2d2190d866092d3566881a",
+   "Generators/Pandapower/dynamic_Panda+gmm.csv": "425a72fd92f653020ef43f6cdfb0f08765d578699e0f1e473aeb7306b2c05418",
+   "Generators/Pandapower/dynamic_Panda+laplace+poisson.csv": "3aec0c4b04ea72d3063636fa8a225f74dcf5a5ff8b0d526eafd07cad41722f4a",
+   "Generators/Pandapower/dynamic_Panda+laplace+uniform.csv": "7d7e3b19111cbd10a37e73bd71baf0bcd729a21eef2271646a9daec20786bcc6",
+   "Generators/Pandapower/dynamic_Panda+laplace.csv": "50094e6c2020fc146858b6c9aba78de78d48e708f582431c84f047b12c7bfe02",
+   "Generators/Pandapower/dynamic_Panda+pink.csv": "89fecb5ddd2bb78207c427dc5c3666c723ea8c54988ab4859e509bf94f5bd3bd",
+   "Generators/Pandapower/dynamic_Panda+poisson.csv": "9a79daf82bc489cc420fcef2c4d4b4b97bbb0e417b5e1147db6eff4838572684",
+   "Generators/Pandapower/dynamic_Panda+uniform.csv": "8ad852e95b747b529aa5710246ab1cc0723e8178e08610157b463ad95758f1bb",
+   "Generators/Pandapower/dynamic_Panda_clean.csv": "06da2471cb28012617e7804556604c611a89a5b0916c1b888e35bfdac340bfee",
+   "Generators/Pandapower/dynamic_Panda_denoised.csv": "4ff3c4225f42fbdeea47a11b6ece5dda3bd058009e4ebfc5b80e8e703f504815"
+  },
+  "Mosaik": {
+   "Generators/Mosaik/dynamic_Mosaik+gaussian+uniform.csv": "74ec6b3c8f7ee0d6e9a4299a6d5282568fc94eb605a37b629b47fc1ca7318ca2",
+   "Generators/Mosaik/dynamic_Mosaik+gaussian1.csv": "3a7b50e853205c4d4918b61349314539d70c3a067e812c815dded829c280b7fe",
+   "Generators/Mosaik/dynamic_Mosaik+gaussian2.csv": "75181497d1a0aef523518dce7c8a363314f3b1168c159f502675255c4aba8f95",
+   "Generators/Mosaik/dynamic_Mosaik+gmm.csv": "66a933ff8cdc876902d550154e942d1f1911f73243354b99abb44b393991c2c6",
+   "Generators/Mosaik/dynamic_Mosaik+laplace+poisson.csv": "f9da79fe86a058f7082583295be20eaa230345f79ac2a11995d5ac0ed6e2b05a",
+   "Generators/Mosaik/dynamic_Mosaik+laplace+uniform.csv": "f58a5777bb2f278a22351a7c2a843708eb3dd3d7ecb16c85c24ac5e5586b4bb8",
+   "Generators/Mosaik/dynamic_Mosaik+laplace.csv": "343ca298a48fe3c8d2d78a36401389a46abecf4bdd25e58a9523dbc3063d96c7",
+   "Generators/Mosaik/dynamic_Mosaik+pink.csv": "d0f2aced786af3352d0af60840476bf1a16e205046dbf3bce776baeb49fc1294",
+   "Generators/Mosaik/dynamic_Mosaik+poisson.csv": "bdc1d56d964a44834c5e7a58bb2673f8f3c9f4d55a91f0a31b724f6ad7b3b5fb",
+   "Generators/Mosaik/dynamic_Mosaik+uniform.csv": "9771fdbe5c020e607315ccebb8ef449a5c3531d350a1c8fef714dc0b7d3bdbc5",
+   "Generators/Mosaik/dynamic_Mosaik.csv": "c8bd8d0610140352c39887e04db26b61c5643744bf054f87f6cae5c2e150b069",
+   "Generators/Mosaik/results.csv": "121225348d7fab76c6f7731c8373e5f406b064f6bcd23f16c72c3909b94bc43a"
+  }
+ },
+ "seconds": {
+  "seed0_a": {
+   "Pandapower": 2126.6,
+   "Mosaik": 335.3
+  },
+  "seed0_b": {
+   "Pandapower": 1872.3,
+   "Mosaik": 330.4
+  },
+  "seed1": {
+   "Pandapower": 1877.2,
+   "Mosaik": 315.5
+  }
+ }
+}
