@@ -1,0 +1,13 @@
+"# D49 reference: Table 2 vs upstream 7533f59 sample_results, RandomForest, window 20; P(real) of the Table 2 noise = max over Panda and Mosaik sources; spread = |rf_w20 - allRF_w20|; tol_floor = max(0.05, spread); final tolerance adds 2 sd of our 5 generations"
+value,column,table2_noise,table2_prob,up_rf_w20,up_allrf_w20,up_spread,tol_floor,primary
+voltage V1,V1,GMM,0.267,0.2617,0.2570,0.0048,0.0500,1
+voltage V2,V2,Autoencoder,0.397,0.3739,0.3352,0.0387,0.0500,0
+voltage V3,V3,Autoencoder,0.356,0.3756,0.3785,0.0029,0.0500,0
+current I1,C1,Gaussian2,0.688,0.6966,0.6979,0.0013,0.0500,1
+current I2,C2,Gaussian2,0.365,0.3653,0.3552,0.0101,0.0500,1
+current I3,C3,Gaussian2,0.525,0.5351,0.5337,0.0015,0.0500,1
+frequency,frequency,GMM,0.331,0.3388,0.3093,0.0295,0.0500,1
+power_apparent,power_apparent,Gaussian2,0.605,0.6240,0.6248,0.0007,0.0500,1
+power_reactive,power_reactive,Laplace+Uniform,0.133,0.1321,0.1309,0.0012,0.0500,1
+power_real,power_real,Gaussian2,0.707,0.7750,0.7300,0.0450,0.0500,1
+all values,all,GMM,0.418,0.5302,0.4133,0.1170,0.1170,1
