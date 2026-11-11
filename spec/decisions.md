@@ -158,3 +158,20 @@ D66 (2026-11-12): D48(f) paper-settings sensitivity arm; settings fixed before t
 (c) Gate: our D45/D46 classifier refitted from the stored features reproduced the stored results exactly for C1-Full_s0 and B1_s0 on both plants (HAI 1.000 / 0.562, QAPPD 1.000 / 0.662).
 (d) Disclosure: the smoke run was meant to show no values, but upstream logging (not suppressed by the script) printed row-level test metrics for C1-Full_s0 before this entry: HAI accuracy U 0.810, U-split 0.676; QAPPD U 0.326, U-split 0.382. The settings in (a)-(b) were proposed before the smoke run; nothing was changed after seeing these values. All 50 outputs are reported whichever way they fall.
 Script sha256 46cb65837e85f92d825f932ed6b6339d1db9a2f402964f63ab8675f0fccb6a5a; smoke record sha256 8c9be533bb45fc4eb65c778e23af14ff7482f924f1b72c8cac05203bc7e543f6; config 59a11b235108; projected full run ~1 h.
+
+D67 (2026-11-12): D48(f) sensitivity arm results recorded (summary sha256 5dd15ee49dbf5b54888d617b6dc590daa26b6cc31da05f950a22f8ef6bdff8dc; script 46cb65837e85f92d825f932ed6b6339d1db9a2f402964f63ab8675f0fccb6a5a; log 753e119e332790f204f777982d06072e4b5e1ba8c709af4321a826823c4516df).
+(a) Summary as printed by the run (mean (sd) over training seeds 0-4):
+    == D48(f) sensitivity: mean (sd) over seeds 0-4 | ours = D45/D46 stored, mean over classifier seeds
+       hai   C1-Full  ours acc 1.000 P(real) 0.002 | U acc 0.884 (0.044) P(real) 0.225 (0.075) | U-split acc 0.819 (0.089) P(real) 0.291 (0.098)
+       hai   C1       ours acc 1.000 P(real) 0.001 | U acc 0.890 (0.067) P(real) 0.219 (0.103) | U-split acc 0.849 (0.067) P(real) 0.259 (0.102)
+       hai   B8       ours acc 1.000 P(real) 0.002 | U acc 0.843 (0.064) P(real) 0.280 (0.097) | U-split acc 0.805 (0.093) P(real) 0.308 (0.116)
+       hai   B8-L     ours acc 1.000 P(real) 0.002 | U acc 0.774 (0.124) P(real) 0.340 (0.146) | U-split acc 0.746 (0.145) P(real) 0.361 (0.159)
+       hai   B1       ours acc 0.575 P(real) 0.393 | U acc 0.350 (0.035) P(real) 0.621 (0.020) | U-split acc 0.328 (0.030) P(real) 0.640 (0.021)
+       qappd C1-Full  ours acc 1.000 P(real)   n/a | U acc 0.260 (0.038) P(real) 0.697 (0.032) | U-split acc 0.301 (0.047) P(real) 0.709 (0.031)  [QAPPD P(real): diagnostic, not M2b (D43)]
+       qappd C1       ours acc 1.000 P(real)   n/a | U acc 0.294 (0.100) P(real) 0.677 (0.049) | U-split acc 0.325 (0.055) P(real) 0.693 (0.040)  [QAPPD P(real): diagnostic, not M2b (D43)]
+       qappd B8       ours acc 1.000 P(real)   n/a | U acc 0.360 (0.068) P(real) 0.628 (0.049) | U-split acc 0.404 (0.080) P(real) 0.643 (0.050)  [QAPPD P(real): diagnostic, not M2b (D43)]
+       qappd B8-L     ours acc 1.000 P(real)   n/a | U acc 0.400 (0.149) P(real) 0.626 (0.100) | U-split acc 0.401 (0.145) P(real) 0.638 (0.097)  [QAPPD P(real): diagnostic, not M2b (D43)]
+       qappd B1       ours acc 0.667 P(real)   n/a | U acc 0.422 (0.037) P(real) 0.586 (0.016) | U-split acc 0.426 (0.084) P(real) 0.582 (0.034)  [QAPPD P(real): diagnostic, not M2b (D43)]
+    SENSITIVITY FULL DONE in 0h49m57s -> results/phase3/sensitivity/summary.json sha256 5dd15ee49dbf5b54888d617b6dc590daa26b6cc31da05f950a22f8ef6bdff8dc
+(b) Gate: our D45/D46 classifier reproduced stored results exactly in the smoke run (D66(c)); the full run used the same script hash and the same stored, manifest-checked features.
+(c) Interpretation fixed now, before Arm O: under the authors' settings (reversed top-11 ranking, SMOTE 0.9, recall-tuned grid) the HAI learned decoys reach P(real) 0.22-0.36 (ours ~0.002), within the range of the authors' published noise models; detectability therefore depends on detector configuration. Together with D65 (rank fix drops the authors' own EPIC all-values P(real) to ~0.001) this shows the published configuration understates detectability; it is not evidence of decoy realism. QAPPD accuracies below 0.5 reflect a degenerate detector (640 rows, least-relevant features, nearly everything labelled real), reported as such. Under these settings Transformer + layers (B8-L) scores above the proposed decoy (C1-Full) on HAI; reported as is. Outside the Holm family; no D45/D46 setting changed.
