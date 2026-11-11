@@ -138,9 +138,9 @@ def run_job(label, mode, out, arg, cwd, code):
                     _f.seek(0, 2); _n = _f.tell(); _f.seek(max(0, _n - 65536)); _tail = _f.read()
             except OSError:
                 _n, _tail = 0, b""
-            if b"Traceback" in _tail or _n > 50_000_000:
+            if b"Traceback" in _tail or _n > 500_000_000:
                 p.kill(); p.wait()
-                raise SystemExit(f"STOP: {label}: " + ("traceback in log" if b"Traceback" in _tail else "log over 50 MB") + f" -> {log}")
+                raise SystemExit(f"STOP: {label}: " + ("traceback in log" if b"Traceback" in _tail else "log over 500 MB") + f" -> {log}")
             if time.time() - beat >= 60:
                 beat = time.time(); say(f"      ... {label} {fmt(beat - t0)} | {last_step(log)}")
     if p.returncode != 0:

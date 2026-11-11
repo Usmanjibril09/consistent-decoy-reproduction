@@ -1,8 +1,8 @@
 {
  "stage": "epic_classify_smoke",
  "values_displayed": false,
- "repo_head": "7bc2b5b",
- "script_sha256": "cc8b577d4996eed5e2fb751bb5e35b651affedca098da701aee52bafa1a176ee",
+ "repo_head": "7ba9623",
+ "script_sha256": "bea1c960d8550dd31a18ccffc994cc81158d03aeec4556e849513e498808f21a",
  "runner_sha256": "4f6537cfd63cb3035b767021b5fa6e16f2f0134ea12d06fc56760fc6871d79c3",
  "upstream_commit": "7533f59e94e9f54d8e3f151cc53a02a5c6146b6f",
  "rank_diff": [
@@ -83,7 +83,7 @@
    16088,
    64
   ],
-  "seconds": 180.1487431526184
+  "seconds": 175.1396462917328
  },
  "trainings": {
   "U_a": {
@@ -134,5 +134,5 @@
   "train_total_s": 10395.483189225197,
   "disk_per_generation_gb": 0.682378163
  },
- "seconds": 1196.016099691391
+ "seconds": 178.94192481040955
 }
