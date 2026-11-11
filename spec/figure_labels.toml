@@ -1,0 +1,60 @@
+# Display names for every figure (Batch A and Batch B). Codes (B1, C1, M1, H1, ...) never appear in a figure.
+# In the paper, give each name with its code once, in the methods table, e.g. "Replay (B1)".
+# "layers" = the physics-rule layer and the grey-box fallback added to the network; define once in the caption.
+# Edit names here only; scripts/fig_labels.py applies them and stops if a code survives or text is cut off/overlaps.
+
+[methods]
+"C1-Full" = "Proposed decoy"
+"C1" = "w/o both layers"
+"C1-A1" = "w/o physics rules"
+"C1-A2" = "w/o fallback"
+"C1-A4" = "Limit rules only"
+"A3" = "w/o command & layers"
+"A3-L" = "w/o command input"
+"B1" = "Replay"
+"B2" = "ARX model"
+"B3" = "Grey-box model"
+"B4" = "LSTM"
+"B5" = "RCGAN"
+"B6" = "GAN + autoencoder"
+"B7" = "TimeGAN"
+"B8" = "Transformer"
+"B8-L" = "Transformer + layers"
+"B9" = "NeuPot"
+
+[variants]
+"Full" = "Proposed decoy"
+"A1" = "w/o physics rules"
+"A2" = "w/o fallback"
+"A3-bare" = "w/o command & layers"
+"A4" = "Limit rules only"
+"A5" = "w/o both layers"
+
+[override.R4]
+"A3" = "w/o command input"
+
+[terms]
+"M1" = "Attack FIT"
+"M2b" = "SimProcess P(real)"
+"M2" = "Detectability"
+
+[exact]
+"HAI M1 (FIT %)" = "HAI attack FIT (%)"
+"M1 per seed (FIT %)" = "Attack FIT per seed (%)"
+"M1 (FIT %)" = "Attack FIT (%)"
+"M1, FIT (%)" = "Attack FIT (%)"
+"M2 MR" = "MiniRocket"
+"M2 RNN" = "RNN classifier"
+"M2 SP" = "SimProcess"
+"M2b SP" = "SimProcess P(real)"
+"Det. in-range" = "In-range alarms"
+"Det. OOR" = "Out-of-range alarms"
+"Interior OOR" = "Interior alarms"
+"FIT cross" = "FIT cross-time"
+"FIT P-anom" = "FIT anomalous"
+"DTW P-anom" = "DTW anomalous"
+"step + C2/C3" = "step + layers"
+"full-context + C2/C3" = "full-context + layers"
+
+[gate]
+code_regex = '(?<![A-Za-z0-9_-])(?:[ABCH]\d(?:-[A-Z]\w*)?|M\d+b?|MR|SP|OOR)(?![A-Za-z0-9_-])'
