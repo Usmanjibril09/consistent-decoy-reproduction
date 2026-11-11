@@ -1,0 +1,77 @@
+{
+ "script_sha256": "46cb65837e85f92d825f932ed6b6339d1db9a2f402964f63ab8675f0fccb6a5a",
+ "classify_sha256": "caf4e298e59e8f198fc24977362e5d49e1b8bf0f22e7de0ddd6b7a7c23b84e80",
+ "repo_head": "daebd39",
+ "versions": {
+  "sklearn": "1.5.2",
+  "imblearn": "0.14.2",
+  "tsfresh": "0.20.2",
+  "numpy": "1.26.4",
+  "pandas": "2.2.3"
+ },
+ "gate": {
+  "hai/C1-Full_s0": {
+   "accuracy": 1.0,
+   "m2b": 0.001417715133017473,
+   "seconds": 31.884039878845215
+  },
+  "hai/B1_s0": {
+   "accuracy": 0.5625,
+   "m2b": 0.40202837220600685,
+   "seconds": 97.57036089897156
+  },
+  "qappd/C1-Full_s0": {
+   "accuracy": 1.0,
+   "m2b": 0.009375,
+   "seconds": 7.308820962905884
+  },
+  "qappd/B1_s0": {
+   "accuracy": 0.6625,
+   "m2b": 0.40368750000000003,
+   "seconds": 11.402344942092896
+  }
+ },
+ "checks": {
+  "hai": {
+   "top11": [
+    "noise_P1_FT03Z_mean",
+    "noise_P1_FCV03Z_skewness",
+    "noise_P1_LIT01_mean_change",
+    "noise_P1_FCV03Z_median",
+    "noise_P1_FT03_median",
+    "noise_P1_LIT01_skewness",
+    "noise_P1_FT03Z_time_reversal_asymmetry",
+    "noise_P1_FT02_count_above_mean",
+    "noise_P1_LIT01_time_reversal_asymmetry",
+    "P1_FT03Z_skewness",
+    "noise_P1_FCV01Z_median"
+   ],
+   "nan_p_values": 288
+  },
+  "qappd": {
+   "top11": [
+    "noise_MotorSpeed1_percentage_reoccurring_datapoints",
+    "FilteredPitch_autocorr",
+    "noise_MotorSpeed1_percentage_reoccurring_values",
+    "noise_MotorSpeed0_quantile_25",
+    "noise_FilteredYaw_root_mean_square",
+    "Current0_variance_mean_ratio",
+    "noise_Current0_longest_strike_above_mean",
+    "noise_MotorSpeed1_binned_entropy",
+    "noise_FilteredPitch_median",
+    "noise_Current0_mean_change",
+    "noise_Yaw_variance"
+   ],
+   "nan_p_values": 182
+  }
+ },
+ "seconds_per_output": {
+  "hai": 135.08210062980652,
+  "qappd": 6.900068283081055
+ },
+ "projection_s": {
+  "hai": 3377.052515745163,
+  "qappd": 172.50170707702637
+ },
+ "values_displayed": false
+}
