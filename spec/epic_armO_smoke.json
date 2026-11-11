@@ -1,0 +1,2473 @@
+{
+ "script_sha256": "7b62c69ab02b4933fc9ca6d38b51131e1336ecdb6877b1e6b985d254e0b6b8f7",
+ "classify_sha256": "caf4e298e59e8f198fc24977362e5d49e1b8bf0f22e7de0ddd6b7a7c23b84e80",
+ "repo_head": "2ad6d3f",
+ "inputs": {
+  "s0/all/C1": "af7e9926a36bcbc3a715149b1306098e5b41283445e0b4b8295d414e97a102a5",
+  "s0/all/C2": "c9be95e594f20f5c1b65f638cf22d2d811b9d2de2cb68dfca797e118a3da969f",
+  "s0/all/C3": "9418e61caaec621a9616080d2d34dba8206a226640e16639ada97c027015be1d",
+  "s0/all/V1": "ba83e6e35cba1ede8e4619cf635c42895ce017afa34b2aafd6a953785ded343a",
+  "s0/all/V2": "42a0c1354f49b8c865e33a69d03d14148cfed5cb15c644de13430f417581549d",
+  "s0/all/V3": "41ba099f8d14bbe6e3cd9eb6d0c4815a09951807a7670161ff807509934d9c2d",
+  "s0/all/frequency": "832ff9979f8b0bf6b8eaf59acb487dbabf95996e935de046b6380afca0907b34",
+  "s0/all/power_apparent": "8c4e29129eeacd3daef472875f8d710ccd715b23cae43cd80061253290380d91",
+  "s0/all/power_reactive": "029670f2b761170dfb649dfcaa1478fa7c60164182636539734921beda9a9061",
+  "s0/all/power_real": "a8eeadcdb631df8e33b337fc5b6940c93f2ecae11a330d5d47f7d1727c0451f1",
+  "s0/all/all_columns": "96faf34d6a6c654c6c6c31cae5aa37f27e0de043733bd050b2d1a5a02791a763",
+  "s0/no6/C1": "e8162ae7bb44eb1c7253bb684b3ce0e66191c4fdc53d3120af03ec1f41f8f2f4",
+  "s0/no6/C2": "b6b2ad96fd9d749d4d8befd179aa6048b11e102c534fbc26f35800628db545c3",
+  "s0/no6/C3": "a912f7e6397d54819121d450aeb523926d0f0d70a534666e201ded731e042a75",
+  "s0/no6/V1": "55c74de12ccf0d2790c5eda4d9d3345564d50415d09946f4c3cd2fc89436eddf",
+  "s0/no6/V2": "9b83b32b5bbe4634c3bb443b620b0f6948f36a5034ea2f9faf2746c672eb5339",
+  "s0/no6/V3": "db7a5195d6784fdbf13b652f5165c2e98dd9671b053f151e926e0bb0a1468a11",
+  "s0/no6/frequency": "2fece43b13555359bda84268c1ba2d15ef88c01de167973c7b80cce17fa603ed",
+  "s0/no6/power_apparent": "58059075e06a49736ca004f09126e99d01891e962864cc7c9d5c33872f73a920",
+  "s0/no6/power_reactive": "24d745da4fa811a1e0908269bd3aa60533a77be8bb1824225aba59b86b584313",
+  "s0/no6/power_real": "519980b9f7f439a5ac02872a7c59d9dfec0bc42ea797000e2ef588ab776815a3",
+  "s0/no6/all_columns": "b9a7b6266c4f39ceb3195093bd52887f0f5162c3a8fb1715a19b965a4fe1dc81",
+  "s1/all/C1": "d78c4ff27cdee9df1e44f385bc65036fda2edb9977a3c950d211353bff8aa346",
+  "s1/all/C2": "c9f20a8188ebdb445c123e81bbfefd54e97dfff3f3bc69747434569f7f257da2",
+  "s1/all/C3": "445ec25eb963ab0b308bfac3d74522a23c7e02634e2ae3b38a4da81ffcd7a430",
+  "s1/all/V1": "d47ad01ec706260e8f60c790334f9aa23897e99f1c8ab3700cb3a4cd8f8be759",
+  "s1/all/V2": "fa74d39b3085ac5f40b249d14b8a6b77ce05c609073b6dcf9b190f824f6682eb",
+  "s1/all/V3": "b1f20fd424fd304ebf3e1815835342aedc9bb5f1c82f324fe1e41d2d7becb48b",
+  "s1/all/frequency": "a5f914276a1e7583217f62a21ee3f2e93cdd0350c0ee2ca5504cc3cacaa6925b",
+  "s1/all/power_apparent": "ffa13896c6e92b2ab23b0f565f6084baccbc2730531f97e12ee16287cfae3fcc",
+  "s1/all/power_reactive": "c4fd6278150c11fa61ce5ba227d05fda7ed687c6cb51813f4c85661558b71e01",
+  "s1/all/power_real": "fb530c676acd16e661f7246ca830a9415a997ef99ea8b720817cc4b7a0e3c564",
+  "s1/all/all_columns": "fc5eb6f34173e83d555ca73592839eaa593b89227721ca439b58401fd6b5a3da",
+  "s1/no6/C1": "83fbfe4180e80866540dd9aebb6d363e569afdc66cbed9e7ab462e1204b3e92f",
+  "s1/no6/C2": "c64a358a832996ed7442e7ce49d8030c3927ed4a6401e2e31adb42cbee4ad90c",
+  "s1/no6/C3": "e602e707fafe3f76ea47ea143b50d8e191b73aa113f6e660b0c24075a35597cd",
+  "s1/no6/V1": "95e5e3c80850276af7c870986d20653463e87c4dbba301da0cb9c4a3bc65de17",
+  "s1/no6/V2": "9c1853a1ee72abacecc812d9edceefe158e56d9d9ec30d31760d9f9bd7bb658f",
+  "s1/no6/V3": "80dafecdbb3fccf746dd53652d790a7e7ca6ed3c939fc79215db48e81e2c305a",
+  "s1/no6/frequency": "66d49fd2cf5e417c4fd8f14ef4a435c2fdeb9d2d47b8feb960a6977cbf8bbdc9",
+  "s1/no6/power_apparent": "e8f744de28430e3e6354c5a0ae8573e3f7f7c8bd552627d2df6a90fc0a661f91",
+  "s1/no6/power_reactive": "631ad3a0a075e8559517f977a525fc5be25f9665c30b84fd612a13f9434071db",
+  "s1/no6/power_real": "5de060d1fcfa305690131b433833e38dbdebc690d8058a88070faf2a7573f43a",
+  "s1/no6/all_columns": "8849756a533b95bbf0738d320d750ffda9ae82475edb7e9bc84631590e5d302d",
+  "s2/all/C1": "e0ef607399b17b82d3c8c522e425921089e4e4d2709b18c1361ba805170f2361",
+  "s2/all/C2": "8c6704d7a471cad2cd4b325c6ef866768ea96b1c434f89db09dc1b1ef18e94c1",
+  "s2/all/C3": "924939cb3a7edb5323d25afac13d4605b5b57e887f4f4f6adbfa7aeee918a04f",
+  "s2/all/V1": "489b41e5897ad039cd941fcf59a321826f04611d45d804d2124ea3224c653a21",
+  "s2/all/V2": "f6dbadc0d35b45fbeea830696ce5602d5b8ec28345a77b2373d411286c7095b9",
+  "s2/all/V3": "6731a163a39ea79a22984797454aac7c04535bf7807d5ac89a815e943d354427",
+  "s2/all/frequency": "9dba4cf73f569ef7e15d77eee24436d5b12988de3d62282bdfc9329949d6b5a3",
+  "s2/all/power_apparent": "92a766aae8508e683ad41a599f0832ab658aa0bd60324c0d4add0a2efa669f99",
+  "s2/all/power_reactive": "b1171c8a6db945d06b8b1c3f8857d4d6e0264c708e34ee7f88411d691e52c80f",
+  "s2/all/power_real": "4334e90c6cc72947c5ac58762c03c5492a7b4ebb5ce0d7fea5fe7bd83dcc4483",
+  "s2/all/all_columns": "327ad1579d33dfff7e1a6590dc8349cd5796f86767eb0749006c39987bf05c31",
+  "s2/no6/C1": "0cecadc4e7bf9967344a9bf5a8bd9b02ee5937da04fb10e8bfa0c58a3d4bfa79",
+  "s2/no6/C2": "e9c934c1bf0f28da4a3e32bcef9d57d6293b29853c94cda7faa78627a6a64309",
+  "s2/no6/C3": "017ae674aab4cb5fd020f6a45e7d7cc80aa353028fc7bf6b44ed6257418ffea3",
+  "s2/no6/V1": "c677b048f0fce1e5333b3ed543e8887e2371cfa398850c348536a039fabb9c68",
+  "s2/no6/V2": "8cc2f0ee1f5a423f9b5136eb8802b2e457963e1c48a06ad1ca6b39a0de52fb83",
+  "s2/no6/V3": "33d5ca0761b6c3f5d4936ba2b6f50fe0d0f46a8e099a680ea00d3b4f74301e96",
+  "s2/no6/frequency": "82c56c8dcdd660dae5e3fcec584a3fe8eb2cdecfe5c7ee1553b58d5a2b9635d9",
+  "s2/no6/power_apparent": "8bd3b00b5c5cdc02918e9fd09e442cfec415b62a62a37f81bc2e84efe02d1c7f",
+  "s2/no6/power_reactive": "2cc4ca242415b8f6e1ce64d10813b784a31afe92e7bc71f781c614c84a39ec0c",
+  "s2/no6/power_real": "77eb98345b6e4fe7fd9eb0df50a998a2e70a1eb2a65951618b3e09b2ace1c45f",
+  "s2/no6/all_columns": "359822a76c7b21222ebd89e2564b7064b96bf6edc0a7b9e321c7aa8bb57eb3a8",
+  "s3/all/C1": "401125a00c84e5fcd804aedaaab4d61d4a9a748339503ee6dcd1b0452bd6b9a0",
+  "s3/all/C2": "8a9eaa048f941b72e602ff89354068d4f736962640729cd361da748f35b72c32",
+  "s3/all/C3": "95eca3c7efe1b7c74546da2d4810a0d02e0ced1d79a9705034874e7063169fc5",
+  "s3/all/V1": "02481a377e6f6dbc7c14316925f7df51b40fe508021596fec96be3d99b671d53",
+  "s3/all/V2": "d499320bdb481876e8769e6b87bffa49b5c664a88a12ad4b7fb0bf2fed694ea5",
+  "s3/all/V3": "93b95d987c7075e8f445a91a7b7048e65f1e689dacd8eb10dddeacb4570665fa",
+  "s3/all/frequency": "3802caded7c4aafe51a4f6dcdba9e5aa4f87ff58eccd0720e9295d0f7616e1ef",
+  "s3/all/power_apparent": "a115e706751554b70b604bc77950d0adfe06026dc99d78512bf8865c13058162",
+  "s3/all/power_reactive": "ac4b42ace0f78ef26805c21cd0c827db016b61f1d0b482b39c849cb94910171c",
+  "s3/all/power_real": "6c12dd3e0417a40fc750bfc298cb5996a202b321cb4f0367173cf65d7f3bc622",
+  "s3/all/all_columns": "7ad0bdb48a61ea98bdf52a361225f5e9ba262831d86b28a7b8a2127d343f6cc5",
+  "s3/no6/C1": "92f4cdcd7ebe1ccf8f849402acc62054591dbef7531896d2524b39cad9bcb67d",
+  "s3/no6/C2": "e96949bb05dbbcc3cd75aa22a277a35d35ec8369bb6dd6054e1472417c740d61",
+  "s3/no6/C3": "ae967a1a259bbee96c4957b389cb1c8052bc393c4d3b3cfa9ea1ec73ef688b3d",
+  "s3/no6/V1": "ae14d5f6115fc80230f45775cb3d389eb3aac26e5c4e44c827b674d74fa27753",
+  "s3/no6/V2": "5f8dfeefdcda1656042434b132b1b02341aafb48e47e666c7f119b2fbd9efcfa",
+  "s3/no6/V3": "5c30349eff68dc5ba89518bc915235eb8a2defefcc289aba7b3faea04267d797",
+  "s3/no6/frequency": "9a713c1bab9b57ac02b23fa97ea34f216c76bc596bef816548094605b206217a",
+  "s3/no6/power_apparent": "bd993af7215c53db3110e95c6976398a258cdd1c8bf4992c5a87d43a834c10d4",
+  "s3/no6/power_reactive": "533c4297fdd40c53c0a060cc9d60a2267af608dd629ccd9e3df5199e25803e4c",
+  "s3/no6/power_real": "78718e1bd7f58ef765c2f93a8d5ab8b714922b62c040778d1574db247f9ce99c",
+  "s3/no6/all_columns": "3128e5a132c68ff9b0d456198df12f50b63298c355436e1c53e3cf0b79724a41",
+  "s4/all/C1": "68e5f3960b9ed645153cd5c2fc6d1a2dda28e6d4dc3aa3d8de98150bd326d9d5",
+  "s4/all/C2": "0c7623f183260c7ad53cd4709b3916903aa762f2fecfd119b5bd2addcd6a65cd",
+  "s4/all/C3": "1ac93e79e364dbce28eb33eb2b45aa010c1a576afe5dc1c16dda6b47de2ed6fc",
+  "s4/all/V1": "d327ce285116d73739b7294185f001fe3b0b476e977518fed8156b4d81c20507",
+  "s4/all/V2": "6e74bea24413e7465d9c0a217a495b2af7e5bbcf910c709592957b465c508b51",
+  "s4/all/V3": "252f625d8e25eb99c6e90a9c8adaba6682f0ad66f0c27bd2d7a5c536b15fb5ec",
+  "s4/all/frequency": "2cef7251a0728647ff85084893d7acd03e663798eaf7530d701fe557449e0761",
+  "s4/all/power_apparent": "a74231064dc27ff3dade5c8a533dda1fdb875762eec62b1f843853a5972f9155",
+  "s4/all/power_reactive": "5822f4e41cf4bc00eb6b6f16631cd327bb2dd5813bfbe8a3860d218012e787cc",
+  "s4/all/power_real": "d09aaa55cadd4486272c5d98924743242cc30d923d4f24256151503f1c6c6a6b",
+  "s4/all/all_columns": "a9de92d575c17a4057495141fd9524191ef7a3113c0882d4295c8ccad6b7f5e2",
+  "s4/no6/C1": "e0ef737a0bc682cc34b763a3ca308a5d2182c7f112ffe3cd2bd419bb0c507404",
+  "s4/no6/C2": "d19fc43c50013a19a2d8f4cf4c51bab720fec7b080d18d94ef38cb6f50f65706",
+  "s4/no6/C3": "d8ff73bf87a968a7570f61d0e25d822066f43c6bba754f18f4781ae4f11572d9",
+  "s4/no6/V1": "0a827a0abdfe670a02b46908c47012bed433d427bcf3e24273fc9d0af42cb1f2",
+  "s4/no6/V2": "8054cc16a4a29c7fd9dd12e5f1c5ad6f4749c7dd710772c67cb89a15d60f0894",
+  "s4/no6/V3": "88a25d8bc08e19eb2a26422a43bc586a767decf416365a5ff52a2e696fedfa10",
+  "s4/no6/frequency": "84877cfd506f329cf06c5a068bf79010d3a25c12e24be45ebda754b4a8672618",
+  "s4/no6/power_apparent": "8f551594f0e2fa379b40a06a3879faec784578386b6c892316931b39aa36a802",
+  "s4/no6/power_reactive": "c98a9dc3a0417b613df25f148b5e1ee2989048271271d78daf21f96bb39503c1",
+  "s4/no6/power_real": "b9dcb0190ca365db2a0e7b9b17affdcc7ea201c135f478cb5b29a22c6f035536",
+  "s4/no6/all_columns": "74462bcf6ffc29237fc66dc2672faff4f6a7b54b352d5f959c5b7ef5db0633cd"
+ },
+ "inventory": {
+  "s0/all/C1": {
+   "sha256": "af7e9926a36bcbc3a715149b1306098e5b41283445e0b4b8295d414e97a102a5",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15914,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/all/C2": {
+   "sha256": "c9be95e594f20f5c1b65f638cf22d2d811b9d2de2cb68dfca797e118a3da969f",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv"
+   ],
+   "rows_in": 15551,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/all/C3": {
+   "sha256": "9418e61caaec621a9616080d2d34dba8206a226640e16639ada97c027015be1d",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "rows_in": 15589,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/all/V1": {
+   "sha256": "ba83e6e35cba1ede8e4619cf635c42895ce017afa34b2aafd6a953785ded343a",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16299,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/all/V2": {
+   "sha256": "42a0c1354f49b8c865e33a69d03d14148cfed5cb15c644de13430f417581549d",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16233,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/all/V3": {
+   "sha256": "41ba099f8d14bbe6e3cd9eb6d0c4815a09951807a7670161ff807509934d9c2d",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16223,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/all/frequency": {
+   "sha256": "832ff9979f8b0bf6b8eaf59acb487dbabf95996e935de046b6380afca0907b34",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16927,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/all/power_apparent": {
+   "sha256": "8c4e29129eeacd3daef472875f8d710ccd715b23cae43cd80061253290380d91",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15856,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/all/power_reactive": {
+   "sha256": "029670f2b761170dfb649dfcaa1478fa7c60164182636539734921beda9a9061",
+   "features": 62,
+   "simulated": 18,
+   "skipped": [
+    "Mosaik+gaussian2.csv",
+    "Panda+gaussian2.csv"
+   ],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv",
+    "EPIC6.csv",
+    "EPIC7.csv"
+   ],
+   "rows_in": 5529,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/all/power_real": {
+   "sha256": "a8eeadcdb631df8e33b337fc5b6940c93f2ecae11a330d5d47f7d1727c0451f1",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15641,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 145,
+    "Panda+autoencoder.csv": 145
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s0/all/all_columns": {
+   "sha256": "96faf34d6a6c654c6c6c31cae5aa37f27e0de043733bd050b2d1a5a02791a763",
+   "features": 620,
+   "simulated": 20,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv"
+   ],
+   "rows_in": 17327,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 745,
+    "Panda+autoencoder.csv": 745,
+    "EPIC1.csv": 5
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s0/no6/C1": {
+   "sha256": "e8162ae7bb44eb1c7253bb684b3ce0e66191c4fdc53d3120af03ec1f41f8f2f4",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15831,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/no6/C2": {
+   "sha256": "b6b2ad96fd9d749d4d8befd179aa6048b11e102c534fbc26f35800628db545c3",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv"
+   ],
+   "rows_in": 15497,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/no6/C3": {
+   "sha256": "a912f7e6397d54819121d450aeb523926d0f0d70a534666e201ded731e042a75",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "rows_in": 15493,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/no6/V1": {
+   "sha256": "55c74de12ccf0d2790c5eda4d9d3345564d50415d09946f4c3cd2fc89436eddf",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16088,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/no6/V2": {
+   "sha256": "9b83b32b5bbe4634c3bb443b620b0f6948f36a5034ea2f9faf2746c672eb5339",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16022,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/no6/V3": {
+   "sha256": "db7a5195d6784fdbf13b652f5165c2e98dd9671b053f151e926e0bb0a1468a11",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16012,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/no6/frequency": {
+   "sha256": "2fece43b13555359bda84268c1ba2d15ef88c01de167973c7b80cce17fa603ed",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16716,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/no6/power_apparent": {
+   "sha256": "58059075e06a49736ca004f09126e99d01891e962864cc7c9d5c33872f73a920",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15665,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/no6/power_reactive": {
+   "sha256": "24d745da4fa811a1e0908269bd3aa60533a77be8bb1824225aba59b86b584313",
+   "features": 62,
+   "simulated": 18,
+   "skipped": [
+    "Mosaik+gaussian2.csv",
+    "Panda+gaussian2.csv"
+   ],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv",
+    "EPIC7.csv"
+   ],
+   "rows_in": 5526,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s0/no6/power_real": {
+   "sha256": "519980b9f7f439a5ac02872a7c59d9dfec0bc42ea797000e2ef588ab776815a3",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15445,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 145,
+    "Panda+autoencoder.csv": 145
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s0/no6/all_columns": {
+   "sha256": "b9a7b6266c4f39ceb3195093bd52887f0f5162c3a8fb1715a19b965a4fe1dc81",
+   "features": 620,
+   "simulated": 20,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv"
+   ],
+   "rows_in": 17288,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 745,
+    "Panda+autoencoder.csv": 745,
+    "EPIC1.csv": 5
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s1/all/C1": {
+   "sha256": "d78c4ff27cdee9df1e44f385bc65036fda2edb9977a3c950d211353bff8aa346",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15826,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/all/C2": {
+   "sha256": "c9f20a8188ebdb445c123e81bbfefd54e97dfff3f3bc69747434569f7f257da2",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv"
+   ],
+   "rows_in": 15687,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/all/C3": {
+   "sha256": "445ec25eb963ab0b308bfac3d74522a23c7e02634e2ae3b38a4da81ffcd7a430",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "rows_in": 15588,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/all/V1": {
+   "sha256": "d47ad01ec706260e8f60c790334f9aa23897e99f1c8ab3700cb3a4cd8f8be759",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16249,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/all/V2": {
+   "sha256": "fa74d39b3085ac5f40b249d14b8a6b77ce05c609073b6dcf9b190f824f6682eb",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16214,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/all/V3": {
+   "sha256": "b1f20fd424fd304ebf3e1815835342aedc9bb5f1c82f324fe1e41d2d7becb48b",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16240,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/all/frequency": {
+   "sha256": "a5f914276a1e7583217f62a21ee3f2e93cdd0350c0ee2ca5504cc3cacaa6925b",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16745,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/all/power_apparent": {
+   "sha256": "ffa13896c6e92b2ab23b0f565f6084baccbc2730531f97e12ee16287cfae3fcc",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15810,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/all/power_reactive": {
+   "sha256": "c4fd6278150c11fa61ce5ba227d05fda7ed687c6cb51813f4c85661558b71e01",
+   "features": 62,
+   "simulated": 18,
+   "skipped": [
+    "Mosaik+gaussian2.csv",
+    "Panda+gaussian2.csv"
+   ],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv",
+    "EPIC6.csv",
+    "EPIC7.csv"
+   ],
+   "rows_in": 5629,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/all/power_real": {
+   "sha256": "fb530c676acd16e661f7246ca830a9415a997ef99ea8b720817cc4b7a0e3c564",
+   "features": 62,
+   "simulated": 20,
+   "skipped": [
+    "Mosaik+gaussian2.csv",
+    "Panda+gaussian2.csv"
+   ],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15630,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 145,
+    "Panda+autoencoder.csv": 145
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s1/all/all_columns": {
+   "sha256": "fc5eb6f34173e83d555ca73592839eaa593b89227721ca439b58401fd6b5a3da",
+   "features": 620,
+   "simulated": 20,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv"
+   ],
+   "rows_in": 17379,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 745,
+    "Panda+autoencoder.csv": 745,
+    "EPIC1.csv": 5
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s1/no6/C1": {
+   "sha256": "83fbfe4180e80866540dd9aebb6d363e569afdc66cbed9e7ab462e1204b3e92f",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15743,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/no6/C2": {
+   "sha256": "c64a358a832996ed7442e7ce49d8030c3927ed4a6401e2e31adb42cbee4ad90c",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv"
+   ],
+   "rows_in": 15633,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/no6/C3": {
+   "sha256": "e602e707fafe3f76ea47ea143b50d8e191b73aa113f6e660b0c24075a35597cd",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "rows_in": 15492,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/no6/V1": {
+   "sha256": "95e5e3c80850276af7c870986d20653463e87c4dbba301da0cb9c4a3bc65de17",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16038,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/no6/V2": {
+   "sha256": "9c1853a1ee72abacecc812d9edceefe158e56d9d9ec30d31760d9f9bd7bb658f",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16003,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/no6/V3": {
+   "sha256": "80dafecdbb3fccf746dd53652d790a7e7ca6ed3c939fc79215db48e81e2c305a",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16029,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/no6/frequency": {
+   "sha256": "66d49fd2cf5e417c4fd8f14ef4a435c2fdeb9d2d47b8feb960a6977cbf8bbdc9",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16534,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/no6/power_apparent": {
+   "sha256": "e8f744de28430e3e6354c5a0ae8573e3f7f7c8bd552627d2df6a90fc0a661f91",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15619,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/no6/power_reactive": {
+   "sha256": "631ad3a0a075e8559517f977a525fc5be25f9665c30b84fd612a13f9434071db",
+   "features": 62,
+   "simulated": 18,
+   "skipped": [
+    "Mosaik+gaussian2.csv",
+    "Panda+gaussian2.csv"
+   ],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv",
+    "EPIC7.csv"
+   ],
+   "rows_in": 5626,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s1/no6/power_real": {
+   "sha256": "5de060d1fcfa305690131b433833e38dbdebc690d8058a88070faf2a7573f43a",
+   "features": 62,
+   "simulated": 20,
+   "skipped": [
+    "Mosaik+gaussian2.csv",
+    "Panda+gaussian2.csv"
+   ],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15434,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 145,
+    "Panda+autoencoder.csv": 145
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s1/no6/all_columns": {
+   "sha256": "8849756a533b95bbf0738d320d750ffda9ae82475edb7e9bc84631590e5d302d",
+   "features": 620,
+   "simulated": 20,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv"
+   ],
+   "rows_in": 17340,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 745,
+    "Panda+autoencoder.csv": 745,
+    "EPIC1.csv": 5
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s2/all/C1": {
+   "sha256": "e0ef607399b17b82d3c8c522e425921089e4e4d2709b18c1361ba805170f2361",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15836,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/all/C2": {
+   "sha256": "8c6704d7a471cad2cd4b325c6ef866768ea96b1c434f89db09dc1b1ef18e94c1",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv"
+   ],
+   "rows_in": 15558,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/all/C3": {
+   "sha256": "924939cb3a7edb5323d25afac13d4605b5b57e887f4f4f6adbfa7aeee918a04f",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "rows_in": 15766,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/all/V1": {
+   "sha256": "489b41e5897ad039cd941fcf59a321826f04611d45d804d2124ea3224c653a21",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16282,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/all/V2": {
+   "sha256": "f6dbadc0d35b45fbeea830696ce5602d5b8ec28345a77b2373d411286c7095b9",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16280,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/all/V3": {
+   "sha256": "6731a163a39ea79a22984797454aac7c04535bf7807d5ac89a815e943d354427",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16238,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/all/frequency": {
+   "sha256": "9dba4cf73f569ef7e15d77eee24436d5b12988de3d62282bdfc9329949d6b5a3",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16877,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/all/power_apparent": {
+   "sha256": "92a766aae8508e683ad41a599f0832ab658aa0bd60324c0d4add0a2efa669f99",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15828,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/all/power_reactive": {
+   "sha256": "b1171c8a6db945d06b8b1c3f8857d4d6e0264c708e34ee7f88411d691e52c80f",
+   "features": 62,
+   "simulated": 18,
+   "skipped": [
+    "Mosaik+gaussian2.csv",
+    "Panda+gaussian2.csv"
+   ],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv",
+    "EPIC6.csv",
+    "EPIC7.csv"
+   ],
+   "rows_in": 5689,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/all/power_real": {
+   "sha256": "4334e90c6cc72947c5ac58762c03c5492a7b4ebb5ce0d7fea5fe7bd83dcc4483",
+   "features": 62,
+   "simulated": 20,
+   "skipped": [
+    "Mosaik+gaussian2.csv",
+    "Panda+gaussian2.csv"
+   ],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15605,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 145,
+    "Panda+autoencoder.csv": 145
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s2/all/all_columns": {
+   "sha256": "327ad1579d33dfff7e1a6590dc8349cd5796f86767eb0749006c39987bf05c31",
+   "features": 620,
+   "simulated": 20,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv"
+   ],
+   "rows_in": 17352,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 745,
+    "Panda+autoencoder.csv": 745,
+    "EPIC1.csv": 5
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s2/no6/C1": {
+   "sha256": "0cecadc4e7bf9967344a9bf5a8bd9b02ee5937da04fb10e8bfa0c58a3d4bfa79",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15753,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/no6/C2": {
+   "sha256": "e9c934c1bf0f28da4a3e32bcef9d57d6293b29853c94cda7faa78627a6a64309",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv"
+   ],
+   "rows_in": 15504,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/no6/C3": {
+   "sha256": "017ae674aab4cb5fd020f6a45e7d7cc80aa353028fc7bf6b44ed6257418ffea3",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "rows_in": 15670,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/no6/V1": {
+   "sha256": "c677b048f0fce1e5333b3ed543e8887e2371cfa398850c348536a039fabb9c68",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16071,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/no6/V2": {
+   "sha256": "8cc2f0ee1f5a423f9b5136eb8802b2e457963e1c48a06ad1ca6b39a0de52fb83",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16069,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/no6/V3": {
+   "sha256": "33d5ca0761b6c3f5d4936ba2b6f50fe0d0f46a8e099a680ea00d3b4f74301e96",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16027,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/no6/frequency": {
+   "sha256": "82c56c8dcdd660dae5e3fcec584a3fe8eb2cdecfe5c7ee1553b58d5a2b9635d9",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16666,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/no6/power_apparent": {
+   "sha256": "8bd3b00b5c5cdc02918e9fd09e442cfec415b62a62a37f81bc2e84efe02d1c7f",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15637,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/no6/power_reactive": {
+   "sha256": "2cc4ca242415b8f6e1ce64d10813b784a31afe92e7bc71f781c614c84a39ec0c",
+   "features": 62,
+   "simulated": 18,
+   "skipped": [
+    "Mosaik+gaussian2.csv",
+    "Panda+gaussian2.csv"
+   ],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv",
+    "EPIC7.csv"
+   ],
+   "rows_in": 5686,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s2/no6/power_real": {
+   "sha256": "77eb98345b6e4fe7fd9eb0df50a998a2e70a1eb2a65951618b3e09b2ace1c45f",
+   "features": 62,
+   "simulated": 20,
+   "skipped": [
+    "Mosaik+gaussian2.csv",
+    "Panda+gaussian2.csv"
+   ],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15409,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 145,
+    "Panda+autoencoder.csv": 145
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s2/no6/all_columns": {
+   "sha256": "359822a76c7b21222ebd89e2564b7064b96bf6edc0a7b9e321c7aa8bb57eb3a8",
+   "features": 620,
+   "simulated": 20,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv"
+   ],
+   "rows_in": 17313,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 745,
+    "Panda+autoencoder.csv": 745,
+    "EPIC1.csv": 5
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s3/all/C1": {
+   "sha256": "401125a00c84e5fcd804aedaaab4d61d4a9a748339503ee6dcd1b0452bd6b9a0",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15883,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/all/C2": {
+   "sha256": "8a9eaa048f941b72e602ff89354068d4f736962640729cd361da748f35b72c32",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv"
+   ],
+   "rows_in": 15731,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/all/C3": {
+   "sha256": "95eca3c7efe1b7c74546da2d4810a0d02e0ced1d79a9705034874e7063169fc5",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "rows_in": 15617,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/all/V1": {
+   "sha256": "02481a377e6f6dbc7c14316925f7df51b40fe508021596fec96be3d99b671d53",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16245,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/all/V2": {
+   "sha256": "d499320bdb481876e8769e6b87bffa49b5c664a88a12ad4b7fb0bf2fed694ea5",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16180,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/all/V3": {
+   "sha256": "93b95d987c7075e8f445a91a7b7048e65f1e689dacd8eb10dddeacb4570665fa",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16236,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/all/frequency": {
+   "sha256": "3802caded7c4aafe51a4f6dcdba9e5aa4f87ff58eccd0720e9295d0f7616e1ef",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16907,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/all/power_apparent": {
+   "sha256": "a115e706751554b70b604bc77950d0adfe06026dc99d78512bf8865c13058162",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15766,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/all/power_reactive": {
+   "sha256": "ac4b42ace0f78ef26805c21cd0c827db016b61f1d0b482b39c849cb94910171c",
+   "features": 62,
+   "simulated": 18,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv",
+    "EPIC6.csv",
+    "EPIC7.csv"
+   ],
+   "rows_in": 5689,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/all/power_real": {
+   "sha256": "6c12dd3e0417a40fc750bfc298cb5996a202b321cb4f0367173cf65d7f3bc622",
+   "features": 62,
+   "simulated": 20,
+   "skipped": [
+    "Mosaik+gaussian2.csv",
+    "Panda+gaussian2.csv"
+   ],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15661,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 145,
+    "Panda+autoencoder.csv": 145
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s3/all/all_columns": {
+   "sha256": "7ad0bdb48a61ea98bdf52a361225f5e9ba262831d86b28a7b8a2127d343f6cc5",
+   "features": 620,
+   "simulated": 20,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv"
+   ],
+   "rows_in": 17348,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 745,
+    "Panda+autoencoder.csv": 745,
+    "EPIC1.csv": 5
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s3/no6/C1": {
+   "sha256": "92f4cdcd7ebe1ccf8f849402acc62054591dbef7531896d2524b39cad9bcb67d",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15800,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/no6/C2": {
+   "sha256": "e96949bb05dbbcc3cd75aa22a277a35d35ec8369bb6dd6054e1472417c740d61",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv"
+   ],
+   "rows_in": 15677,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/no6/C3": {
+   "sha256": "ae967a1a259bbee96c4957b389cb1c8052bc393c4d3b3cfa9ea1ec73ef688b3d",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "rows_in": 15521,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/no6/V1": {
+   "sha256": "ae14d5f6115fc80230f45775cb3d389eb3aac26e5c4e44c827b674d74fa27753",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16034,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/no6/V2": {
+   "sha256": "5f8dfeefdcda1656042434b132b1b02341aafb48e47e666c7f119b2fbd9efcfa",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15969,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/no6/V3": {
+   "sha256": "5c30349eff68dc5ba89518bc915235eb8a2defefcc289aba7b3faea04267d797",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16025,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/no6/frequency": {
+   "sha256": "9a713c1bab9b57ac02b23fa97ea34f216c76bc596bef816548094605b206217a",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16696,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/no6/power_apparent": {
+   "sha256": "bd993af7215c53db3110e95c6976398a258cdd1c8bf4992c5a87d43a834c10d4",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15575,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/no6/power_reactive": {
+   "sha256": "533c4297fdd40c53c0a060cc9d60a2267af608dd629ccd9e3df5199e25803e4c",
+   "features": 62,
+   "simulated": 18,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv",
+    "EPIC7.csv"
+   ],
+   "rows_in": 5686,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s3/no6/power_real": {
+   "sha256": "78718e1bd7f58ef765c2f93a8d5ab8b714922b62c040778d1574db247f9ce99c",
+   "features": 62,
+   "simulated": 20,
+   "skipped": [
+    "Mosaik+gaussian2.csv",
+    "Panda+gaussian2.csv"
+   ],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15465,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 145,
+    "Panda+autoencoder.csv": 145
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s3/no6/all_columns": {
+   "sha256": "3128e5a132c68ff9b0d456198df12f50b63298c355436e1c53e3cf0b79724a41",
+   "features": 620,
+   "simulated": 20,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv"
+   ],
+   "rows_in": 17309,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 745,
+    "Panda+autoencoder.csv": 745,
+    "EPIC1.csv": 5
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s4/all/C1": {
+   "sha256": "68e5f3960b9ed645153cd5c2fc6d1a2dda28e6d4dc3aa3d8de98150bd326d9d5",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15915,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/all/C2": {
+   "sha256": "0c7623f183260c7ad53cd4709b3916903aa762f2fecfd119b5bd2addcd6a65cd",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv"
+   ],
+   "rows_in": 15557,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/all/C3": {
+   "sha256": "1ac93e79e364dbce28eb33eb2b45aa010c1a576afe5dc1c16dda6b47de2ed6fc",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "rows_in": 15560,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/all/V1": {
+   "sha256": "d327ce285116d73739b7294185f001fe3b0b476e977518fed8156b4d81c20507",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16183,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/all/V2": {
+   "sha256": "6e74bea24413e7465d9c0a217a495b2af7e5bbcf910c709592957b465c508b51",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16212,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/all/V3": {
+   "sha256": "252f625d8e25eb99c6e90a9c8adaba6682f0ad66f0c27bd2d7a5c536b15fb5ec",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16224,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/all/frequency": {
+   "sha256": "2cef7251a0728647ff85084893d7acd03e663798eaf7530d701fe557449e0761",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16831,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/all/power_apparent": {
+   "sha256": "a74231064dc27ff3dade5c8a533dda1fdb875762eec62b1f843853a5972f9155",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15765,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/all/power_reactive": {
+   "sha256": "5822f4e41cf4bc00eb6b6f16631cd327bb2dd5813bfbe8a3860d218012e787cc",
+   "features": 62,
+   "simulated": 18,
+   "skipped": [
+    "Mosaik+gaussian2.csv",
+    "Panda+gaussian2.csv"
+   ],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv",
+    "EPIC6.csv",
+    "EPIC7.csv"
+   ],
+   "rows_in": 5828,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/all/power_real": {
+   "sha256": "d09aaa55cadd4486272c5d98924743242cc30d923d4f24256151503f1c6c6a6b",
+   "features": 62,
+   "simulated": 20,
+   "skipped": [
+    "Mosaik+gaussian2.csv",
+    "Panda+gaussian2.csv"
+   ],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15617,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 145,
+    "Panda+autoencoder.csv": 145
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s4/all/all_columns": {
+   "sha256": "a9de92d575c17a4057495141fd9524191ef7a3113c0882d4295c8ccad6b7f5e2",
+   "features": 620,
+   "simulated": 20,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC6.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv"
+   ],
+   "rows_in": 17376,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 745,
+    "Panda+autoencoder.csv": 745,
+    "EPIC1.csv": 5
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s4/no6/C1": {
+   "sha256": "e0ef737a0bc682cc34b763a3ca308a5d2182c7f112ffe3cd2bd419bb0c507404",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15832,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/no6/C2": {
+   "sha256": "d19fc43c50013a19a2d8f4cf4c51bab720fec7b080d18d94ef38cb6f50f65706",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv"
+   ],
+   "rows_in": 15503,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/no6/C3": {
+   "sha256": "d8ff73bf87a968a7570f61d0e25d822066f43c6bba754f18f4781ae4f11572d9",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "rows_in": 15464,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/no6/V1": {
+   "sha256": "0a827a0abdfe670a02b46908c47012bed433d427bcf3e24273fc9d0af42cb1f2",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15972,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/no6/V2": {
+   "sha256": "8054cc16a4a29c7fd9dd12e5f1c5ad6f4749c7dd710772c67cb89a15d60f0894",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16001,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/no6/V3": {
+   "sha256": "88a25d8bc08e19eb2a26422a43bc586a767decf416365a5ff52a2e696fedfa10",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16013,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/no6/frequency": {
+   "sha256": "84877cfd506f329cf06c5a068bf79010d3a25c12e24be45ebda754b4a8672618",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 16620,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/no6/power_apparent": {
+   "sha256": "8f551594f0e2fa379b40a06a3879faec784578386b6c892316931b39aa36a802",
+   "features": 62,
+   "simulated": 22,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15574,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/no6/power_reactive": {
+   "sha256": "c98a9dc3a0417b613df25f148b5e1ee2989048271271d78daf21f96bb39503c1",
+   "features": 62,
+   "simulated": 18,
+   "skipped": [
+    "Mosaik+gaussian2.csv",
+    "Panda+gaussian2.csv"
+   ],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv",
+    "EPIC7.csv"
+   ],
+   "rows_in": 5825,
+   "nan_rows_dropped": {},
+   "nonfinite_after_cast": 0
+  },
+  "s4/no6/power_real": {
+   "sha256": "b9dcb0190ca365db2a0e7b9b17affdcc7ea201c135f478cb5b29a22c6f035536",
+   "features": 62,
+   "simulated": 20,
+   "skipped": [
+    "Mosaik+gaussian2.csv",
+    "Panda+gaussian2.csv"
+   ],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [],
+   "rows_in": 15421,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 145,
+    "Panda+autoencoder.csv": 145
+   },
+   "nonfinite_after_cast": 0
+  },
+  "s4/no6/all_columns": {
+   "sha256": "74462bcf6ffc29237fc66dc2672faff4f6a7b54b352d5f959c5b7ef5db0633cd",
+   "features": 620,
+   "simulated": 20,
+   "skipped": [],
+   "real_files": [
+    "EPIC1.csv",
+    "EPIC2.csv",
+    "EPIC3.csv",
+    "EPIC4.csv",
+    "EPIC5.csv",
+    "EPIC7.csv",
+    "EPIC8.csv"
+   ],
+   "real_train_only": [
+    "EPIC2.csv"
+   ],
+   "rows_in": 17337,
+   "nan_rows_dropped": {
+    "Mosaik+autoencoder.csv": 745,
+    "Panda+autoencoder.csv": 745,
+    "EPIC1.csv": 5
+   },
+   "nonfinite_after_cast": 0
+  }
+ },
+ "jobs": 11720,
+ "seconds_per_fit": {
+  "C1": 6.991882801055908,
+  "C2": 3.9353442192077637,
+  "C3": 5.588393211364746,
+  "V1": 5.283030033111572,
+  "V2": 5.563514232635498,
+  "V3": 5.707198858261108,
+  "frequency": 5.764479875564575,
+  "power_apparent": 5.432384014129639,
+  "power_reactive": 2.7806529998779297,
+  "power_real": 5.0580878257751465,
+  "all_columns": 5.253062963485718
+ },
+ "projection_seconds": 61607.750215530396,
+ "values_displayed": false
+}
