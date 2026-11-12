@@ -182,3 +182,15 @@ D70 2026-11-12 EPIC dynamic test (D48; D49 r5) settings fixed after a smoke run 
 
 
 D71 (2026-11-12): correction to D69, made before any figure using arm O is approved. In the arm O summary (sha256 73479cb4c902f0bc178e30656677cda2a1aa2706e01f7ba9fa553f59c0fde123), 2 of 236 entries rest on fewer than 5 generations, so their value is not a mean over 5 generations and has no spread: D69 reports real power (Gaussian 2) as P(real) 0.524 without stating that it comes from 1 of 5 generations. Entries: all/power_real/gaussian2: 1 of 5 generations, P(real) 0.524, sd not defined; units present: s0 (Mosaik/Panda); generations without any unit: s1, s2, s3, s4 | no6/power_real/gaussian2: 1 of 5 generations, P(real) 0.512, sd not defined; units present: s0 (Mosaik/Panda); generations without any unit: s1, s2, s3, s4. From now on, every report and figure shows these entries with their generation count (R10(b): triangle marker, 'Fewer than 5 generations'). No value, setting or result changed; D69 stays as committed and is read together with this entry.
+D72 2026-11-13 EPIC dynamic test (D48; D49 r5; exploratory, outside the Holm family) recorded. scripts/epic_dynamic.py at 8adca3f, FULL,
+    10/10 trainings, 2h08m23s; 0 upstream ERROR lines in 4 new extractions; dynamic_s100 extraction and U__all training reused (hashes
+    verified). In-run checks: arm U static values recomputed exactly = D65; real rows identical to arm U static_s0-s4 in all 11 files.
+    Result (authors' code, all real files, noise named in their Table 2, max over Pandapower/Mosaik, paired Delta = dynamic - static,
+    mean over 5 pairs): the published Delta column is not reproduced on its two largest rows, frequency -0.007 vs 0.233 and all values
+    0.009 vs 0.119, as predicted in D49 from upstream's runs; voltage V1 0.006 vs 0.064; currents and powers positive (I1 0.129,
+    I2 0.055, I3 0.074, apparent 0.090, reactive 0.042, real 0.031) vs published 0.039-0.074; V2/V3 autoencoder (adapted by us, not
+    primary) 0.001/0.006 vs 0.078/0.076. Real power: n = 4 of 5 pairs in both tables (missing pair listed in the summary). EPIC6 removed:
+    same pattern (frequency -0.007, all values -0.013). No pass rule applies (D49); reported as non-reproduction of the Delta column.
+    No setting changed after seeing results; D45/D46, Holm tests, arm O (D69/D71) untouched. Summary copied byte-identical to
+    spec/epic_dynamic_summary.json.
+    Summary sha256 b415be097578393b89787dae64af12f225db437cf4d093b9d48146835f6d534d; run log ~/Desktop/epic_dyn_full.txt sha256 ab63acb81b10770b26bf24b0c24f7425368905c0e4f816f9a1752668997c2b7c.
