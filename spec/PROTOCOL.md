@@ -1,4 +1,4 @@
-# PROTOCOL v1.7 (D33 Phase 3 spec, amended by D36, D43, D45; D45 made before any decoy output is scored)
+# PROTOCOL v1.8 (D33 Phase 3 spec, amended by D36, D43, D45; D45 made before any decoy output is scored; v1.8 = D73, editorial, made after all results were recorded: section 7 and 12 aligned with D34/D35, no rule, setting or result changed)
 
 ## 1 Question
 Can a lightweight learned industrial decoy remain behaviourally consistent when an attacker actively changes its commands
@@ -52,8 +52,10 @@ Out-of-coverage probe = any command sample outside the tag's training min-max. P
 P-real members fixed in D27 before training; P-anom none.
 Fingerprinting classifiers trained to separate real from decoy windows: K-dev (usable during development) and K-test
 (never used before Phase 3): TimeGAN post-hoc 2-layer RNN classifier (Yoon et al. 2019); SimProcess pipeline, tsfresh features + random forest (Donadel et al., CPSS 2025); MiniRocket. K-dev: 1D-CNN.
-Physics-rule detector (attacker-side, fixed before training, not enforced by C2): QAPPD PitchDot vs 100*dPitch, pitch-yaw coupling;
-HAI valve opening vs measured flow, pump command vs TIT03 direction. Only detector applicable to P-syn.
+Physics-rule detector (attacker-side, fixed before training, not enforced by C2; rules as kept in D35): QAPPD PitchDot and YawDot vs
+centred rate of change of Pitch and Yaw (k = 10 samples); HAI measured flow P1_FT01Z, P1_FT02Z, P1_FT03 vs the six valve positions at a
+common lag. Pitch-yaw coupling and pump command vs TIT03 were candidates dropped by the D35 criterion (validation R2 < 0.25; reported
+as limitations). Only detector applicable to P-syn.
 
 ## 8 Metrics (established only)
 Primary:
@@ -97,8 +99,7 @@ O4 CLOSED (D22): Qin et al. CGAN generates network-topology images (condition = 
 O5 CLOSED (D22): no access; B9 built from published description and stated as such in the paper.
 O6 CLOSED (D20): LLMPot fine-tunes an LLM on request/response packets collected by probing a live PLC; byte-level, own metrics (BCA, RVA), no fingerprinting classifiers. Not applicable to recorded datasets -> Related Work, not a baseline.
 O3 CLOSED (D22): QAPPD V~I,w (R2 0.97/0.98), speed lag tau~240 ms (judge multi-step, not 1-step R2); HAI tracking + rate limit; PCV02 excluded.
-O8 QAPPD motor-voltage physical limit (Quanser Aero 2 documentation). Until confirmed, QAPPD out-of-range probes are not clipped,
-   and the paper states this.
+O8 CLOSED (D34): Quanser Aero 2 motor voltage range +-24 V (Quanser QUARC documentation); QAPPD out-of-range probes clipped to +-24 V.
 
 ## 13 Phase 3 evaluation (D33; fixed before any held-out file is opened)
 E1 Held-out files are opened only by scripts/03_evaluate.py (splits test, heldout, crosstime); every file is hashed in the run log.
@@ -115,7 +116,7 @@ E4 P-anom: QAPPD test_7 anomaly segment, tiled as in E3. Held-out normal FIT: no
 E5 P-syn: 20 base windows per plant drawn with seed 33 from held-out normal windows; probes start at the first free-run step.
    Per command tag, both directions: step, pulse (HAI 30 s, QAPPD 0.5 s) and ramp over the horizon, amplitude 25% of the training
    range (in-range set; probes leaving training min-max are dropped from it); steps to 10% and 25% of the training range beyond the
-   training max and min (out-of-range set), clipped to physical limits where known (valves 0-100 %; QAPPD voltage: O8). Probes
+   training max and min (out-of-range set), clipped to physical limits where known (valves 0-100 %; QAPPD voltage +-24 V, D34). Probes
    whose clipped target falls inside training min-max are dropped and counted.
 E6 Physics-rule detector (section 7): threshold per rule = p99.9 of its residual on real training windows; a window is detected if
    any free-run step exceeds a threshold. The rate on real held-out normal windows is reported as the false-alarm rate.

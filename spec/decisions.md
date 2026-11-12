@@ -194,3 +194,18 @@ D72 2026-11-13 EPIC dynamic test (D48; D49 r5; exploratory, outside the Holm fam
     No setting changed after seeing results; D45/D46, Holm tests, arm O (D69/D71) untouched. Summary copied byte-identical to
     spec/epic_dynamic_summary.json.
     Summary sha256 b415be097578393b89787dae64af12f225db437cf4d093b9d48146835f6d534d; run log ~/Desktop/epic_dyn_full.txt sha256 ab63acb81b10770b26bf24b0c24f7425368905c0e4f816f9a1752668997c2b7c.
+D73 2026-11-13 Editorial record after all results (D72); changes no rule, setting, window, seed, threshold or result.
+    (a) PROTOCOL v1.8: section 7 detector line replaced by the rules D35 kept (HAI P1_FT01Z, P1_FT02Z, P1_FT03 vs six valve positions
+        at a common lag; QAPPD PitchDot, YawDot vs centred rate of Pitch, Yaw, k = 10), matching results/phase3/metrics/metrics.json;
+        pitch-yaw coupling and pump vs TIT03 named as dropped by D35. Section 12 O8 marked closed per D34; section 13 E5 'QAPPD voltage: O8' now '+-24 V, D34'. Tagged protocol-v1.8.
+    (b) D9 clarification: the Sassnick et al. (EUROCAST 2024) tool generated the commanded trajectories only; QAPPD responses were
+        recorded on the physical Quanser Aero 2 (QAPPD release, Zenodo 10.5281/zenodo.20287835; the dataset paper, arXiv 2605.27486,
+        mentions 50 Hz downsampling, the release and this study use 100 Hz; the paper cites the release for the rate).
+    (c) D72 correction: the missing real-power pair is generation 4 (static_s4 / dynamic_s104). The only null values in
+        spec/epic_dynamic_summary.json are evaluation/all[9]/static_per_pair[4] and evaluation/no6[9]/static_per_pair[4] (static
+        value); Delta for real power is the mean over pairs 0-3. Cause not investigated. Replaces D72's "listed in the summary".
+    (d) Disk cleanup in ~/epic_work/classify/dynamic: 110 feature files in U__*/features removed after byte comparison (cmp) with
+        their originals in combined_*; 110 feature_importance_*.csv (upstream ranking caches, training folders only) kept; 5 extract.log
+        compressed with gzip and tested; 5073 MB freed. Removed files were byte-identical to kept originals, so every recorded hash
+        still matches a file. ~/epic_work/generation (D50) untouched.
+    Cleanup log ~/Desktop/epic_cleanup.txt sha256 4889e89522bfe6a13c7e378285c823b6ac851409cca87efd89aa46413e82aaa2.
