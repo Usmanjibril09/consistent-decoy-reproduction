@@ -1,0 +1,72 @@
+{
+ "stage": "epic_dynamic_smoke",
+ "values_displayed": false,
+ "repo_head": "44054be",
+ "script_sha256": "073f1891d8db7852cb371af57ababaeb03f740fe36869274df2e2d3674ac6636",
+ "runner_sha256": "c815b1c93f8fcb0ab988da195f405170689ecd2c96892cb59bd950c6d7749ad2",
+ "epic_classify_sha256": "bea1c960d8550dd31a18ccffc994cc81158d03aeec4556e849513e498808f21a",
+ "upstream_commit": "7533f59e94e9f54d8e3f151cc53a02a5c6146b6f",
+ "pair": "dynamic_s100 with static_s0",
+ "extraction_seconds": 2508.5201921463013,
+ "extraction_errors": 0,
+ "training_seconds": 335.46699690818787,
+ "training_errors": 0,
+ "real_rows": {
+  "combined_C1_features.csv": 666,
+  "combined_C2_features.csv": 382,
+  "combined_C3_features.csv": 457,
+  "combined_V1_features.csv": 1271,
+  "combined_V2_features.csv": 1271,
+  "combined_V3_features.csv": 1271,
+  "combined_power_real_features.csv": 1130,
+  "combined_power_reactive_features.csv": 141,
+  "combined_power_apparent_features.csv": 1123,
+  "combined_frequency_features.csv": 1271,
+  "combined_all_columns_features.csv": 1020
+ },
+ "dyn_rows": {
+  "combined_C1_features.csv": 15197,
+  "combined_C2_features.csv": 15209,
+  "combined_C3_features.csv": 15198,
+  "combined_V1_features.csv": 14962,
+  "combined_V2_features.csv": 14968,
+  "combined_V3_features.csv": 14989,
+  "combined_power_real_features.csv": 14501,
+  "combined_power_reactive_features.csv": 5234,
+  "combined_power_apparent_features.csv": 14683,
+  "combined_frequency_features.csv": 15524,
+  "combined_all_columns_features.csv": 16354
+ },
+ "test_rows": {
+  "all": {
+   "combined_C1_features.csv": 15197,
+   "combined_C2_features.csv": 15209,
+   "combined_C3_features.csv": 15198,
+   "combined_V1_features.csv": 14962,
+   "combined_V2_features.csv": 14968,
+   "combined_V3_features.csv": 14989,
+   "combined_power_real_features.csv": 14211,
+   "combined_power_reactive_features.csv": 5234,
+   "combined_power_apparent_features.csv": 14683,
+   "combined_frequency_features.csv": 15524,
+   "combined_all_columns_features.csv": 14864
+  },
+  "no6": {
+   "combined_C1_features.csv": 15197,
+   "combined_C2_features.csv": 15209,
+   "combined_C3_features.csv": 15198,
+   "combined_V1_features.csv": 14962,
+   "combined_V2_features.csv": 14968,
+   "combined_V3_features.csv": 14989,
+   "combined_power_real_features.csv": 14211,
+   "combined_power_reactive_features.csv": 5234,
+   "combined_power_apparent_features.csv": 14683,
+   "combined_frequency_features.csv": 15524,
+   "combined_all_columns_features.csv": 14864
+  }
+ },
+ "test_rows_total": 155039,
+ "published_delta_rows": 11,
+ "projection_text": "4 more extractions in parallel 0h41m48s to 2h47m14s; 9 more trainings x 0h05m35s = 0h50m19s",
+ "seconds": 2878.633723258972
+}
