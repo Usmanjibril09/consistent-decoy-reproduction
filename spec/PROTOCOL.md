@@ -1,4 +1,4 @@
-# PROTOCOL v1.8 (D33 Phase 3 spec, amended by D36, D43, D45; D45 made before any decoy output is scored; v1.8 = D73, editorial, made after all results were recorded: section 7 and 12 aligned with D34/D35, no rule, setting or result changed)
+# PROTOCOL v1.9 (D33 Phase 3 spec, amended by D36, D43, D45; D45 made before any decoy output is scored; v1.9 = D73, editorial, made after all results were recorded: section 7 and 12 aligned with D34/D35, no rule, setting or result changed) | v1.9: editorial note (D74), post-results, no setting changed
 
 ## 1 Question
 Can a lightweight learned industrial decoy remain behaviourally consistent when an attacker actively changes its commands
@@ -29,7 +29,7 @@ C1 Command-conditioned response model: GRU predicting response tags from command
    and state (not unconditioned trajectory generation). Width/depth chosen within the 12-configuration budget.
 C2 Consistency layer: structure from hardware physics, parameters fitted on training data: physical actuator range where known
    (valve opening 0-100 %), training range only for tags without a physical limit; p99.9 rate limits; demand->position tracking
-   (HAI; first-order lag rejected, D22); voltage->current->speed chain (QAPPD); sign of steady-state gain.
+   (HAI; first-order lag rejected, D22); voltage->current->speed chain (QAPPD); sign of steady-state gain. *(Superseded: not implemented as worded; the applied rules are those in `src/decoy/constraints.py`, D22/D32; see D74.)*
 C3 Coverage-aware fallback: a command is out of coverage when outside its training min-max (D27). Blend weight
    w = min(1, excess / (5% of training range)); output = (1-w)*C1 + w*B3 (identified grey-box loop model).
 Runtime budget: per-step inference below the sampling period (10 ms QAPPD, 1 s HAI) on the gateway-class CPU.
