@@ -1,7 +1,29 @@
-# Consistent decoy — Phase 2 training
+# Command-conditioned process decoys for industrial IoT honeypots
 
-This implements the Phase 2 training/validation protocol for HAI and QAPPD.
-It does not run Phase 3, inspect held-out data, or establish any hypothesis as true.
+Research code for the HAI and Quanser Aero 2 evaluations and the exploratory
+SimProcess reassessment. This source release excludes datasets, processed
+windows, checkpoints, virtual environments, and generated results.
+
+## Reproduction entry points
+
+Use Python 3.11 and the stage-specific requirements in `spec/`. Obtain the data
+from its providers and preserve the input layout in `configs/experiment.toml`.
+
+| Data | Local layout |
+| --- | --- |
+| [HAI](https://github.com/icsdataset/hai), releases 23.05 and 22.04 | `data/raw/HAI/hai-23.05/` and `data/raw/HAI/hai-22.04/` |
+| Quanser Aero 2 pick-and-place data, Zenodo DOI `10.5281/zenodo.20287835` | `data/raw/EUROCAST/` |
+
+Use `scripts/00_inventory.py` to check inputs, then run
+`scripts/01_preprocess.py` to build `data/processed/`. Train using the commands
+below. The held-out stages start at `scripts/03_evaluate.py`; consult
+`spec/PROTOCOL.md` and `spec/decisions.md` for stage order, inputs, and
+experimental settings. Use the separate Kaggle export workflow only when you
+intend to create a private training-data bundle.
+
+Keep the Git history and tags. The full experiment scripts use them to verify
+the frozen protocol and code. For an archive distribution, clone the included
+Git bundle before running the experiment.
 
 ## Included methods
 
