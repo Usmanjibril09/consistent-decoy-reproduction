@@ -20,7 +20,7 @@
 "B7" = "TimeGAN"
 "B8" = "Transformer"
 "B8-L" = "Transformer + layers"
-"B9" = "NeuPot"
+"B9" = "NeuPot-inspired"
 
 [variants]
 "Full" = "Proposed decoy"

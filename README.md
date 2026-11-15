@@ -21,9 +21,16 @@ below. The held-out stages start at `scripts/03_evaluate.py`; consult
 experimental settings. Use the separate Kaggle export workflow only when you
 intend to create a private training-data bundle.
 
-Keep the Git history and tags. The full experiment scripts use them to verify
-the frozen protocol and code. For an archive distribution, clone the included
-Git bundle before running the experiment.
+Clone the repository with its history and tags. The full experiment scripts use
+them to verify the frozen protocol and code. GitHub-generated source archives
+lack this metadata.
+
+## Figures
+
+After generating the evaluation outputs, use the dependencies in
+`spec/requirements-fig.txt` and run `scripts/06_figures_batchA.py` and
+`scripts/06_figures_batchB.py` from the repository root. The figure scripts share
+the method labels in `spec/figure_labels.toml`.
 
 ## Included methods
 
@@ -49,10 +56,12 @@ for Phase 2 beyond Python >=3.11, NumPy and PyTorch.
 
 ```sh
 python -m unittest discover -s tests
+# After running preprocessing with the provider datasets:
 python scripts/02_train.py --smoke --out results/stage2-smoke
 ```
 
-Smoke runs all 11 trainable/fitted method entries plus the inference variants,
+The unit tests use synthetic fixtures. The training smoke run uses the processed
+provider inputs and runs all 11 trainable/fitted method entries plus the inference variants,
 using 64 windows, 2 configurations, 2 seeds, 2 neural epochs and 4 GAN iterations
 per phase. The protocol's full budget is unchanged. A smoke pass checks execution,
 causality and resume behavior; it does not establish scientific model quality.

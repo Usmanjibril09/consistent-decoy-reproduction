@@ -1,0 +1,1 @@
+The SimProcess modules in this directory are from [Donadel et al., SimProcess](https://github.com/donadelden/SimProcess/tree/7533f59e94e9f54d8e3f151cc53a02a5c6146b6f). The README at that revision identifies the license as MIT. The license text is included here for the vendored modules.
